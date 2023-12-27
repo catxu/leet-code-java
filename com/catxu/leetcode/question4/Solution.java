@@ -40,11 +40,11 @@ class Solution {
         int left = 0;
         int right = nums2.length - 1;
         while (true) {
-            int i = Math.floorDiv(left + right, 2);
+            int i = Math.floorDiv(left + right, 2); // Math.floorDiv(-1, 2) = -1
             int j = half - i - 2;
             int shorterLeftVal = i < 0 ? Integer.MIN_VALUE : nums2[i];
-            int longerLeftVal = j < 0 ? Integer.MIN_VALUE : nums1[j];
             int shorterRightVal = i + 1 >= nums2.length ? Integer.MAX_VALUE : nums2[i + 1];
+            int longerLeftVal = j < 0 ? Integer.MIN_VALUE : nums1[j];
             int longerRightVal = j + 1 >= nums1.length ? Integer.MAX_VALUE : nums1[j + 1];
             if (Math.max(shorterLeftVal, longerLeftVal) <= Math.min(shorterRightVal, longerRightVal)) {
                 if (total % 2 != 0) {
