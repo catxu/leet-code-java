@@ -42,15 +42,15 @@ import java.util.Arrays;
  */
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
-        int i = 0, j = numbers.length - 1, sum;
-        while (i < j) {
-            sum = numbers[i] + numbers[j];
-            if (sum == target) {
-                return new int[]{i + 1, j + 1};
+        int l = 0, r = numbers.length - 1, sum;
+        while (l < r) {
+            sum = numbers[l] + numbers[r];
+            if (sum > target) {
+                r--;
             } else if (sum < target) {
-                i++;
+                l++;
             } else {
-                j--;
+                return new int[]{l + 1, r + 1};
             }
         }
         return null;
