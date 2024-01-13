@@ -1,0 +1,52 @@
+package com.catxu.leetcode.question22;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 22. Generate Parentheses
+ * <p>
+ * Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+ * <p>
+ * <p>
+ * <p>
+ * Example 1:
+ * <p>
+ * Input: n = 3
+ * Output: ["((()))","(()())","(())()","()(())","()()()"]
+ * Example 2:
+ * <p>
+ * Input: n = 1
+ * Output: ["()"]
+ * <p>
+ * <p>
+ * Constraints:
+ * <p>
+ * 1 <= n <= 8
+ */
+class Solution {
+    List<String> ans = new ArrayList<>();
+
+    public List<String> generateParenthesis(int n) {
+        backtrack(n, 0, 0, "");
+        return ans;
+    }
+
+    private void backtrack(int n, int open, int close, String s) {
+        if (s.length() == n * 2) {
+            ans.add(s);
+            return;
+        }
+        if (open < n) {
+            backtrack(n, open + 1, close, s + "(");
+        }
+        if (close < open) {
+            backtrack(n, open, close + 1, s + ")");
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        System.out.println(s.generateParenthesis(8).size());
+    }
+}
