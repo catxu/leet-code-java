@@ -1,5 +1,7 @@
 package com.catxu.leetcode.question24;
 
+import com.catxu.leetcode.question.ListNode;
+
 /**
  * 24. Swap Nodes in Pairs
  * <p>
@@ -25,5 +27,37 @@ package com.catxu.leetcode.question24;
  * The number of nodes in the list is in the range [0, 100].
  * 0 <= Node.val <= 100
  */
-public class Solution {
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(0, head);
+        ListNode prev = dummy;
+        ListNode cur = head;
+
+        while (cur != null && cur.next != null) {
+            // save ptrs
+            ListNode second = cur.next;
+            ListNode nxtPair = second.next;
+
+            // reverse this pair
+            second.next = cur;
+            cur.next = nxtPair;
+            prev.next = second;
+
+            // update ptrs
+            prev = cur;
+            cur = nxtPair;
+        }
+        return dummy.next;
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        ListNode node1_2 = new ListNode(4);
+        ListNode node1_1 = new ListNode(2, node1_2);
+        ListNode node1_0 = new ListNode(1, node1_1);
+        s.swapPairs(node1_0);
+    }
 }
