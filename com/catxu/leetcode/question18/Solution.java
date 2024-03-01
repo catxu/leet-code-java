@@ -29,7 +29,7 @@ import java.util.List;
  * -10^9 <= nums[i] <= 10^9
  * -10^9 <= target <= 10^9
  */
-public class Solution {
+class Solution {
     public List<List<Integer>> fourSum(int[] nums, int target) {
         Arrays.sort(nums);
         List<List<Integer>> ans = new ArrayList<>();
