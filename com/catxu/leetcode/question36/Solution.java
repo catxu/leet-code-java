@@ -56,39 +56,16 @@ import java.util.Set;
  */
 class Solution {
     public boolean isValidSudoku(char[][] board) {
-        boolean row = checkRow(board);
-        if (!row) {
-            return false;
-        }
-        boolean col = checkCol(board);
-        if (!col) {
-            return false;
-        }
-        return checkSubBox(board);
-    }
-
-    private boolean checkSubBox(char[][] board) {
-        return false;
-    }
-
-    private boolean checkCol(char[][] board) {
-        for (char[] col : board) {
-            Set<Character> colSet = new HashSet<>();
-            for (char num : col) {
-                if (num != '.' && !colSet.add(num)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private boolean checkRow(char[][] board) {
-        for (char[] row : board) {
-            Set<Character> rowSet = new HashSet<>();
-            for (char num : row) {
-                if (num != '.' && !rowSet.add(num)) {
-                    return false;
+        Set<String> sudoku = new HashSet<>();
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                char ch = board[row][col];
+                if (ch != '.') {
+                    if (!sudoku.add(ch + "at row" + row) ||
+                            !sudoku.add(ch + "at col" + col) ||
+                            !sudoku.add(ch + "at sub-box" + row / 3 + "-" + col / 3)) {
+                        return false;
+                    }
                 }
             }
         }
@@ -110,7 +87,7 @@ class Solution {
                         , {'.', '.', '.', '.', '8', '.', '.', '7', '9'}
                 })
         );
-        /*System.out.println(
+        System.out.println(
                 s.isValidSudoku(new char[][]{
                         {'8', '3', '.', '.', '7', '.', '.', '.', '.'}
                         , {'6', '.', '.', '1', '9', '5', '.', '.', '.'}
@@ -122,6 +99,6 @@ class Solution {
                         , {'.', '.', '.', '4', '1', '9', '.', '.', '5'}
                         , {'.', '.', '.', '.', '8', '.', '.', '7', '9'}
                 })
-        );*/
+        );
     }
 }
