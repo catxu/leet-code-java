@@ -55,39 +55,31 @@ class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-//        System.out.println(solution.minNonZeroProduct(1));
-//        System.out.println(solution.minNonZeroProduct(2));
-//        System.out.println(solution.minNonZeroProduct(3));
-//        // 581202553
-//        System.out.println(solution.minNonZeroProduct(4));
-//        // 202795991
-//        System.out.println(solution.minNonZeroProduct(5));
-//        // 945196305
-//        System.out.println(solution.minNonZeroProduct(30));
-//        // 112322054
-//        System.out.println(solution.minNonZeroProduct(35));
+        System.out.println(solution.minNonZeroProduct(1));
+        System.out.println(solution.minNonZeroProduct(2));
+        System.out.println(solution.minNonZeroProduct(3));
+        // 581202553
+        System.out.println(solution.minNonZeroProduct(4));
+        // 202795991
+        System.out.println(solution.minNonZeroProduct(5));
+        // 945196305
+        System.out.println(solution.minNonZeroProduct(30));
+        // 112322054
+        System.out.println(solution.minNonZeroProduct(35));
         // 65332879
         System.out.println(solution.minNonZeroProduct(55));
     }
 
+    private long quickMul(long x, long N) {
+        if (N == 0) return 1;
+        long y = quickMul(x, N / 2);
+        return N % 2 == 0 ? (y * y % M) : (y * y % M * x % M);
+    }
 
     public int minNonZeroProduct(int p) {
-        long base = (long) (Math.pow(2, p) - 2);
-        long nums = base + 1;
-        long product = (fastPow(base, nums / 2) % M) * (nums % M);
-        return (int) (product % M);
+        long a = (1L << (p - 1)) - 1;
+        long x = ((1L << p) - 1) % M;
+        long ret = quickMul(x - 1, a) * x % M;
+        return (int) ret;
     }
-
-    private long fastPow(long x, long p) {
-        long result = 1L;
-        while (p != 0) {
-            if ((p & 1) == 1) {
-                result = ((result % M) * (x % M)) % M;
-            }
-            x = ((x % M) * (x % M)) % M;
-            p = p >> 1;
-        }
-        return result % M;
-    }
-
 }
