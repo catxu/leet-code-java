@@ -51,8 +51,6 @@ package com.catxu.leetcode.question1969;
  */
 class Solution {
 
-    private static final int M = 1000000007;
-
     public static void main(String[] args) {
         Solution solution = new Solution();
         System.out.println(solution.minNonZeroProduct(1));
@@ -70,16 +68,37 @@ class Solution {
         System.out.println(solution.minNonZeroProduct(55));
     }
 
-    private long quickMul(long x, long N) {
-        if (N == 0) return 1;
-        long y = quickMul(x, N / 2);
-        return N % 2 == 0 ? (y * y % M) : (y * y % M * x % M);
+    private static final int M = 1000000007;
+
+    /**
+     * 快速幂取余
+     *
+     * @param x      底数
+     * @param p      指数
+     * @param modulo 模
+     * @return
+     */
+    private long fastPowModulo(long x, long p, int modulo) {
+        long result = 1L;
+        while (p != 0) {
+            if ((p & 1) == 1) {
+                result = ((result % modulo) * (x % modulo)) % modulo;
+            }
+            x = ((x % modulo) * (x % modulo)) % modulo;
+            p >>= 1;
+        }
+        return result % modulo;
     }
 
     public int minNonZeroProduct(int p) {
-        long a = (1L << (p - 1)) - 1;
-        long x = ((1L << p) - 1) % M;
-        long ret = quickMul(x - 1, a) * x % M;
-        return (int) ret;
+        // long base = (long) Math.pow(2, p) - 2;
+        // 注意精度丢失
+        long base = (long) Math.pow(2, p) - 2;
+        long nums = base + 1;
+        long product = ((fastPowModulo(base, nums / 2, M) % M) * (nums % M));
+        // return (int) product % M;
+        // 模运算优先级 小于 type-cast
+        return (int) (product % M);
     }
+
 }
