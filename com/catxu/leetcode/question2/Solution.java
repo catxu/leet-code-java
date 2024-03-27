@@ -1,5 +1,7 @@
 package com.catxu.leetcode.question2;
 
+import com.catxu.leetcode.question.ListNode;
+
 /**
  * 2. Add Two Numbers
  * <p>
@@ -70,22 +72,6 @@ class Solution {
         return result;
     }
 
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 }
 
 

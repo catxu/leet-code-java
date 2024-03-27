@@ -91,8 +91,8 @@ class Solution {
     }
 
     public int minNonZeroProduct(int p) {
-        // long base = (long) Math.pow(2, p) - 2;
-        // 注意精度丢失
+        // long base = (long) (Math.pow(2, p) - 2);
+        // 注意精度丢失，这里需要先cast再 - 2
         long base = (long) Math.pow(2, p) - 2;
         long nums = base + 1;
         long product = ((fastPowModulo(base, nums / 2, M) % M) * (nums % M));
