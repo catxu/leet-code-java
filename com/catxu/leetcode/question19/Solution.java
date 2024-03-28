@@ -1,5 +1,7 @@
 package com.catxu.leetcode.question19;
 
+import com.catxu.leetcode.question.ListNode;
+
 /**
  * 19. Remove Nth Node From End of List
  * <p>
@@ -30,44 +32,24 @@ package com.catxu.leetcode.question19;
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         int traverse = traverse(head, n);
-        if(traverse == n)
+        if (traverse == n)
             return head.next;
         return head;
     }
 
     private int traverse(ListNode node, int n) {
-        if(node == null)
+        if (node == null)
             return 0;
         int num = traverse(node.next, n);
-        if(num == n)
+        if (num == n)
             node.next = node.next.next;
         return num + 1;
     }
 
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
     public static void main(String[] args) {
         Solution s = new Solution();
-        ListNode node4 = new ListNode(5);
-        ListNode node3 = new ListNode(4, node4);
-        ListNode node2 = new ListNode(3, node3);
-        ListNode node1 = new ListNode(2, node2);
-        ListNode node0 = new ListNode(1, node1);
-        System.out.println(s.removeNthFromEnd(node0, 2));
+        System.out.println(s.removeNthFromEnd(ListNode.build(new int[]{1, 2, 3, 4, 5}), 2));
+        System.out.println(s.removeNthFromEnd(ListNode.build(new int[]{1}), 1));
+        System.out.println(s.removeNthFromEnd(ListNode.build(new int[]{1, 2}), 1));
     }
 }

@@ -1,5 +1,7 @@
 package com.catxu.leetcode.question21;
 
+import com.catxu.leetcode.question.ListNode;
+
 /**
  * 21. Merge Two Sorted Lists
  * <p>
@@ -50,37 +52,8 @@ class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        ListNode node1_2 = new ListNode(4);
-        ListNode node1_1 = new ListNode(2, node1_2);
-        ListNode node1_0 = new ListNode(1, node1_1);
-        ListNode node2_2 = new ListNode(4);
-        ListNode node2_1 = new ListNode(3, node2_2);
-        ListNode node2_0 = new ListNode(1, node2_1);
-        solution.mergeTwoLists(node1_0, node2_0);
-        ListNode case2_1 = null;
-        ListNode case2_2 = null;
-        solution.mergeTwoLists(case2_1, case2_2);
-        ListNode case3_1 = null;
-        ListNode case3_2 = new ListNode(0);
-        solution.mergeTwoLists(case3_1, case3_2);
-        System.out.println();
+        System.out.println(solution.mergeTwoLists(ListNode.build(new int[]{1, 2, 4}), ListNode.build(new int[]{1, 3, 4})));
+        System.out.println(solution.mergeTwoLists(ListNode.build(new int[]{}), ListNode.build(new int[]{0})));
     }
 
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 }

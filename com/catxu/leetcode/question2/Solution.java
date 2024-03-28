@@ -47,6 +47,14 @@ import com.catxu.leetcode.question.ListNode;
  * * }
  */
 class Solution {
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.addTwoNumbers(ListNode.build(new int[]{2, 4, 3}), ListNode.build(new int[]{5, 6, 4})));
+        System.out.println(solution.addTwoNumbers(ListNode.build(new int[]{0}), ListNode.build(new int[]{0})));
+        System.out.println(solution.addTwoNumbers(ListNode.build(new int[]{9, 9, 9, 9, 9, 9, 9}), ListNode.build(new int[]{9, 9, 9, 9})));
+    }
+
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int val = (l1 == null ? 0 : l1.val) + (l2 == null ? 0 : l2.val);
         if (val >= 10) {

@@ -67,12 +67,10 @@ class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        ListNode node1_2 = new ListNode(4);
-        ListNode node1_1 = new ListNode(2, node1_2);
-        ListNode node1_0 = new ListNode(1, node1_1);
-        ListNode node2_2 = new ListNode(4);
-        ListNode node2_1 = new ListNode(3, node2_2);
-        ListNode node2_0 = new ListNode(1, node2_1);
-        solution.mergeKLists(new ListNode[]{node1_0, node2_0});
+        // [1,4,5],[1,3,4],[2,6]
+        ListNode node1_0 = ListNode.build(new int[]{1, 4, 5});
+        ListNode node1_1 = ListNode.build(new int[]{1, 3, 4});
+        ListNode node1_2 = ListNode.build(new int[]{2, 6});
+        System.out.println(solution.mergeKLists(new ListNode[]{node1_0, node1_1, node1_2}));
     }
 }
