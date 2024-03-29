@@ -43,24 +43,25 @@ import java.util.Arrays;
 class Solution {
     public void nextPermutation(int[] nums) {
         int len = nums.length;
-        for (int fast = len - 1; fast >= 0; ) {
-            int next = fast - 1;
-            if (next < 0) {
-                revert(nums, fast, len - 1);
+        for (int tail = len - 1; tail >= 0; ) {
+            int prev = tail - 1;
+            if (prev < 0) {
+                revert(nums, tail, len - 1);
                 return;
             }
-            if (nums[fast] > nums[next]) {
+            if (nums[tail] > nums[prev]) {
                 int slow = len - 1;
                 // 从后向前搜索，找到第一个比目标元素大的 元素
-                while (nums[slow] <= nums[next] && slow > fast) {
+                while (nums[slow] <= nums[prev] && slow > tail) {
                     --slow;
                 }
-                swap(nums, slow, next);
+                swap(nums, slow, prev);
+                // 交换之后，尾部数组一定是降序排列的，需将其翻转为升序，如 [1,3,2] -> [2,3,1] --翻转--> [2,1,3]
                 // 翻转尾部的倒序数组
-                revert(nums, fast, len - 1);
+                revert(nums, tail, len - 1);
                 return;
             }
-            fast--;
+            tail--;
         }
     }
 

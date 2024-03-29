@@ -55,9 +55,7 @@ class Solution {
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        ListNode node1_2 = new ListNode(4);
-        ListNode node1_1 = new ListNode(2, node1_2);
-        ListNode node1_0 = new ListNode(1, node1_1);
-        s.swapPairs(node1_0);
+        ListNode listNode = ListNode.build(new int[]{1, 2, 3, 4});
+        System.out.println(s.swapPairs(listNode));
     }
 }

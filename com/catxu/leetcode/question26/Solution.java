@@ -65,5 +65,4 @@ class Solution {
         Solution s = new Solution();
         System.out.println(s.removeDuplicates(new int[]{ 1, 1, 1}));
     }
-
 }
