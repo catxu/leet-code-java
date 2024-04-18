@@ -45,9 +45,8 @@ class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-//        System.out.println(solution.combinationSum(new int[]{2, 3, 6, 7}, 7));
         System.out.println(solution.combinationSum(new int[]{10, 1, 2, 7, 6, 1, 5}, 8));
-//        System.out.println(solution.combinationSum(new int[]{2, 5, 2, 1, 2}, 5));
+        System.out.println(solution.combinationSum(new int[]{2, 5, 2, 1, 2}, 5));
     }
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
