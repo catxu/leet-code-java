@@ -28,8 +28,8 @@ package com.catxu.leetcode.question43;
 class Solution {
 
     public static void main(String[] args) {
-        String num1 = "-1";
-        String num2 = "-1";
+        String num1 = "2";
+        String num2 = "3";
         Solution solution = new Solution();
         System.out.println(solution.multiply(num1, num2));
     }
