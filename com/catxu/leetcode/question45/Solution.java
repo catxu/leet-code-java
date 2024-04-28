@@ -55,5 +55,6 @@ class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
         System.out.println(solution.jump(new int[]{2, 3, 1, 1, 4}));
+        System.out.println(solution.jump(new int[]{2, 3, 0, 1, 4}));
     }
 }
