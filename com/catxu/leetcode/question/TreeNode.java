@@ -49,7 +49,7 @@ public class TreeNode {
         nodes.add(root.val);
     }
 
-    public TreeNode levelOrderBuildTree(Integer[] arr) {
+    public static TreeNode levelOrderBuildTree(Integer[] arr) {
         if (arr == null || arr.length == 0) return null;
 
         TreeNode root = new TreeNode(arr[0]);

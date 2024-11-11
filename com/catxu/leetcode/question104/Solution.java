@@ -39,4 +39,12 @@ class Solution {
         int rightDepth = backtracking(root.right, depth);
         return Math.max(leftDepth, rightDepth);
     }
+
+    public static void main(String[] args) {
+        TreeNode root1 = TreeNode.levelOrderBuildTree(new Integer[]{3, 9, 20, null, null, 15, 7});
+        Solution solution = new Solution();
+        System.out.println(solution.maxDepth(root1));
+        TreeNode root2 = TreeNode.levelOrderBuildTree(new Integer[]{1, null, 2});
+        System.out.println(solution.maxDepth(root2));
+    }
 }
