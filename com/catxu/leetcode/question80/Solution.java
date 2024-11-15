@@ -59,37 +59,22 @@ package com.catxu.leetcode.question80;
  */
 class Solution {
     public int removeDuplicates(int[] nums) {
-        int slow = 0;
-        int fast = 1;
-        int threshold = 1;
-        while (fast < nums.length) {
-            if (nums[slow] != nums[fast]) {
-                slow++;
-                nums[slow] = nums[fast];
-                threshold = 1;
-            } else if (nums[slow] == nums[fast] && threshold < 2) {
-                // 相同且重复小于2
-                slow++;
-                if (nums[slow] != nums[fast]) {
-                    nums[slow] = nums[fast];
-                }
-                threshold++;
-            } else {
-                // 相同且重复大于2 向后匹配，直至数组末尾或下一个不同值
-                while (fast < nums.length && nums[fast] == nums[slow]) {
-                    fast++;
-                }
-                // 匹配到数组末尾 全部相同，直接返回 slow+1
-                if (fast == nums.length) {
-                    return ++slow;
-                }
-                slow++;
-                nums[slow] = nums[fast];
-                threshold = 1;
-            }
-            fast++;
+        if (nums.length <= 2) {
+            return nums.length;
         }
-        return ++slow;
+
+        int slow = 2;
+
+        for (int fast = 2; fast < nums.length; fast++) {
+            // 题目说明 non-decreasing order 非递减序列
+            // 如果 nums[fast] == nums[slow - 2] 则说明 nums[slow - 2] == nums[slow - 1] == nums[fast]，即超过最多2个重复限制
+            // 此时保持 slow 不动，向后移动 fast，直到 nums[fast] 和 nums[slow - 2] 不相等，将 nums[fast] 保留
+            if (nums[fast] != nums[slow - 2]) {
+                nums[slow] = nums[fast];
+                slow++;
+            }
+        }
+        return slow;
     }
 
     public static void main(String[] args) {
