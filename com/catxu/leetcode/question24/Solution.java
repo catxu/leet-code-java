@@ -10,21 +10,25 @@ import com.catxu.leetcode.question.ListNode;
  * Example 1:
  * <p>
  * Input: head = [1,2,3,4]
+ * <p>
  * Output: [2,1,4,3]
  * <p>
  * Example 2:
  * <p>
  * Input: head = []
+ * <p>
  * Output: []
+ * <p>
  * Example 3:
  * <p>
  * Input: head = [1]
- * Output: [1]
  * <p>
+ * Output: [1]
  * <p>
  * Constraints:
  * <p>
  * The number of nodes in the list is in the range [0, 100].
+ * <p>
  * 0 <= Node.val <= 100
  */
 class Solution {

@@ -11,19 +11,20 @@ import com.catxu.leetcode.question.ListNode;
  * <p>
  * Return the head of the merged linked list.
  * <p>
- * <p>
- * <p>
  * Example 1:Input: list1 = [1,2,4], list2 = [1,3,4]
+ * <p>
  * Output: [1,1,2,3,4,4]
  * <p>
  * Example 2:
  * <p>
  * Input: list1 = [], list2 = []
+ * <p>
  * Output: []
  * <p>
  * Example 3:
  * <p>
  * Input: list1 = [], list2 = [0]
+ * <p>
  * Output: [0]
  */
 class Solution {

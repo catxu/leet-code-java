@@ -8,23 +8,29 @@ import com.catxu.leetcode.question.ListNode;
  * Given the head of a linked list, remove the nth node from the end of the list and return its head.
  * <p>
  * Input: head = [1,2,3,4,5], n = 2
+ * <p>
  * Output: [1,2,3,5]
  * <p>
  * Example 2:
  * <p>
  * Input: head = [1], n = 1
+ * <p>
  * Output: []
  * <p>
  * Example 3:
  * <p>
  * Input: head = [1,2], n = 1
+ * <p>
  * Output: [1]
  * <p>
  * Constraints:
  * <p>
  * The number of nodes in the list is sz.
+ * <p>
  * 1 <= sz <= 30
+ * <p>
  * 0 <= Node.val <= 100
+ * <p>
  * 1 <= n <= sz
  * <p>
  * Follow up: Could you do this in one pass?

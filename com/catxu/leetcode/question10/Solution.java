@@ -10,34 +10,45 @@ import java.util.Objects;
  * Given an input string s and a pattern p, implement regular expression matching with support for '.' and '*' where:
  * <p>
  * '.' Matches any single character.
+ * <p>
  * '*' Matches zero or more of the preceding element.
+ * <p>
  * The matching should cover the entire input string (not partial).
- * <p>
- * <p>
  * <p>
  * Example 1:
  * <p>
  * Input: s = "aa", p = "a"
+ * <p>
  * Output: false
+ * <p>
  * Explanation: "a" does not match the entire string "aa".
+ * <p>
  * Example 2:
  * <p>
  * Input: s = "aa", p = "a*"
+ * <p>
  * Output: true
+ * <p>
  * Explanation: '*' means zero or more of the preceding element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
+ * <p>
  * Example 3:
  * <p>
  * Input: s = "ab", p = ".*"
- * Output: true
- * Explanation: ".*" means "zero or more (*) of any character (.)".
  * <p>
+ * Output: true
+ * <p>
+ * Explanation: ".*" means "zero or more (*) of any character (.)".
  * <p>
  * Constraints:
  * <p>
  * 1 <= s.length <= 20
+ * <p>
  * 1 <= p.length <= 20
+ * <p>
  * s contains only lowercase English letters.
+ * <p>
  * p contains only lowercase English letters, '.', and '*'.
+ * <p>
  * It is guaranteed for each appearance of the character '*', there will be a previous valid character to match.
  */
 class Solution {

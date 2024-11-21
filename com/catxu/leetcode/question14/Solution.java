@@ -10,17 +10,23 @@ package com.catxu.leetcode.question14;
  * Example 1:
  * <p>
  * Input: strs = ["flower","flow","flight"]
+ * <p>
  * Output: "fl"
+ * <p>
  * Example 2:
  * <p>
  * Input: strs = ["dog","racecar","car"]
+ * <p>
  * Output: ""
+ * <p>
  * Explanation: There is no common prefix among the input strings.
  * <p>
  * Constraints:
  * <p>
  * 1 <= strs.length <= 200
+ * <p>
  * 0 <= strs[i].length <= 200
+ * <p>
  * strs[i] consists of only lowercase English letters.
  */
 class Solution {

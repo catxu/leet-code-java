@@ -8,6 +8,7 @@ import java.util.Stack;
  * 20. Valid Parentheses
  * <p>
  * Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+ * <p>
  * An input string is valid if:
  * <p>
  * 1. Open brackets must be closed by the same type of brackets.
@@ -17,24 +18,32 @@ import java.util.Stack;
  * 3. Every close bracket has a corresponding open bracket of the same type.
  * <p>
  * Example 1:
+ * <p>
  * Input: s = "()"
+ * <p>
  * Output: true
  * <p>
  * Example 2:
+ * <p>
  * Input: s = "()[]{}"
+ * <p>
  * Output: true
  * <p>
  * Example 3:
+ * <p>
  * Input: s = "(]"
+ * <p>
  * Output: false
  * <p>
  * Example 4:
+ * <p>
  * Input: s = "([])"
+ * <p>
  * Output: true
  * <p>
  * Constraints:
  * <p>
- * · 1 <= s.length <= 10^4
+ * · 1 <= s.length <= 10<sup>4</sup>
  * <p>
  * · s consists of parentheses only '()[]{}'.
  */

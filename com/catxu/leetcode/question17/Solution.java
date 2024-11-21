@@ -12,20 +12,25 @@ import java.util.*;
  * Example 1:
  * <p>
  * Input: digits = "23"
+ * <p>
  * Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+ * <p>
  * Example 2:
  * <p>
  * Input: digits = ""
+ * <p>
  * Output: []
+ * <p>
  * Example 3:
  * <p>
  * Input: digits = "2"
- * Output: ["a","b","c"]
  * <p>
+ * Output: ["a","b","c"]
  * <p>
  * Constraints:
  * <p>
  * 0 <= digits.length <= 4
+ * <p>
  * digits[i] is a digit in the range ["2", "9"].
  */
 class Solution {

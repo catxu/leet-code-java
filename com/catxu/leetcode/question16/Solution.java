@@ -11,25 +11,29 @@ import java.util.Arrays;
  * <p>
  * You may assume that each input would have exactly one solution.
  * <p>
- * <p>
- * <p>
  * Example 1:
  * <p>
  * Input: nums = [-1,2,1,-4], target = 1
+ * <p>
  * Output: 2
+ * <p>
  * Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+ * <p>
  * Example 2:
  * <p>
  * Input: nums = [0,0,0], target = 1
- * Output: 0
- * Explanation: The sum that is closest to the target is 0. (0 + 0 + 0 = 0).
  * <p>
+ * Output: 0
+ * <p>
+ * Explanation: The sum that is closest to the target is 0. (0 + 0 + 0 = 0).
  * <p>
  * Constraints:
  * <p>
  * 3 <= nums.length <= 500
+ * <p>
  * -1000 <= nums[i] <= 1000
- * -10^4 <= target <= 10^4
+ * <p>
+ * -10<sup>4</sup> <= target <= 10<sup>4</sup>
  */
 class Solution {
     public int threeSumClosest(int[] nums, int target) {

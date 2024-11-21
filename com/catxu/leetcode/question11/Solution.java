@@ -15,19 +15,24 @@ package com.catxu.leetcode.question11;
  * Example 1:
  * <p>
  * Input: height = [1,8,6,2,5,4,8,3,7]
+ * <p>
  * Output: 49
+ * <p>
  * Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
  * <p>
  * Example 2:
  * <p>
  * Input: height = [1,1]
+ * <p>
  * Output: 1
  * <p>
  * Constraints:
  * <p>
  * n == height.length
- * 2 <= n <= 10^5
- * 0 <= height[i] <= 10^4
+ * <p>
+ * 2 <= n <= 10<sup>5</sup>
+ * <p>
+ * 0 <= height[i] <= 10<sup>4</sup>
  */
 class Solution {
     public int maxArea(int[] height) {

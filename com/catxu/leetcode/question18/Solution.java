@@ -5,29 +5,37 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 18. 4Sum
+ * 18. 4 Sum
  * <p>
  * Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
  * <p>
  * 0 <= a, b, c, d < n
+ * <p>
  * a, b, c, and d are distinct.
+ * <p>
  * nums[a] + nums[b] + nums[c] + nums[d] == target
+ * <p>
  * You may return the answer in any order.
  * <p>
  * Example 1:
  * <p>
  * Input: nums = [1,0,-1,0,-2,2], target = 0
+ * <p>
  * Output: [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+ * <p>
  * Example 2:
  * <p>
  * Input: nums = [2,2,2,2,2], target = 8
+ * <p>
  * Output: [[2,2,2,2]]
  * <p>
  * Constraints:
  * <p>
  * 1 <= nums.length <= 200
- * -10^9 <= nums[i] <= 10^9
- * -10^9 <= target <= 10^9
+ * <p>
+ * -10<sup>9</sup> <= nums[i] <= 10<sup>9</sup>
+ * <p>
+ * -10<sup>9</sup> <= target <= 10<sup>9</sup>
  */
 class Solution {
     public List<List<Integer>> fourSum(int[] nums, int target) {
