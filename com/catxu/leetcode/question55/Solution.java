@@ -27,7 +27,7 @@ package com.catxu.leetcode.question55;
  * <p>
  * 1 <= nums.length <= 10<sup>4</sup>
  * <p>
- * 0 <= nums[i] <= 10^5
+ * 0 <= nums[i] <= 10<sup>5</sup>
  */
 class Solution {
 

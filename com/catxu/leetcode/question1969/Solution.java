@@ -11,7 +11,7 @@ package com.catxu.leetcode.question1969;
  * <p>
  * For example, if x = 1101 and y = 0011, after swapping the 2nd bit from the right, we have x = 1111 and y = 0001.
  * <p>
- * Find the minimum non-zero product of nums after performing the above operation any number of times. Return this product modulo 10^9 + 7.
+ * Find the minimum non-zero product of nums after performing the above operation any number of times. Return this product modulo 10<sup>9</sup> + 7.
  * <p>
  * Note: The answer should be the minimum product before the modulo operation is done.
  * <p>
