@@ -10,19 +10,22 @@ import com.catxu.leetcode.question.TreeNode;
  * A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
  * <p>
  * Example 1:
- * <img src="./tmp-tree.jpg" alt="tree image" />
+ * <img src="./tmp-tree.png" alt="tree image" />
  * <p>
  * Input: root = [3,9,20,null,null,15,7]
+ * <p>
  * Output: 3
  * <p>
  * Example 2:
  * <p>
  * Input: root = [1,null,2]
+ * <p>
  * Output: 2
  * <p>
  * Constraints:
  * <p>
- * The number of nodes in the tree is in the range [0, 10^4].
+ * The number of nodes in the tree is in the range [0, 10<sup>4</sup>].
+ * <p>
  * -100 <= Node.val <= 100
  */
 class Solution {

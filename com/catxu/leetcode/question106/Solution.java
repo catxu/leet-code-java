@@ -14,11 +14,13 @@ import java.util.Map;
  * <img src="./tree.png" alt="tree image" />
  * <p>
  * Input: inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
+ * <p>
  * Output: [3,9,20,null,null,15,7]
  * <p>
  * Example 2:
  * <p>
  * Input: inorder = [-1], postorder = [-1]
+ * <p>
  * Output: [-1]
  * <p>
  * Constraints:

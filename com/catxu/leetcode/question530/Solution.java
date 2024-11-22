@@ -26,9 +26,9 @@ import java.util.Map;
  * <p>
  * Constraints:
  * <p>
- * · The number of nodes in the tree is in the range [2, 104].
+ * · The number of nodes in the tree is in the range [2, 10<sup>4</sup>].
  * <p>
- * · 0 <= Node.val <= 10^5
+ * · 0 <= Node.val <= 10<sup>5</sup>
  * <p>
  * Note: This question is the same as 783: https://leetcode.com/problems/minimum-distance-between-bst-nodes/
  */

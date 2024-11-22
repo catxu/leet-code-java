@@ -8,18 +8,25 @@ package com.catxu.leetcode.question28;
  * Example 1:
  * <p>
  * Input: haystack = "sadbutsad", needle = "sad"
+ * <p>
  * Output: 0
+ * <p>
  * Explanation: "sad" occurs at index 0 and 6.
+ * <p>
  * The first occurrence is at index 0, so we return 0.
+ * <p>
  * Example 2:
  * <p>
  * Input: haystack = "leetcode", needle = "leeto"
+ * <p>
  * Output: -1
+ * <p>
  * Explanation: "leeto" did not occur in "leetcode", so we return -1.
  * <p>
  * Constraints:
  * <p>
- * 1 <= haystack.length, needle.length <= 10^4
+ * 1 <= haystack.length, needle.length <= 10<sup>4</sup>
+ * <p>
  * haystack and needle consist of only lowercase English characters.
  */
 class Solution {

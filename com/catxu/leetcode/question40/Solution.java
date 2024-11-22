@@ -13,32 +13,36 @@ import java.util.List;
  * <p>
  * Note: The solution set must not contain duplicate combinations.
  * <p>
- * <p>
- * <p>
  * Example 1:
  * <p>
  * Input: candidates = [10,1,2,7,6,1,5], target = 8
+ * <p>
  * Output:
+ * <p>
  * [
  * [1,1,6],
  * [1,2,5],
  * [1,7],
  * [2,6]
  * ]
+ * <p>
  * Example 2:
  * <p>
  * Input: candidates = [2,5,2,1,2], target = 5
+ * <p>
  * Output:
+ * <p>
  * [
  * [1,2,2],
  * [5]
  * ]
  * <p>
- * <p>
  * Constraints:
  * <p>
  * 1 <= candidates.length <= 100
+ * <p>
  * 1 <= candidates[i] <= 50
+ * <p>
  * 1 <= target <= 30
  */
 class Solution {

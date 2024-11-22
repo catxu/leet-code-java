@@ -13,31 +13,40 @@ import java.util.Arrays;
  * <p>
  * Your solution must use only constant extra space.
  * <p>
- * <p>
- * <p>
  * Example 1:
  * <p>
  * Input: numbers = [2,7,11,15], target = 9
+ * <p>
  * Output: [1,2]
+ * <p>
  * Explanation: The sum of 2 and 7 is 9. Therefore, index1 = 1, index2 = 2. We return [1, 2].
+ * <p>
  * Example 2:
  * <p>
  * Input: numbers = [2,3,4], target = 6
+ * <p>
  * Output: [1,3]
+ * <p>
  * Explanation: The sum of 2 and 4 is 6. Therefore index1 = 1, index2 = 3. We return [1, 3].
+ * <p>
  * Example 3:
  * <p>
  * Input: numbers = [-1,0], target = -1
- * Output: [1,2]
- * Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
  * <p>
+ * Output: [1,2]
+ * <p>
+ * Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
  * <p>
  * Constraints:
  * <p>
- * 2 <= numbers.length <= 3 * 10^4
+ * 2 <= numbers.length <= 3 * 10<sup>4</sup>
+ * <p>
  * -1000 <= numbers[i] <= 1000
+ * <p>
  * numbers is sorted in non-decreasing order.
+ * <p>
  * -1000 <= target <= 1000
+ * <p>
  * The tests are generated such that there is exactly one solution.
  */
 class Solution {

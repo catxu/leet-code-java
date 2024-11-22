@@ -18,23 +18,33 @@ package com.catxu.leetcode.question1969;
  * Example 1:
  * <p>
  * Input: p = 1
+ * <p>
  * Output: 1
+ * <p>
  * Explanation: nums = [1].
+ * <p>
  * There is only one element, so the product equals that element.
  * <p>
  * Example 2:
  * <p>
  * Input: p = 2
+ * <p>
  * Output: 6
+ * <p>
  * Explanation: nums = [01, 10, 11].
+ * <p>
  * Any swap would either make the product 0 or stay the same.
+ * <p>
  * Thus, the array product of 1 * 2 * 3 = 6 is already minimized.
  * <p>
  * Example 3:
  * <p>
  * Input: p = 3
+ * <p>
  * Output: 1512
+ * <p>
  * Explanation: nums = [001, 010, 011, 100, 101, 110, 111]
+ * <p>
  * - In the first operation we can swap the leftmost bit of the second and fifth elements.
  * <p>
  * - The resulting array is [001, 110, 011, 100, 001, 110, 111].

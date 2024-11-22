@@ -32,7 +32,7 @@ import java.util.Stack;
  * <p>
  * Constraints:
  * <p>
- * 0 <= s.length <= 3 * 10^4
+ * 0 <= s.length <= 3 * 10<sup>4</sup>
  * <p>
  * s[i] is '(', or ')'.
  */

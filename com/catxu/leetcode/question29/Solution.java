@@ -9,7 +9,7 @@ package com.catxu.leetcode.question29;
  * <p>
  * Return the quotient after dividing dividend by divisor.
  * <p>
- * Note: Assume we are dealing with an environment that could only store integers within the 32-bit signed integer range: [−2^31, 2^31 − 1]. For this problem, if the quotient is strictly greater than 2^31 - 1, then return 2^31 - 1, and if the quotient is strictly less than -2^31, then return -2^31.
+ * Note: Assume we are dealing with an environment that could only store integers within the 32-bit signed integer range: [−2<sup>31</sup>, 2<sup>31</sup> − 1]. For this problem, if the quotient is strictly greater than 2<sup>31</sup> - 1, then return 2<sup>31</sup> - 1, and if the quotient is strictly less than -2<sup>31</sup>, then return -2<sup>31</sup>.
  * <p>
  * Example 1:
  * <p>
@@ -29,7 +29,7 @@ package com.catxu.leetcode.question29;
  * <p>
  * Constraints:
  * <p>
- * -2^31 <= dividend, divisor <= 2^31 - 1
+ * -2<sup>31</sup> <= dividend, divisor <= 2<sup>31</sup> - 1
  * <p>
  * divisor != 0
  */

@@ -27,9 +27,9 @@ import java.util.TreeSet;
  * <p>
  * Constraints:
  * <p>
- * 0 <= nums.length <= 10^5
+ * 0 <= nums.length <= 10<sup>5</sup>
  * <p>
- * -10^9 <= nums[i] <= 10^9
+ * -10<sup>9</sup> <= nums[i] <= 10<sup>9</sup>
  */
 class Solution {
     public int longestConsecutive(int[] nums) {

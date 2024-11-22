@@ -14,14 +14,19 @@ package com.catxu.leetcode.question33;
  * Example 1:
  * <p>
  * Input: nums = [4,5,6,7,0,1,2], target = 0
+ * <p>
  * Output: 4
+ * <p>
  * Example 2:
  * <p>
  * Input: nums = [4,5,6,7,0,1,2], target = 3
+ * <p>
  * Output: -1
+ * <p>
  * Example 3:
  * <p>
  * Input: nums = [1], target = 0
+ * <p>
  * Output: -1
  */
 class Solution {

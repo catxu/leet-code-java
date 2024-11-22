@@ -51,7 +51,7 @@ package com.catxu.leetcode.question88;
  * <p>
  * 1 <= m + n <= 200
  * <p>
- * -10^9 <= nums1[i], nums2[j] <= 10^9
+ * -10<sup>9</sup> <= nums1[i], nums2[j] <= 10<sup>9</sup>
  * <p>
  * Follow up: Can you come up with an algorithm that runs in O(m + n) time?
  */

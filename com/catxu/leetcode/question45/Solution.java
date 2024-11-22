@@ -17,23 +17,26 @@ package com.catxu.leetcode.question45;
  * </ul>
  * Return the minimum number of jumps to reach nums[n - 1]. The test cases are generated such that you can reach nums[n - 1].
  * <p>
- * <p>
- * <p>
  * Example 1:
  * <p>
  * Input: nums = [2,3,1,1,4]
+ * <p>
  * Output: 2
+ * <p>
  * Explanation: The minimum number of jumps to reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the last index.
+ * <p>
  * Example 2:
  * <p>
  * Input: nums = [2,3,0,1,4]
- * Output: 2
  * <p>
+ * Output: 2
  * <p>
  * Constraints:
  * <p>
- * 1 <= nums.length <= 10^4
+ * 1 <= nums.length <= 10<sup>4</sup>
+ * <p>
  * 0 <= nums[i] <= 1000
+ * <p>
  * It's guaranteed that you can reach nums[n - 1].
  */
 class Solution {

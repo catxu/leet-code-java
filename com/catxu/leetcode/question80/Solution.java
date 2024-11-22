@@ -14,19 +14,17 @@ package com.catxu.leetcode.question80;
  * Custom Judge:
  * <p>
  * The judge will test your solution with the following code:
- * <p>
+ * <pre>
+ *     {@code
  * int[] nums = [...]; // Input array
- * <p>
  * int[] expectedNums = [...]; // The expected answer with correct length
- * <p>
  * int k = removeDuplicates(nums); // Calls your implementation
- * <p>
  * assert k == expectedNums.length;
- * <p>
  * for (int i = 0; i < k; i++) {
- * assert nums[i] == expectedNums[i];
+ *     assert nums[i] == expectedNums[i];
  * }
- * <p>
+ * }
+ * </pre>
  * If all assertions pass, then your solution will be accepted.
  * <p>
  * Example 1:
@@ -51,9 +49,9 @@ package com.catxu.leetcode.question80;
  * <p>
  * Constraints:
  * <p>
- * 1 <= nums.length <= 3 * 10^4
+ * 1 <= nums.length <= 3 * 10<sup>4</sup>
  * <p>
- * -10^4 <= nums[i] <= 10^4
+ * -10<sup>4</sup> <= nums[i] <= 10<sup>4</sup>
  * <p>
  * nums is sorted in non-decreasing order.
  */

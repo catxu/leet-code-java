@@ -7,22 +7,26 @@ package com.catxu.leetcode.question55;
  * <p>
  * Return true if you can reach the last index, or false otherwise.
  * <p>
- * <p>
  * Example 1:
  * <p>
  * Input: nums = [2,3,1,1,4]
+ * <p>
  * Output: true
+ * <p>
  * Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+ * <p>
  * Example 2:
  * <p>
  * Input: nums = [3,2,1,0,4]
- * Output: false
- * Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.
  * <p>
+ * Output: false
+ * <p>
+ * Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.
  * <p>
  * Constraints:
  * <p>
- * 1 <= nums.length <= 10^4
+ * 1 <= nums.length <= 10<sup>4</sup>
+ * <p>
  * 0 <= nums[i] <= 10^5
  */
 class Solution {

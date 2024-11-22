@@ -3,32 +3,39 @@ package com.catxu.leetcode.question50;
 /**
  * 50. Pow(x, n)
  * <p>
- * Implement pow(x, n), which calculates x raised to the power n (i.e., x^n).
+ * Implement pow(x, n), which calculates x raised to the power n (i.e., x<sup>n</sup>).
  * <p>
  * Example 1:
  * <p>
  * Input: x = 2.00000, n = 10
+ * <p>
  * Output: 1024.00000
  * <p>
  * Example 2:
  * <p>
  * Input: x = 2.10000, n = 3
+ * <p>
  * Output: 9.26100
+ * <p>
  * Example 3:
  * <p>
  * Input: x = 2.00000, n = -2
+ * <p>
  * Output: 0.25000
  * <p>
- * Explanation: 2^-2 = 1/2^2 = 1/4 = 0.25
- * <p>
+ * Explanation: 2<sup>-2</sup> = 1/2<sup>2</sup> = 1/4 = 0.25
  * <p>
  * Constraints:
  * <p>
  * -100.0 < x < 100.0
- * -2^31 <= n <= 2^31-1
+ * <p>
+ * -2<sup>31</sup> <= n <= 2<sup>31</sup>-1
+ * <p>
  * n is an integer.
+ * <p>
  * Either x is not zero or n > 0.
- * -10^4 <= x^n <= 10^4
+ * <p>
+ * -10<sup>4</sup> <= x<sup>n</sup> <= 10<sup>4</sup>
  */
 class Solution {
 

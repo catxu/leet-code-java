@@ -14,20 +14,27 @@ import java.util.List;
  * Example 1:
  * <p>
  * Input: nums = [1,2,3]
+ * <p>
  * Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+ * <p>
  * Example 2:
  * <p>
  * Input: nums = [0,1]
+ * <p>
  * Output: [[0,1],[1,0]]
+ * <p>
  * Example 3:
  * <p>
  * Input: nums = [1]
+ * <p>
  * Output: [[1]]
  * <p>
  * Constraints:
  * <p>
  * 1 <= nums.length <= 6
+ * <p>
  * -10 <= nums[i] <= 10
+ * <p>
  * All the integers of nums are unique.
  */
 class Solution {

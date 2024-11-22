@@ -10,22 +10,30 @@ package com.catxu.leetcode.question35;
  * Example 1:
  * <p>
  * Input: nums = [1,3,5,6], target = 5
+ * <p>
  * Output: 2
+ * <p>
  * Example 2:
  * <p>
  * Input: nums = [1,3,5,6], target = 2
+ * <p>
  * Output: 1
+ * <p>
  * Example 3:
  * <p>
  * Input: nums = [1,3,5,6], target = 7
+ * <p>
  * Output: 4
  * <p>
  * Constraints:
  * <p>
- * 1 <= nums.length <= 10^4
- * -10^4 <= nums[i] <= 10^4
+ * 1 <= nums.length <= 10<sup>4</sup>
+ * <p>
+ * -10<sup>4</sup> <= nums[i] <= 10<sup>4</sup>
+ * <p>
  * nums contains distinct values sorted in ascending order.
- * -10^4 <= target <= 10^4
+ * <p>
+ * -10<sup>4</sup> <= target <= 10<sup>4</sup>
  */
 class Solution {
     public int searchInsert(int[] nums, int target) {

@@ -2,6 +2,43 @@ package com.catxu.leetcode.question34;
 
 import java.util.Arrays;
 
+/**
+ * 34. Find First and Last Position of Element in Sorted Array
+ * <p>
+ * Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+ * <p>
+ * If target is not found in the array, return [-1, -1].
+ * <p>
+ * You must write an algorithm with O(log n) runtime complexity.
+ * <p>
+ * Example 1:
+ * <p>
+ * Input: nums = [5,7,7,8,8,10], target = 8
+ * <p>
+ * Output: [3,4]
+ * <p>
+ * Example 2:
+ * <p>
+ * Input: nums = [5,7,7,8,8,10], target = 6
+ * <p>
+ * Output: [-1,-1]
+ * <p>
+ * Example 3:
+ * <p>
+ * Input: nums = [], target = 0
+ * <p>
+ * Output: [-1,-1]
+ * <p>
+ * Constraints:
+ * <p>
+ * 0 <= nums.length <= 10<sup>5</sup>
+ * <p>
+ * -10<sup>9</sup> <= nums[i] <= 10<sup>9</sup>
+ * <p>
+ * nums is a non-decreasing array.
+ * <p>
+ * -10<sup>9</sup> <= target <= 10<sup>9</sup>
+ */
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         int l = 0, r = nums.length - 1;

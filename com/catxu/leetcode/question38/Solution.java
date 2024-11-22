@@ -9,7 +9,9 @@ import java.util.List;
  * The count-and-say sequence is a sequence of digit strings defined by the recursive formula:
  * <p>
  * countAndSay(1) = "1"
+ * <p>
  * countAndSay(n) is the way you would "say" the digit string from countAndSay(n-1), which is then converted into a different digit string.
+ * <p>
  * To determine how you "say" a digit string, split it into the minimal number of substrings such that each substring contains exactly one unique digit. Then for each substring, say the number of digits, then say the digit. Finally, concatenate every said digit.
  * <p>
  * For example, the saying and conversion for digit string "3322251":
@@ -19,16 +21,25 @@ import java.util.List;
  * Example 1:
  * <p>
  * Input: n = 1
+ * <p>
  * Output: "1"
+ * <p>
  * Explanation: This is the base case.
+ * <p>
  * Example 2:
  * <p>
  * Input: n = 4
+ * <p>
  * Output: "1211"
+ * <p>
  * Explanation:
+ * <p>
  * countAndSay(1) = "1"
+ * <p>
  * countAndSay(2) = say "1" = one 1 = "11"
+ * <p>
  * countAndSay(3) = say "11" = two 1's = "21"
+ * <p>
  * countAndSay(4) = say "21" = one 2 + one 1 = "12" + "11" = "1211"
  * <p>
  * Constraints:
