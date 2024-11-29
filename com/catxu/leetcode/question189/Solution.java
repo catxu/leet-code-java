@@ -48,9 +48,7 @@ class Solution {
         if (k == 0 || k == nums.length) {
             return;
         }
-        if (k > nums.length) {
-            k = k % nums.length;
-        }
+        k = k % nums.length;
         // lifo
         Stack<Integer> stack = new Stack<>();
         for (int i = nums.length - k; i < nums.length; i++) {
@@ -72,7 +70,7 @@ class Solution {
         int[] ex2 = {-1, -100, 3, 99};
         solution.rotate(ex2, 2);
         System.out.println(Arrays.toString(ex2));
-        int[] ex3 = {1,2};
+        int[] ex3 = {1, 2};
         solution.rotate(ex3, 5);
         System.out.println(Arrays.toString(ex3));
     }
