@@ -45,10 +45,10 @@ import java.util.Stack;
 class Solution {
 
     public void rotate(int[] nums, int k) {
-        if (k == 0 || k == nums.length) {
+        k = k % nums.length;
+        if (k == 0) {
             return;
         }
-        k = k % nums.length;
         // lifo
         Stack<Integer> stack = new Stack<>();
         for (int i = nums.length - k; i < nums.length; i++) {
