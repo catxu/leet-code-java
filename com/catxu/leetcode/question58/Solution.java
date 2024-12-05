@@ -50,7 +50,7 @@ class Solution {
         int start = end;
         while (start > 0 && chars[--start] != ' ') {
         }
-        // end 之后没有 start
+        // end 之后没有 space
         return end - start + (chars[start] == ' ' ? 0 : 1);
     }
 
