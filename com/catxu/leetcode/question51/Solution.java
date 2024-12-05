@@ -1,7 +1,9 @@
 package com.catxu.leetcode.question51;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 51. N-Queens
@@ -52,10 +54,9 @@ class Solution {
 
     private void backtracking(List<List<String>> res, List<List<String>> state, int row, int n, boolean[] cols, boolean[] mainDiag, boolean[] subDiag) {
         if (row == n) {
-            res.addAll(state.stream()
-                    .map(List::copyOf)  // Deep copy each inner list
-                    .toList()  // Collect into a new List<List<String>>
-            );
+            // 将state 里面每一行（List<String>）即 [".","Q",".","."] 转成 [".Q..", "...Q", ...] 的格式，以满足题目返回要求
+            List<String> chessBoard = state.stream().map(e -> String.join("", e)).toList();
+            res.add(chessBoard);
             return;
         }
         List<String> chessRow = state.get(row);
