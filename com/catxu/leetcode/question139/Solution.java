@@ -56,6 +56,7 @@ class Solution {
             }
             visited[start] = true;
             for (int end = start + 1; end <= s.length(); end++) {
+                // end 是开区间 [start, end)
                 if (dict.contains(s.substring(start, end))) {
                     if (end == s.length()) {
                         return true;
@@ -69,9 +70,11 @@ class Solution {
 
     public static void main(String[] args) {
         Solution s = new Solution();
-//        System.out.println(s.wordBreak("leetcode", Arrays.asList("leet", "code")));
-//        System.out.println(s.wordBreak("applepenapple", Arrays.asList("apple", "pen")));
-//        System.out.println(s.wordBreak("catsandog", Arrays.asList("cats", "dog", "sand", "and", "cat")));
+        System.out.println(s.wordBreak("leetcode", Arrays.asList("leet", "code")));
+        System.out.println(s.wordBreak("applepenapple", Arrays.asList("apple", "pen")));
+        System.out.println(s.wordBreak("catsandog", Arrays.asList("cats", "dog", "sand", "and", "cat")));
         System.out.println(s.wordBreak("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", Arrays.asList("a", "aa", "aaa", "aaaa")));
+        System.out.println(s.wordBreak("catsanddog", Arrays.asList("cats", "cat", "and", "dog")));
+        System.out.println(s.wordBreak("orange", Arrays.asList("or", "orange")));
     }
 }
