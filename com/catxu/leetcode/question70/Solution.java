@@ -41,7 +41,7 @@ import java.util.Map;
  * 1 <= n <= 45
  */
 class Solution {
-    private final Map<Integer, Integer> memoizer = new HashMap<>(64);
+    /*private final Map<Integer, Integer> memoizer = new HashMap<>(64);
 
     public int climbStairs(int n) {
         if (memoizer.containsKey(n)) {
@@ -55,15 +55,28 @@ class Solution {
         }
         memoizer.put(n, climbStairs(n - 1) + climbStairs(n - 2));
         return memoizer.get(n);
+    }*/
+
+    public int climbStairs(int n) {
+        if (n <= 2) {
+            return n;
+        }
+        int[] dp = new int[n];
+        dp[0] = 1;
+        dp[1] = 2;
+        for (int i = 2; i < n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n - 1];
     }
 
     public static void main(String[] args) {
         Solution s = new Solution();
-//        System.out.println(s.climbStairs(2));
-//        System.out.println(s.climbStairs(3));
-//        System.out.println(s.climbStairs(4));
+        System.out.println(s.climbStairs(2));
+        System.out.println(s.climbStairs(3));
+        System.out.println(s.climbStairs(4));
         System.out.println(s.climbStairs(5));
-//        System.out.println(s.climbStairs(10));
-//        System.out.println(s.climbStairs(45));
+        System.out.println(s.climbStairs(10));
+        System.out.println(s.climbStairs(45));
     }
 }
