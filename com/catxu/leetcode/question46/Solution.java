@@ -1,7 +1,6 @@
 package com.catxu.leetcode.question46;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -47,7 +46,7 @@ class Solution {
                 if (tempList.contains(nums[i])) continue; // Skip if already used
                 tempList.add(nums[i]);
                 backtrack(result, tempList, nums);
-                tempList.remove(tempList.size() - 1); // Backtrack
+                tempList.removeLast(); // Backtrack
             }
         }
     }
