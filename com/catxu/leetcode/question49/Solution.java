@@ -43,8 +43,14 @@ import java.util.*;
  */
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        List<List<String>> ans = new ArrayList<>();
-        Map<Integer, List<String>> map = new HashMap<>();
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
+            char[] chars = str.toCharArray();
+            Arrays.sort(chars);
+            String sortedStr = String.valueOf(chars);
+            map.computeIfAbsent(sortedStr, k -> new ArrayList<>()).add(str);
+        }
+        return new ArrayList<>(map.values());
 
 
         /*List<List<String>> ans = new ArrayList<>();
@@ -101,5 +107,6 @@ class Solution {
         System.out.println(s.groupAnagrams(new String[]{""}));
         System.out.println(s.groupAnagrams(new String[]{"a"}));
         System.out.println(s.groupAnagrams(new String[]{"", ""}));
+        System.out.println(s.groupAnagrams(new String[]{"cab", "tin", "pew", "duh", "may", "ill", "buy", "bar", "max", "doc"}));
     }
 }
