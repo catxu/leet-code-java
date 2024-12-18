@@ -1,8 +1,8 @@
 package com.catxu.leetcode.question380;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * 380. Insert Delete GetRandom O(1)
@@ -61,24 +61,70 @@ import java.util.Set;
  */
 class RandomizedSet {
 
-    private Set<Integer> set;
-    private int[] array;
+    private final Map<Integer, Integer> valAndIndexMap;
+    private final Integer[] vals;
+    private final Random random;
+    private int size;
 
     public RandomizedSet() {
-        set  = new HashSet<>();
-        array = new int[2_00000];
+        valAndIndexMap = new HashMap<>();
+        vals = new Integer[2_00000];
+        random = new Random();
+        size = 0;
     }
 
     public boolean insert(int val) {
-        return set.add(val);
+        if (valAndIndexMap.containsKey(val)) {
+            return false;
+        }
+        valAndIndexMap.put(val, size);
+        vals[size] = val;
+        size += 1;
+        return true;
     }
 
     public boolean remove(int val) {
-        return set.remove(val);
+        // 从map中移除 val，从 list 中将最后一个值与被移除值替换，将最后一个值删除
+        if (!valAndIndexMap.containsKey(val)) {
+            return false;
+        }
+        Integer removedIndex = valAndIndexMap.remove(val);
+        if (removedIndex != size - 1) {
+            vals[removedIndex] = vals[size - 1];
+            // 更新lastVal在map中的索引
+            valAndIndexMap.put(vals[size - 1], removedIndex);
+        }
+        vals[size - 1] = null;
+        size -= 1;
+        return true;
     }
 
     public int getRandom() {
-        new Random().nextInt(set.size());
+        return vals[random.nextInt(size)];
+    }
+
+    public static void main(String[] args) {
+        RandomizedSet obj = new RandomizedSet();
+        System.out.println(obj.insert(1));
+        System.out.println(obj.remove(2));
+        System.out.println(obj.insert(2));
+        System.out.println(obj.getRandom());
+        System.out.println(obj.remove(1));
+        System.out.println(obj.insert(2));
+        System.out.println(obj.getRandom());
+
+//        System.out.println(obj.insert(0));
+//        System.out.println(obj.insert(1));
+//        System.out.println(obj.remove(0));
+//        System.out.println(obj.insert(2));
+//        System.out.println(obj.remove(1));
+
+//        System.out.println(obj.remove(0));
+//        System.out.println(obj.remove(0));
+//        System.out.println(obj.insert(0));
+//        System.out.println(obj.getRandom());
+//        System.out.println(obj.remove(0));
+//        System.out.println(obj.insert(0));
     }
 }
 
