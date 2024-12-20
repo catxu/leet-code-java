@@ -10,7 +10,7 @@ import java.util.Arrays;
  * Note: You can only move either down or right at any point in time.
  * <p>
  * Example 1:
- *
+ * <p>
  * <img src="./minpath.png" />
  * <p>
  * Input: grid = [[1,3,1],[1,5,1],[4,2,1]]
