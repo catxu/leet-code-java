@@ -49,12 +49,9 @@ class Solution {
         }
 
         for (int i = start; i <= n; i++) {
-//            if (combinations.contains(i) || (!combinations.isEmpty() && i < combinations.get(combinations.size() - 1))) {
-//                continue;
-//            }
             combinations.add(i);
             dfs(res, n, k, i + 1, combinations);
-            combinations.remove(combinations.size() - 1);
+            combinations.removeLast();
         }
     }
 
