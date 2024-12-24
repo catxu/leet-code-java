@@ -2,6 +2,56 @@ package com.catxu.leetcode.question855;
 
 import java.util.TreeSet;
 
+/**
+ * 855. Exam Room
+ * <p>
+ * There is an exam room with n seats in a single row labeled from 0 to n - 1.
+ * <p>
+ * When a student enters the room, they must sit in the seat that maximizes the distance to the closest person. If there are multiple such seats, they sit in the seat with the lowest number. If no one is in the room, then the student sits at seat number 0.
+ * <p>
+ * Design a class that simulates the mentioned exam room.
+ * <p>
+ * Implement the ExamRoom class:
+ * <p>
+ * ExamRoom(int n) Initializes the object of the exam room with the number of the seats n.
+ * <p>
+ * int seat() Returns the label of the seat at which the next student will set.
+ * <p>
+ * void leave(int p) Indicates that the student sitting at seat p will leave the room. It is guaranteed that there will be a student sitting at seat p.
+ * <p>
+ * Example 1:
+ * <p>
+ * Input
+ * <p>
+ * ["ExamRoom", "seat", "seat", "seat", "seat", "leave", "seat"]
+ * <p>
+ * [[10], [], [], [], [], [4], []]
+ * <p>
+ * Output
+ * <p>
+ * [null, 0, 9, 4, 2, null, 5]
+ * <p>
+ * Explanation
+ * <pre>
+ * {@code
+ * ExamRoom examRoom = new ExamRoom(10);
+ * examRoom.seat(); // return 0, no one is in the room, then the student sits at seat number 0.
+ * examRoom.seat(); // return 9, the student sits at the last seat number 9.
+ * examRoom.seat(); // return 4, the student sits at the last seat number 4.
+ * examRoom.seat(); // return 2, the student sits at the last seat number 2.
+ * examRoom.leave(4);
+ * examRoom.seat(); // return 5, the student sits at the last seat number 5.
+ * }
+ * </pre>
+ * <p>
+ * Constraints:
+ * <p>
+ * 1 <= n <= 10<sup>9</sup>
+ * <p>
+ * It is guaranteed that there is a student sitting at seat p.
+ * <p>
+ * At most 10<sup>4</sup> calls will be made to seat and leave.
+ */
 class ExamRoom {
     private final TreeSet<Integer> seats;
     private final int N;
