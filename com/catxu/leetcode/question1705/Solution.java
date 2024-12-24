@@ -1,6 +1,6 @@
 package com.catxu.leetcode.question1705;
 
-import java.util.Stack;
+import java.util.PriorityQueue;
 
 /**
  * 1705. Maximum Number of Eaten Apples
@@ -53,30 +53,40 @@ import java.util.Stack;
  */
 class Solution {
     public int eatenApples(int[] apples, int[] days) {
-        // 最大吃苹果数 = 吃上苹果的天数
-        // 维护一个剩余苹果数量 用栈来装 每天如果产生了新苹果，就入栈，peek() 校验 day 为 0 或者 apple 为 0 ，任意一个为 0 就 pop 出栈
-        // 另外还需要跟踪索引， 有可能 后进的 却先过期了 [7, 1, 2, 9] / [7, 1, 2, 9]
-        // 索引表示第 i 天入栈的，如果取出来 maxDay > i + days[i] 则表示已过期
-        // 特殊条件，如果 days[i] == 0 则不过期？
-        if (apples.length == 0) {
-            return 0;
-        }
-        Stack<int[]> stack = new Stack<>();
-        for (int i = 0; i < apples.length; i++) {
-            stack.addFirst(new int[]{apples[i], days[i], i + 1});
-        }
-        int ans = 0, curDay = 1;
-        while (!stack.isEmpty()) {
-            int[] appleToEat = stack.peek();
-            if (appleToEat[0] > 0 &&  (appleToEat[2] /*起始时间*/ + appleToEat[1] /*最大保存时间*/) >= curDay) {
-                curDay++;
-                ans += 1;
-                appleToEat[0] = appleToEat[0] - 1;
-            } else {
-                stack.pop();
+        int n = apples.length;
+        int day = 0, eaten = 0;
+
+        // Min-Heap to store [expirationDay, appleCount]
+        PriorityQueue<int[]> heap = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+
+        while (day < n || !heap.isEmpty()) {
+            // Add today's apples with expiration day
+            if (day < n && apples[day] > 0) {
+                heap.offer(new int[]{day + days[day], apples[day]});
             }
+
+            // Remove all rotten apples
+            while (!heap.isEmpty() && heap.peek()[0] <= day) {
+                heap.poll();
+            }
+
+            // Eat an apple if available
+            if (!heap.isEmpty()) {
+                int[] top = heap.poll();
+                top[1]--; // Eat one apple
+                eaten++;
+
+                // If there are apples left, add back to the heap
+                if (top[1] > 0) {
+                    heap.offer(top);
+                }
+            }
+
+            // Move to the next day
+            day++;
         }
-        return ans;
+
+        return eaten;
     }
 
     public static void main(String[] args) {
