@@ -1,6 +1,5 @@
 package com.catxu.leetcode.question1705;
 
-import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -62,23 +61,15 @@ class Solution {
         if (apples.length == 0) {
             return 0;
         }
-        int ans = 0;
         Stack<int[]> stack = new Stack<>();
         for (int i = 0; i < apples.length; i++) {
-            stack.push(new int[]{apples[i], days[i]});
-//            int[] appleToEat = stack.peek();
-//            if (appleToEat[0] > 0 && i + appleToEat[i] > ans) {
-//                ans += 1;
-//                appleToEat[0] = appleToEat[0] - 1;
-//            } else {
-//                stack.pop();
-//            }
+            stack.addFirst(new int[]{apples[i], days[i], i + 1});
         }
-        int curDay = 0;
+        int ans = 0, curDay = 1;
         while (!stack.isEmpty()) {
-            curDay++;
             int[] appleToEat = stack.peek();
-            if (appleToEat[0] > 0 && curDay - appleToEat[1] == 0) {
+            if (appleToEat[0] > 0 &&  (appleToEat[2] /*起始时间*/ + appleToEat[1] /*最大保存时间*/) >= curDay) {
+                curDay++;
                 ans += 1;
                 appleToEat[0] = appleToEat[0] - 1;
             } else {
@@ -86,5 +77,18 @@ class Solution {
             }
         }
         return ans;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.eatenApples(new int[]{1, 2, 3, 5, 2}, new int[]{3, 2, 1, 4, 2}));
+        System.out.println(solution.eatenApples(new int[]{3}, new int[]{2}));
+        System.out.println(solution.eatenApples(new int[]{3, 0, 0, 0, 2}, new int[]{3, 0, 0, 0, 2}));
+        System.out.println(solution.eatenApples(new int[]{3, 1, 0, 0, 2}, new int[]{0, 2, 0, 0, 2}));
+        System.out.println(solution.eatenApples(new int[]{0, 0, 0, 0}, new int[]{0, 0, 0, 0}));
+        System.out.println(solution.eatenApples(new int[]{2, 1, 10, 0, 0}, new int[]{3, 2, 5, 0, 0}));
+        System.out.println(solution.eatenApples(new int[]{1, 2, 3, 4, 5}, new int[]{1, 10, 10, 10, 10}));
+        System.out.println(solution.eatenApples(new int[]{1}, new int[]{0}));
+        System.out.println(solution.eatenApples(new int[]{2, 1, 10}, new int[]{2, 10, 1}));
     }
 }
