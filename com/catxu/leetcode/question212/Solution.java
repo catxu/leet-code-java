@@ -67,85 +67,81 @@ class Solution {
         }));
     }
 
-    public List<String> findWords(char[][] board, String[] words) {
-        Trie node = new Trie();
-        for (String word : words) {
-            node.insert(word);
+    static class TrieNode {
+        String word;
+        TrieNode[] children;
+
+        public TrieNode() {
+            children = new TrieNode[26];
+            word = null;
         }
-        Set<String> ans = new HashSet<>();
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                dfs(board, ans, node, i, j, "");
-            }
-        }
-        return new ArrayList<>(ans);
     }
 
-    private void dfs(char[][] board, Set<String> ans, Trie node, int i, int j, String state) {
-        if (i < 0 || j < 0 || i > board.length - 1 || j > board[0].length - 1 || board[i][j] == '#') {
+    private TrieNode root;
+
+    // 构建 Trie
+    public void buildTrie(String[] words) {
+        root = new TrieNode();
+        for (String word : words) {
+            TrieNode node = root;
+            for (char c : word.toCharArray()) {
+                int index = c - 'a';
+                if (node.children[index] == null) {
+                    node.children[index] = new TrieNode();
+                }
+                node = node.children[index];
+            }
+            node.word = word; // 记录完整单词
+        }
+    }
+
+    // 主方法
+    public List<String> findWords(char[][] board, String[] words) {
+        // 结果集
+        Set<String> result = new HashSet<>();
+        // 构建 Trie
+        buildTrie(words);
+
+        // 遍历每个网格位置
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                dfs(board, i, j, root, result);
+            }
+        }
+
+        return new ArrayList<>(result);
+    }
+
+    // DFS 搜索
+    private void dfs(char[][] board, int i, int j, TrieNode node, Set<String> result) {
+        // 边界条件
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] == '#') {
             return;
         }
+
         char c = board[i][j];
-        state += c;
-        if (!node.startsWith(state)) {
-            return;
+        int index = c - 'a';
+        if (node.children[index] == null) {
+            return; // 不在 Trie 中
         }
-        if (!ans.contains(state) && node.search(state)) {
-            ans.add(state);
+
+        node = node.children[index];
+        if (node.word != null) {
+            result.add(node.word); // 找到单词
+            node.word = null; // 防止重复添加
         }
+
         // 标记当前节点
         board[i][j] = '#';
+
         // 搜索相邻节点
-        dfs(board, ans, node, i - 1, j, state);
-        dfs(board, ans, node, i + 1, j, state);
-        dfs(board, ans, node, i, j - 1, state);
-        dfs(board, ans, node, i, j + 1, state);
+        dfs(board, i - 1, j, node, result);
+        dfs(board, i + 1, j, node, result);
+        dfs(board, i, j - 1, node, result);
+        dfs(board, i, j + 1, node, result);
+
         // 恢复当前节点
         board[i][j] = c;
     }
 
-    static class Trie {
-        private final Trie[] child;
-        private boolean isEndOfWord;
-
-        public Trie() {
-            child = new Trie[26];
-            isEndOfWord = false;
-        }
-
-        public void insert(String word) {
-            Trie node = this;
-            for (int i = 0; i < word.length(); i++) {
-                char ch = word.charAt(i);
-                int index = ch - 'a';
-                if (node.child[index] == null) {
-                    node.child[index] = new Trie();
-                }
-                node = node.child[index];
-            }
-            node.isEndOfWord = true;
-        }
-
-        public boolean startsWith(String prefix) {
-            return searchPrefix(prefix) != null;
-        }
-
-        public boolean search(String word) {
-            Trie node = searchPrefix(word);
-            return node != null && node.isEndOfWord;
-        }
-
-        private Trie searchPrefix(String prefix) {
-            Trie node = this;
-            for (int i = 0; i < prefix.length(); i++) {
-                char ch = prefix.charAt(i);
-                int index = ch - 'a';
-                if (node.child[index] == null) {
-                    return null;
-                }
-                node = node.child[index];
-            }
-            return node;
-        }
-    }
 }
