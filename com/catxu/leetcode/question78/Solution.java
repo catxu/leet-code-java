@@ -43,7 +43,7 @@ class Solution {
         for (int i = start; i < nums.length; i++) {
             state.add(nums[i]);
             backtrack(res, state, nums, i + 1);
-            state.remove(state.size() - 1);
+            state.removeLast();
         }
     }
 
