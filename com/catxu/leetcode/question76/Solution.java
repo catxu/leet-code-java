@@ -47,120 +47,85 @@ import java.util.*;
  */
 class Solution {
 
-    //    private String minWindow = "";
-//    private int minLength = Integer.MAX_VALUE;
-//    private int tSize;
-//
-//    public String minWindow(String s, String t) {
-//        if (t.isEmpty() || s.length() < t.length()) {
-//            return "";
-//        }
-//        tSize = t.length();
-//        // Frequency map for the target string
-//        Map<Character, Integer> targetMap = new HashMap<>();
-//        for (char c : t.toCharArray()) {
-//            targetMap.put(c, targetMap.getOrDefault(c, 0) + 1);
-//        }
-//
-//        // Start backtracking
-//        backtrack(s, targetMap, new StringBuilder(), 0);
-//        return minWindow;
-//    }
-//
-//    private void backtrack(String s, Map<Character, Integer> targetMap, StringBuilder current, int index) {
-//        if (index > s.length()) {
-//            return;
-//        }
-//
-//        // Check if the current substring is valid
-//        if (current.length() >= tSize && containsAllCharacters(current.toString(), targetMap)) {
-//            if (current.length() < minLength) {
-//                minLength = current.length();
-//                minWindow = current.toString();
-//            }
-//        }
-//
-//        // Explore further substrings
-//        for (int i = index; i < s.length(); i++) {
-//            current.append(s.charAt(i)); // Add current character
-//            backtrack(s, targetMap, current, i + 1); // Recursive call
-//            current.deleteCharAt(current.length() - 1); // Backtrack
-//        }
-//    }
-//
-//    private boolean containsAllCharacters(String str, Map<Character, Integer> targetMap) {
-//        Map<Character, Integer> countMap = new HashMap<>();
-//        for (char c : str.toCharArray()) {
-//            countMap.put(c, countMap.getOrDefault(c, 0) + 1);
-//        }
-//
-//        for (Map.Entry<Character, Integer> entry : targetMap.entrySet()) {
-//            char key = entry.getKey();
-//            int value = entry.getValue();
-//            if (countMap.getOrDefault(key, 0) < value) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-//
-    public static void main(String[] args) {
-        Solution s = new Solution();
-        System.out.println(s.minWindow("ADOBECODEBANC", "ABC"));
-//        System.out.println(s.minWindow("a", "a"));
-//        System.out.println(s.minWindow("a", "aa"));
-    }
+    private String minWindow = "";
+    private int minLength = Integer.MAX_VALUE;
+    private int minSize;
+    private Set<String> memo;
 
     public String minWindow(String s, String t) {
-        if (t.isEmpty() || t.length() > s.length()) {
+        if (t.isEmpty() || s.length() < t.length()) {
             return "";
         }
+
+        this.minSize = t.length();
+        this.memo = new HashSet<>();
+        // Frequency map for the target string
         Map<Character, Integer> targetMap = new HashMap<>();
-        for (int i = 0; i < t.length(); i++) {
-            char c = t.charAt(i);
+        for (char c : t.toCharArray()) {
             targetMap.put(c, targetMap.getOrDefault(c, 0) + 1);
         }
-        dfs(s, targetMap, t.length(), 0, new StringBuilder());
-        return ans;
+
+        // Start backtracking
+        backtrack(s, targetMap, 0, 0);
+        return minWindow;
     }
 
-    String ans = "";
-    int minWindow = Integer.MAX_VALUE;
-
-    private void dfs(String s,
-                     Map<Character, Integer> targetMap,
-                     int minSize,
-                     int startIndex,
-                     StringBuilder state) {
-        if (startIndex > s.length()) {
+    private void backtrack(String s, Map<Character, Integer> targetMap, int start, int end) {
+        if (start > s.length()) {
             return;
         }
-        if (state.length() >= minSize && state.length() < minWindow && containsAll(state.toString(), targetMap)) {
-            minWindow = state.length();
-            ans = state.toString();
+        // Generate a key for memoization
+        String memoKey = start + "," + end;
+        if (memo.contains(memoKey)) {
             return;
         }
-        for (int i = startIndex; i < s.length(); i++) {
-            state.append(s.charAt(i));
-            dfs(s, targetMap, minSize, i + 1, state);
-            state.deleteCharAt(state.length() - 1);
+        // Check if the current substring is valid
+        int currentLength = end - start;
+        if (start < end
+                && currentLength >= minSize
+                && currentLength < minLength
+                && targetMap.containsKey(s.charAt(start))
+                && targetMap.containsKey(s.charAt(end - 1))
+                && containsAllCharacters(s.substring(start, end), targetMap)) {
+            minLength = currentLength;
+            minWindow = s.substring(start, end);
         }
 
+        // Explore extending the substring by advancing `end`
+        if (end < s.length()) {
+            backtrack(s, targetMap, start, end + 1);
+        }
+
+        // Explore moving the `start` pointer forward (shrinking the substring)
+        if (start < end) {
+            backtrack(s, targetMap, start + 1, end);
+        }
+
+        // Store the result in the memoization set
+        memo.add(memoKey);
     }
 
-    private boolean containsAll(String current, Map<Character, Integer> targetMap) {
-        Map<Character, Integer> currentMap = new HashMap<>();
-        for (int i = 0; i < current.length(); i++) {
-            char c = current.charAt(i);
-            currentMap.put(c, targetMap.getOrDefault(c, 0) + 1);
+    private boolean containsAllCharacters(String str, Map<Character, Integer> targetMap) {
+        Map<Character, Integer> countMap = new HashMap<>();
+        for (char c : str.toCharArray()) {
+            countMap.put(c, countMap.getOrDefault(c, 0) + 1);
         }
+
         for (Map.Entry<Character, Integer> entry : targetMap.entrySet()) {
-            Character key = entry.getKey();
-            Integer value = entry.getValue();
-            if (currentMap.getOrDefault(key, 0) - value < 0) {
+            char key = entry.getKey();
+            int value = entry.getValue();
+            if (countMap.getOrDefault(key, 0) < value) {
                 return false;
             }
         }
         return true;
     }
+
+    public static void main(String[] args) {
+        System.out.println(new Solution().minWindow("ADOBECODEBANC", "ABC"));
+        System.out.println(new Solution().minWindow("a", "a"));
+        System.out.println(new Solution().minWindow("a", "aa"));
+        System.out.println(new Solution().minWindow("BCA", "C"));
+    }
+
 }
