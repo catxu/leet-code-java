@@ -95,7 +95,6 @@ class Solution {
         }
     }
 
-    // 主方法
     public List<String> findWords(char[][] board, String[] words) {
         // 结果集
         Set<String> result = new HashSet<>();
@@ -112,7 +111,6 @@ class Solution {
         return new ArrayList<>(result);
     }
 
-    // DFS 搜索
     private void dfs(char[][] board, int i, int j, TrieNode node, Set<String> result) {
         // 边界条件
         if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] == '#') {
@@ -122,7 +120,8 @@ class Solution {
         char c = board[i][j];
         int index = c - 'a';
         if (node.children[index] == null) {
-            return; // 不在 Trie 中
+            // 不在 Trie 中
+            return;
         }
 
         node = node.children[index];
