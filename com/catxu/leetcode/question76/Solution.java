@@ -1,6 +1,7 @@
 package com.catxu.leetcode.question76;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 76. Minimum Window Substring
@@ -47,79 +48,59 @@ import java.util.*;
  */
 class Solution {
 
-    private String minWindow = "";
-    private int minLength = Integer.MAX_VALUE;
-    private int minSize;
-    private Set<String> memo;
-
     public String minWindow(String s, String t) {
-        if (t.isEmpty() || s.length() < t.length()) {
+        if (s.length() < t.length()) {
             return "";
         }
 
-        this.minSize = t.length();
-        this.memo = new HashSet<>();
-        // Frequency map for the target string
+        // 记录目标字符频率
         Map<Character, Integer> targetMap = new HashMap<>();
         for (char c : t.toCharArray()) {
             targetMap.put(c, targetMap.getOrDefault(c, 0) + 1);
         }
 
-        // Start backtracking
-        backtrack(s, targetMap, 0, 0);
-        return minWindow;
-    }
+        // 窗口内字符频率
+        Map<Character, Integer> windowMap = new HashMap<>();
+        int left = 0, right = 0; // 左右指针
+        int valid = 0; // 有效匹配字符数
+        int minLength = Integer.MAX_VALUE;
+        int start = 0;
 
-    private void backtrack(String s, Map<Character, Integer> targetMap, int start, int end) {
-        if (start > s.length()) {
-            return;
-        }
-        // Generate a key for memoization
-        String memoKey = start + "," + end;
-        if (memo.contains(memoKey)) {
-            return;
-        }
-        // Check if the current substring is valid
-        int currentLength = end - start;
-        if (start < end
-                && currentLength >= minSize
-                && currentLength < minLength
-                && targetMap.containsKey(s.charAt(start))
-                && targetMap.containsKey(s.charAt(end - 1))
-                && containsAllCharacters(s.substring(start, end), targetMap)) {
-            minLength = currentLength;
-            minWindow = s.substring(start, end);
-        }
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            right++;
 
-        // Explore extending the substring by advancing `end`
-        if (end < s.length()) {
-            backtrack(s, targetMap, start, end + 1);
-        }
+            // 更新窗口内字符频率
+            if (targetMap.containsKey(c)) {
+                windowMap.put(c, windowMap.getOrDefault(c, 0) + 1);
+                if (windowMap.get(c).equals(targetMap.get(c))) {
+                    valid++;
+                }
+            }
 
-        // Explore moving the `start` pointer forward (shrinking the substring)
-        if (start < end) {
-            backtrack(s, targetMap, start + 1, end);
-        }
+            // 当窗口符合条件时，收缩左边界
+            while (valid == targetMap.size()) {
+                // 更新最小窗口
+                if (right - left < minLength) {
+                    minLength = right - left;
+                    start = left;
+                }
 
-        // Store the result in the memoization set
-        memo.add(memoKey);
-    }
+                char d = s.charAt(left);
+                left++;
 
-    private boolean containsAllCharacters(String str, Map<Character, Integer> targetMap) {
-        Map<Character, Integer> countMap = new HashMap<>();
-        for (char c : str.toCharArray()) {
-            countMap.put(c, countMap.getOrDefault(c, 0) + 1);
-        }
-
-        for (Map.Entry<Character, Integer> entry : targetMap.entrySet()) {
-            char key = entry.getKey();
-            int value = entry.getValue();
-            if (countMap.getOrDefault(key, 0) < value) {
-                return false;
+                if (targetMap.containsKey(d)) {
+                    if (windowMap.get(d).equals(targetMap.get(d))) {
+                        valid--;
+                    }
+                    windowMap.put(d, windowMap.get(d) - 1);
+                }
             }
         }
-        return true;
+
+        return minLength == Integer.MAX_VALUE ? "" : s.substring(start, start + minLength);
     }
+
 
     public static void main(String[] args) {
         System.out.println(new Solution().minWindow("ADOBECODEBANC", "ABC"));
