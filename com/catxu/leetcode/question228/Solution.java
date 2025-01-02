@@ -9,36 +9,33 @@ import java.util.List;
 class Solution {
 
     public List<String> summaryRanges(int[] nums) {
-        if (nums.length == 0) {
-            return List.of();
-        }
-        int prev = nums[0];
         List<String> ans = new ArrayList<>();
+        if (nums.length == 0) {
+            return ans;
+        }
         boolean prevInRange = false;
-        ans.add(prev + "");
+        ans.add(String.valueOf(nums[0]));
         for (int i = 1; i < nums.length; i++) {
-            int cur = nums[i];
             // 注意整型溢出
-            if (prev + 1 != cur) {
+            if (nums[i - 1] + 1 != nums[i]) {
                 if (prevInRange) {
-                    extractRange(ans, prev);
+                    extractRange(ans, nums[i - 1]);
                 }
-                ans.addLast(cur + "");
+                ans.addLast(String.valueOf(nums[i]));
                 prevInRange = false;
             } else {
                 prevInRange = true;
             }
-            prev = cur;
         }
         if (prevInRange) {
-            extractRange(ans, prev);
+            extractRange(ans, nums[nums.length - 1]);
         }
         return ans;
     }
 
-    private static void extractRange(List<String> ans, int prev) {
-        String last = ans.removeLast();
-        String rangedStr = last + "->" + prev;
+    private static void extractRange(List<String> ans, int next) {
+        String prev = ans.removeLast();
+        String rangedStr = prev + "->" + next;
         ans.addLast(rangedStr);
     }
 
