@@ -1,27 +1,53 @@
 package com.catxu.leetcode.question729;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 729. My Calendar I
  */
 class MyCalendar {
 
-    private List<int[]> events;
+    static class SegmentTree {
+        private final int start;
+        private final int end;
+        private SegmentTree left;
+        private SegmentTree right;
+        public SegmentTree(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+
+        public boolean insert(int startTime, int endTime) {
+            SegmentTree cur = this;
+            while (true) {
+                if (endTime <= cur.start) {
+                    if (cur.left == null) {
+                        cur.left = new SegmentTree(startTime, endTime);
+                        return true;
+                    }
+                    cur = cur.left;
+                } else if (startTime >= cur.end) {
+                    if (cur.right == null) {
+                        cur.right = new SegmentTree(startTime, endTime);
+                        return true;
+                    }
+                    cur = cur.right;
+                } else {
+                    return false;
+                }
+            }
+        }
+    }
+
+    private SegmentTree root;
 
     public MyCalendar() {
-        this.events = new ArrayList<>();
     }
 
     public boolean book(int startTime, int endTime) {
-        for (int[] event : events) {
-            if (startTime < event[1] && endTime > event[0]) {
-                return false;
-            }
+        if (root == null) {
+            root = new SegmentTree(startTime, endTime);
+            return true;
         }
-        events.add(new int[]{startTime, endTime});
-        return true;
+        return root.insert(startTime, endTime);
     }
 
     public static void main(String[] args) {
