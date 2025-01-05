@@ -102,7 +102,7 @@ class Solution {
             int spaceCount = maxWidth - line.stream().mapToInt(String::length).sum();
             // 特殊处理：一行只有一个单词
             if (line.size() == 1) {
-                res.add(line.get(0) + " ".repeat(spaceCount));
+                res.add(line.getFirst() + " ".repeat(spaceCount));
                 continue;
             }
             int spaceBetween = spaceCount / (line.size() - 1);
@@ -111,10 +111,10 @@ class Solution {
             for (int j = 0; j < line.size() - 1; j++) {
                 justified.append(line.get(j)).append(" ".repeat(spaceBetween + (j < extraSpace ? 1 : 0)));
             }
-            justified.append(line.get(line.size() - 1));
+            justified.append(line.getLast());
             res.add(justified.toString());
         }
-        String lastLine = String.join(" ", lines.get(lines.size() - 1));
+        String lastLine = String.join(" ", lines.getLast());
         lastLine = String.format("%-" + maxWidth + "s", lastLine);
         res.add(lastLine);
         return res;
