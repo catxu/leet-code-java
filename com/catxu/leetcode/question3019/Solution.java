@@ -36,7 +36,7 @@ class Solution {
     public int countKeyChanges(String s) {
         int ans = 0;
         for (int i = 1; i < s.length(); i++) {
-            if (Character.toUpperCase(s.charAt(i - 1)) != Character.toUpperCase(s.charAt(i))) {
+            if ((s.charAt(i - 1) & 31) != (s.charAt(i) & 31)) {
                 ans++;
             }
         }
