@@ -69,11 +69,20 @@ class Solution {
                     rpn.append(stack.pop()).append(" ");
                 }
                 stack.pop(); // Pop the '('
-            } else if (c == '+' || c == '-') {
+            } else if (c == '+') {
                 while (!stack.isEmpty() && stack.peek() != '(') {
                     rpn.append(stack.pop()).append(" ");
                 }
                 stack.push(c);
+            } else if (c == '-') {
+                if (i == 0 || infix.charAt(i - 1) == '(') {
+                    rpn.append(0).append(" "); // Treat unary '-' as '0 -'
+                }
+                while (!stack.isEmpty() && stack.peek() != '(') {
+                    rpn.append(stack.pop()).append(" ");
+                }
+                stack.push(c);
+
             }
         }
 
@@ -114,6 +123,8 @@ class Solution {
 
     public static void main(String[] args) {
         System.out.println(new Solution().calculate("(1+(4+5+2)-3)+(6+8)"));
+        System.out.println(new Solution().calculate("-1-(2+3)+4"));
+        System.out.println(new Solution().calculate("-1-(-2+3)+4"));
     }
 }
 
