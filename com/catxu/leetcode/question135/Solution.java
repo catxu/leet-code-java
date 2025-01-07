@@ -1,8 +1,42 @@
 package com.catxu.leetcode.question135;
 
 import java.util.Arrays;
-import java.util.Stack;
 
+/**
+ * 135. Candy
+ * <p>
+ * There are n children standing in a line. Each child is assigned a rating value given in the integer array ratings.
+ * <p>
+ * You are giving candies to these children subjected to the following requirements:
+ * <p>
+ * Each child must have at least one candy.
+ * <p>
+ * Children with a higher rating get more candies than their neighbors.
+ * <p>
+ * Return the minimum number of candies you need to have to distribute the candies to the children.
+ * <p>
+ * Example 1:
+ * <pre>
+ * Input: ratings = [1,0,2]
+ * Output: 5
+ * Explanation: You can allocate to the first, second and third child with 2, 1, 2 candies respectively.
+ * </pre>
+ * Example 2:
+ * <pre>
+ * Input: ratings = [1,2,2]
+ * Output: 4
+ * Explanation: You can allocate to the first, second and third child with 1, 2, 1 candies respectively.
+ * The third child gets 1 candy because it satisfies the above two conditions.
+ * </pre>
+ * <p>
+ * Constraints:
+ * <p>
+ * n == ratings.length
+ * <p>
+ * 1 <= n <= 2 * 10<sup>4</sup>
+ * <p>
+ * 0 <= ratings[i] <= 2 * 10<sup>4</sup>
+ */
 class Solution {
     public int candy(int[] ratings) {
         int n = ratings.length;
@@ -20,42 +54,13 @@ class Solution {
         }
 
         return Arrays.stream(candies).sum();
-
-        /*int ans = 0, prevRate = 1;
-        // 维护连续降序起点
-        Stack<Integer> stack = new Stack<>();
-
-        for (int i = 1; i < ratings.length; i++) {
-            int prev = ratings[i - 1];
-            if (ratings[i] > prev) {
-                ans += prevRate + 1 + calcOffset(stack, i);
-                prevRate += 1;
-            } else if (ratings[i] < prev) {
-                prevRate = 1;
-                if (!stack.isEmpty()) {
-                    continue;
-                }
-                stack.push(i - 1);
-            } else {
-                prevRate = 1;
-                ans += prevRate + calcOffset(stack, i);
-            }
-        }
-        return ans + calcOffset(stack, ratings.length - 1);*/
     }
 
-    private int calcOffset(Stack<Integer> stack, int i) {
-        if (!stack.isEmpty()) {
-            int start = stack.pop();
-            return (1 + i - start) * (i - start) / 2;
-        }
-        return 0;
-    }
 
     public static void main(String[] args) {
         Solution s = new Solution();
-//        System.out.println(s.candy(new int[]{1, 0, 2}));
-//        System.out.println(s.candy(new int[]{1, 2, 2}));
+        System.out.println(s.candy(new int[]{1, 0, 2}));
+        System.out.println(s.candy(new int[]{1, 2, 2}));
         System.out.println(s.candy(new int[]{3, 2, 1, 3, 2, 1}));
     }
 }
