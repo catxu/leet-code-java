@@ -1,7 +1,6 @@
 package com.catxu.leetcode.question224;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Stack;
 
 /**
  * 224. Basic Calculator
@@ -44,87 +43,78 @@ import java.util.Deque;
  */
 class Solution {
 
+    private static final String SPACE = " ";
+
     public int calculate(String s) {
-        s = s.replaceAll(" ", "");
+        s = s.replaceAll("\\s*", "");
         return evalRPN(infixToRPN(s));
     }
 
     private String infixToRPN(String infix) {
         StringBuilder rpn = new StringBuilder();
-        Deque<Character> stack = new ArrayDeque<>();
-
+        Stack<Character> operators = new Stack<>();
         for (int i = 0; i < infix.length(); i++) {
             char c = infix.charAt(i);
-
             if (Character.isDigit(c)) {
                 rpn.append(c);
                 while (i + 1 < infix.length() && Character.isDigit(infix.charAt(i + 1))) {
                     rpn.append(infix.charAt(++i));
                 }
-                rpn.append(" "); // Add space as a separator
+                rpn.append(SPACE); // Add space as a separator
             } else if (c == '(') {
-                stack.push(c);
+                operators.push(c);
             } else if (c == ')') {
-                while (!stack.isEmpty() && stack.peek() != '(') {
-                    rpn.append(stack.pop()).append(" ");
+                while (!operators.isEmpty() && operators.peek() != '(') {
+                    rpn.append(operators.pop()).append(SPACE);
                 }
-                stack.pop(); // Pop the '('
+                operators.pop(); // Pop the '('
             } else if (c == '+') {
-                while (!stack.isEmpty() && stack.peek() != '(') {
-                    rpn.append(stack.pop()).append(" ");
+                while (!operators.isEmpty() && operators.peek() != '(') {
+                    rpn.append(operators.pop()).append(SPACE);
                 }
-                stack.push(c);
+                operators.push(c);
             } else if (c == '-') {
-                if (i == 0 || infix.charAt(i - 1) == '(') {
-                    rpn.append(0).append(" "); // Treat unary '-' as '0 -'
+                if (i == 0 || infix.charAt(i - 1) == '(') { // If not remove SPACE first, [i - 1] could be SPACE
+                    rpn.append(0).append(SPACE); // Treat unary '-' as '0 -'
                 }
-                while (!stack.isEmpty() && stack.peek() != '(') {
-                    rpn.append(stack.pop()).append(" ");
+                while (!operators.isEmpty() && operators.peek() != '(') {
+                    rpn.append(operators.pop()).append(SPACE);
                 }
-                stack.push(c);
-
+                operators.push(c);
             }
         }
-
-        while (!stack.isEmpty()) {
-            rpn.append(stack.pop()).append(" ");
+        while (!operators.isEmpty()) {
+            rpn.append(operators.pop()).append(SPACE);
         }
-
         return rpn.toString().trim();
     }
 
     private int evalRPN(String rpn) {
-        Deque<Integer> stack = new ArrayDeque<>();
         String[] tokens = rpn.split("\\s+");
-
+        Stack<Integer> stack = new Stack<>();
         for (String token : tokens) {
             if (token.matches("-?\\d+")) { // Check if it's a number
                 stack.push(Integer.parseInt(token));
             } else {
                 int operand2 = stack.pop();
                 int operand1 = stack.pop();
-                int result = 0;
-
-                switch (token) {
-                    case "+":
-                        result = operand1 + operand2;
-                        break;
-                    case "-":
-                        result = operand1 - operand2;
-                        break;
-                }
+                int result = switch (token) {
+                    case "+" -> operand1 + operand2;
+                    case "-" -> operand1 - operand2;
+                    default -> 0;
+                };
                 stack.push(result);
             }
         }
-
         return stack.pop();
     }
 
 
     public static void main(String[] args) {
+        System.out.println(new Solution().calculate("1+2+3-4"));
+        System.out.println(new Solution().calculate("1-(     -2)"));
         System.out.println(new Solution().calculate("(1+(4+5+2)-3)+(6+8)"));
         System.out.println(new Solution().calculate("-1-(2+3)+4"));
-        System.out.println(new Solution().calculate("-1-(-2+3)+4"));
     }
 }
 
