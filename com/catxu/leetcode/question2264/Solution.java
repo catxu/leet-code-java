@@ -45,25 +45,18 @@ package com.catxu.leetcode.question2264;
  */
 class Solution {
     public String largestGoodInteger(String num) {
-        int window = 3;
-        int largestNum = -1;
-        for (int i = 0; i <= num.length() - window; ) {
-            if (num.charAt(i) == num.charAt(i + 1) && num.charAt(i) == num.charAt(i + 2)) {
-                largestNum = Math.max(largestNum, num.charAt(i) - '0');
-                i += window;
-            } else if (num.charAt(i + 1) != num.charAt(i + 2)) {
-                i += window - 1;
-            } else {
-                i++;
+        for (char d = '9'; d >= '0'; d--) {
+            String s = String.valueOf(d).repeat(3);
+            if (num.contains(s)) {
+                return s;
             }
         }
-        return largestNum == -1 ? "" : Integer.toString(largestNum).repeat(3);
+        return "";
     }
 
     public static void main(String[] args) {
         System.out.println(new Solution().largestGoodInteger("6777133339"));
         System.out.println(new Solution().largestGoodInteger("2300019"));
         System.out.println(new Solution().largestGoodInteger("42352338"));
-        System.out.println(new Solution().largestGoodInteger("222"));
     }
 }
