@@ -1,5 +1,8 @@
 package com.catxu.leetcode.question3297;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 3297. Count Substrings That Can Be Rearranged to Contain a String I
  * <p>
@@ -45,12 +48,46 @@ package com.catxu.leetcode.question3297;
  */
 class Solution {
     public long validSubstringCount(String word1, String word2) {
-        return -1L;
+        if (word1.length() < word2.length()) {
+            return 0;
+        }
+        Map<Character, Integer> target = new HashMap<>();
+        for (char c : word2.toCharArray()) {
+            target.merge(c, 1, Integer::sum);
+        }
+        Map<Character, Integer> window = new HashMap<>();
+        int left = 0, right = 0, valid = 0;
+        long ans = 0L;
+        while (right < word1.length()) {
+            char c = word1.charAt(right);
+            if (target.containsKey(c)) {
+                window.merge(c, 1, Integer::sum);
+                if (target.get(c).equals(window.get(c))) {
+                    valid++;
+                }
+            }
+            while (valid == target.size()) {
+                char d = word1.charAt(left);
+                left++;
+                if (target.containsKey(d)) {
+                    if (window.merge(d, -1, Integer::sum) < target.get(d)) {
+                        valid--;
+                    }
+                }
+            }
+            // 注意 answer 在循环外添加，找到一次后 left++，后续都可以通过 rearrange 组成 前缀为 word2 的 substring
+            ans += left;
+            right++;
+        }
+        return ans;
     }
 
 
     public static void main(String[] args) {
-        System.out.println(new Solution().validSubstringCount("abcc", "abc"));
+        System.out.println(new Solution().validSubstringCount("dcbdcdccb", "cdd"));
+
+        System.out.println(new Solution().validSubstringCount("bcca", "abc"));
         System.out.println(new Solution().validSubstringCount("abcabc", "abc"));
+        System.out.println(new Solution().validSubstringCount("abcabc", "aaabc"));
     }
 }
