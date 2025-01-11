@@ -5,18 +5,14 @@ package com.catxu.leetcode.question3270;
  */
 class Solution {
     public int generateKey(int num1, int num2, int num3) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%04d", num1))
-                .append(String.format("%04d", num2))
-                .append(String.format("%04d", num3));
-        StringBuilder ans = new StringBuilder();
-        for (int i = 0; i < 4; i++) {
-            char min = sb.charAt(i) <= sb.charAt(i + 4)
-                    ? (sb.charAt(i) <= sb.charAt(i + 8) ? sb.charAt(i) : sb.charAt(i + 8))
-                    : (sb.charAt(i + 4) <= sb.charAt(i + 8) ? sb.charAt(i + 4) : sb.charAt(i + 8));
-            ans.append((ans.isEmpty() && min == '0') ? "" : min);
+        int ans = 0;
+        for (int pow10 = 1; num1 > 0 && num2 > 0 && num3 > 0; pow10 *= 10) {
+            ans += (Math.min(Math.min(num1 % 10, num2 % 10), num3 % 10)) * pow10;
+            num1 /= 10;
+            num2 /= 10;
+            num3 /= 10;
         }
-        return ans.isEmpty() ? 0 : Integer.parseInt(ans.toString());
+        return ans;
     }
 
     public static void main(String[] args) {
