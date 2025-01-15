@@ -47,26 +47,23 @@ import java.util.PriorityQueue;
  */
 class Solution {
     public int minOperations(int[] nums, int k) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        minHeap.offer(k);
+        for (int x : nums) {
+            if (x < k) minHeap.offer(x);
+        }
+
         int ans = 0;
-        PriorityQueue<Long> minHeap = new PriorityQueue<>();
-        for (int num : nums) {
-            minHeap.add((long) num);
-        }
-
-        while (minHeap.size() > 1) {
-            if (minHeap.peek() >= k) {
-                break;
-            }
-            long a = minHeap.poll();
-            long b = minHeap.poll();
-            long res = a * 2 + b;
-            if (res < k) {
-                minHeap.add(res);
-            }
+        while (minHeap.size() > 1 && minHeap.peek() < k) {
             ans++;
+            int x = minHeap.poll();
+            int y = minHeap.poll();
+            // y 为下一个最小，如果 x > ((k-y+1) / 2)，就没必要在 enqueue 了
+            if (x < (k - y + 1) / 2) {
+                minHeap.offer(x * 2 + y);
+            }
         }
-
-        return minHeap.isEmpty() ? ans : (minHeap.peek() < k ? ans + 1 : ans);
+        return ans;
     }
 
     public static void main(String[] args) {
@@ -76,34 +73,4 @@ class Solution {
         System.out.println(new Solution().minOperations(new int[]{15, 90, 76, 23, 66, 28, 37, 16, 45}, 91));
     }
 
-    private void quickSort(int[] nums, int start, int end) {
-        if (end <= start) {
-            return;
-        }
-        int pivot = partition(nums, start, end);
-        quickSort(nums, start, pivot - 1);
-        quickSort(nums, pivot + 1, end);
-    }
-
-    private int partition(int[] nums, int start, int end) {
-        int i = start - 1, pivot = nums[end];
-        for (int j = start; j < end; j++) {
-            if (nums[j] < pivot) {
-                i++;
-                swap(nums, i, j);
-            }
-        }
-        i++;
-        swap(nums, i, end);
-        return i;
-    }
-
-    private void swap(int[] nums, int i, int j) {
-        if (i == j) {
-            return;
-        }
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
 }
