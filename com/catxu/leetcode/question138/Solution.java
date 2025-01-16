@@ -1,6 +1,8 @@
 package com.catxu.leetcode.question138;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 /**
@@ -64,64 +66,42 @@ class Solution {
     }
 
     public Node copyRandomList(Node head) {
-        if (head == null) {
-            return null;
+        Node cur = head;
+        Queue<Node> queue = new LinkedList<>();
+        Map<Node, Node> targetMap = new HashMap<>();
+        while (cur != null) {
+            Node node = new Node(cur.val);
+            queue.offer(node);
+            targetMap.put(cur, node);
+            cur = cur.next;
         }
-
-        // Step 1: Create a new node after each node in the original list.
-        Node curr = head;
-        while (curr != null) {
-            Node copy = new Node(curr.val);
-            copy.next = curr.next;
-            curr.next = copy;
-            curr = copy.next; // Move to the next original node
-        }
-
-        // Step 2: Set the random pointer for the copied nodes.
-        curr = head;
-        while (curr != null) {
-            if (curr.random != null) {
-                curr.next.random = curr.random.next; // Point to the copied node
-            }
-            curr = curr.next.next; // Move to the next original node
-        }
-
-        // Step 3: Separate the original and copied list.
         Node dummy = new Node(0);
-        Node copyHead = dummy;
-        curr = head;
-        while (curr != null) {
-            Node copy = curr.next;
-            copyHead.next = copy;
-            copyHead = copy;
-
-            curr.next = copy.next; // Restore the next pointer of the original list
-            curr = curr.next; // Move to the next original node
+        Node pointer = dummy;
+        cur = head;
+        while (!queue.isEmpty()) {
+            Node random = targetMap.get(cur.random);
+            pointer.next = queue.poll();
+            pointer.next.random = random;
+            pointer = pointer.next;
+            cur = cur.next;
         }
-
         return dummy.next;
     }
 
-//    public Node copyRandomList(Node head) {
-//        Node dummy = new Node(0);
-//        dummy.next = head;
-//        Node cur = dummy.next;
-//        Queue<Node> queue = new LinkedList<>();
-//        while (cur != null) {
-//            Node node = new Node(cur.val);
-//            if (cur.random != null) {
-//                node.random = new Node(cur.random.val);
-//            }
-//
-//            queue.offer(node);
-//            cur = cur.next;
-//        }
-//        Node newHead = new Node(0);
-//        cur = newHead;
-//        while (!queue.isEmpty()) {
-//            cur.next = queue.poll();
-//            cur = cur.next;
-//        }
-//        return newHead.next;
-//    }
+    public static void main(String[] args) {
+        Node node1 = new Node(7);
+        Node node2 = new Node(13);
+        Node node3 = new Node(11);
+        Node node4 = new Node(10);
+        Node node5 = new Node(1);
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+        node2.random = node1;
+        node4.random = node3;
+        node5.random = node1;
+
+        System.out.println(new Solution().copyRandomList(node1));
+    }
 }
