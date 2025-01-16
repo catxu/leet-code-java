@@ -1,9 +1,7 @@
 package com.catxu.leetcode.question138;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
-import java.util.Queue;
 
 /**
  * 138. Copy List with Random Pointer
@@ -65,27 +63,36 @@ class Solution {
         }
     }
 
+    Map<Node, Node> copyedNodeMap = new HashMap<>();
+
+//    public Node copyRandomList(Node head) {
+//        if (head == null) {
+//            return null;
+//        }
+//        if (!copyedNodeMap.containsKey(head)) {
+//            Node newNode = new Node(head.val);
+//            copyedNodeMap.put(head, newNode);
+//            newNode.next = copyRandomList(head.next);
+//            newNode.random = copyRandomList(head.random);
+//        }
+//        return copyedNodeMap.get(head);
+//    }
+
     public Node copyRandomList(Node head) {
-        Node cur = head;
-        Queue<Node> queue = new LinkedList<>();
         Map<Node, Node> targetMap = new HashMap<>();
+        Node cur = head;
         while (cur != null) {
-            Node node = new Node(cur.val);
-            queue.offer(node);
-            targetMap.put(cur, node);
+            targetMap.put(cur, new Node(cur.val));
             cur = cur.next;
         }
-        Node dummy = new Node(0);
-        Node pointer = dummy;
         cur = head;
-        while (!queue.isEmpty()) {
-            Node random = targetMap.get(cur.random);
-            pointer.next = queue.poll();
-            pointer.next.random = random;
-            pointer = pointer.next;
+        while (cur != null) {
+            Node node = targetMap.get(cur);
+            node.next = targetMap.get(cur.next);
+            node.random = targetMap.get(cur.random);
             cur = cur.next;
         }
-        return dummy.next;
+        return targetMap.get(head);
     }
 
     public static void main(String[] args) {
