@@ -68,5 +68,14 @@ class Solution {
         System.out.println(new Solution().minimumSubarrayLength(new int[]{2, 1, 8}, 10));
         System.out.println(new Solution().minimumSubarrayLength(new int[]{1, 2}, 0));
         System.out.println(new Solution().minimumSubarrayLength(new int[]{16, 1, 2, 20, 32}, 45));
+
+        System.out.println("-*-*-*-*-*-");
+        System.out.println(2);
+        System.out.println(2 ^ 3);
+        System.out.println((2 ^ 3) ^ 3);
+        System.out.println("-----------");
+        System.out.println(2);
+        System.out.println(2 >> 1);
+        System.out.println(2 >> 1 << 1);
     }
 }
