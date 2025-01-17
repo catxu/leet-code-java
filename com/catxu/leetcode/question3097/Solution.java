@@ -9,27 +9,52 @@ package com.catxu.leetcode.question3097;
  * 0 <= nums[i] <= 10<sup>9</sup>
  * 0 <= k <= 10<sup>9</sup>
  * </pre>
+ *
+ * @see com.catxu.leetcode.question3095
  */
 class Solution {
     public int minimumSubarrayLength(int[] nums, int k) {
-        int res = Integer.MAX_VALUE;
-        for (int i = 0; i < nums.length; i++) {
-            int x = nums[i];
-            if (x >= k) {
+        int[] bitCnt = new int[32];
+        int orSum = 0, ans = Integer.MAX_VALUE, l = 0, r = 0;
+        for (; r < nums.length; r++) {
+            int val = nums[r];
+            if (val >= k) {
                 return 1;
             }
-            for (int j = i - 1; j >= 0 && (nums[j] | x) != nums[j]; j--) {
-                nums[j] |= x;
-                if (nums[j] >= k) {
-                    res = Math.min(res, i - j + 1);
+            orSum |= val;
+            int position = 0;
+            while (val > 0) {
+                if ((val & 1) == 1) {
+                    bitCnt[position]++;
                 }
+                val >>= 1;
+                position++;
+            }
+            while (orSum >= k && l < r) {
+                // shrink window
+                ans = Math.min(ans, r - l + 1);
+                position = 0;
+                val = nums[l];
+                while (val > 0) {
+                    if ((val & 1) == 1) {
+                        if (--bitCnt[position] == 0) {
+                            orSum -= (int) Math.pow(2, position);
+                        }
+                    }
+                    val >>= 1;
+                    position++;
+                }
+                l++;
             }
         }
-        return res == Integer.MAX_VALUE ? -1 : res;
+
+        return ans == Integer.MAX_VALUE ? -1 : ans;
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().minimumSubarrayLength(new int[]{1, 2}, 3));
-        System.out.println(new Solution().minimumSubarrayLength(new int[]{2, 2, 2, 3, 5}, 8));
+        System.out.println(new Solution().minimumSubarrayLength(new int[]{1, 2, 3}, 2));
+        System.out.println(new Solution().minimumSubarrayLength(new int[]{2, 1, 8}, 10));
+        System.out.println(new Solution().minimumSubarrayLength(new int[]{1, 2}, 0));
+        System.out.println(new Solution().minimumSubarrayLength(new int[]{16, 1, 2, 20, 32}, 45));
     }
 }

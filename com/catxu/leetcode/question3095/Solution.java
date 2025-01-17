@@ -1,4 +1,4 @@
-package com.catxu.leetcode.question3295;
+package com.catxu.leetcode.question3095;
 
 /**
  * 3095. Shortest Subarray With OR at Least K I
