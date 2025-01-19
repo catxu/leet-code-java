@@ -35,19 +35,33 @@ class Solution {
         Solution solution = new Solution();
         System.out.println(solution.canJump(new int[]{2, 3, 1, 1, 4}));
         System.out.println(solution.canJump(new int[]{3, 2, 1, 0, 4}));
+        System.out.println(solution.canJump(new int[]{2, 0, 0}));
     }
-
 
     public boolean canJump(int[] nums) {
-        if (nums.length == 1) return true;
-        int count = 0;
-        for (int i = nums.length - 2; i >= 0; i--) { //最后一个不用考虑
-            if (nums[i] <= count) {
-                count++;           //需要跨越的距离
-            } else {
-                count = 0;
+        boolean[] dp = new boolean[nums.length];
+        dp[0] = true;
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && j + nums[j] >= i) {
+                    dp[i] = true;
+                    break;
+                }
             }
         }
-        return count == 0;
+        return dp[nums.length - 1];
     }
+
+//    public boolean canJump(int[] nums) {
+//        if (nums.length == 1) return true;
+//        int count = 0;
+//        for (int i = nums.length - 2; i >= 0; i--) { //最后一个不用考虑
+//            if (nums[i] <= count) {
+//                count++;           //需要跨越的距离
+//            } else {
+//                count = 0;
+//            }
+//        }
+//        return count == 0;
+//    }
 }
