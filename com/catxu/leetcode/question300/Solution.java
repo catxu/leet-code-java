@@ -39,10 +39,9 @@ class Solution {
             for (int j = i - 1; j >= 0; j--) {
                 if (nums[j] < nums[i]) {
                     dp[i] = Math.max(dp[i], dp[j] + 1);
-                    ans = Math.max(ans, dp[i]);
-//                    break;
                 }
             }
+            ans = Math.max(ans, dp[i]);
         }
         return ans;
     }
