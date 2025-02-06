@@ -11,24 +11,21 @@ import java.util.List;
  * The solution set must not contain duplicate subsets. Return the solution in any order.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: nums = [1,2,3]
- * <p>
  * Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: nums = [0]
- * <p>
  * Output: [[],[0]]
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * 1 <= nums.length <= 10
- * <p>
  * -10 <= nums[i] <= 10
- * <p>
  * All the numbers of nums are unique.
+ * </pre>
  */
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {

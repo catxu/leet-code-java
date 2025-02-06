@@ -24,7 +24,7 @@ class Solution {
             if (visited[i]) {
                 continue;
             }
-            if (i > 0 && nums[i - 1] == nums[i] && !visited[i - 1]) {
+            if (i > 0 && nums[i - 1] == nums[i] && visited[i - 1]) {
                 continue;
             }
             visited[i] = true;
@@ -80,8 +80,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().permuteUnique(new int[]{2, 8, 6, 7, 1, 4, 9, 3, 5}));
-        System.out.println(new Solution().permuteUnique(new int[]{1, 2, 1}));
+        System.out.println(new Solution().permuteUnique(new int[]{1, 2, 1,2,1}));
         System.out.println(new Solution().permuteUnique(new int[]{1}));
         System.out.println(new Solution().permuteUnique(new int[]{1, 2, 3}));
     }

@@ -38,15 +38,16 @@ class Solution {
 
     // 49 -> 50 -> 25 -> 37 -> 43 -> 46 -> 48 -> 49
 
-    private void backtrack(List<List<Integer>> result, List<Integer> tempList, int[] nums) {
-        if (tempList.size() == nums.length) {
-            result.add(new ArrayList<>(tempList));
+    private void backtrack(List<List<Integer>> result, List<Integer> state, int[] nums) {
+        if (state.size() == nums.length) {
+            result.add(new ArrayList<>(state));
         } else {
-            for (int i = 0; i < nums.length; i++) {
-                if (tempList.contains(nums[i])) continue; // Skip if already used
-                tempList.add(nums[i]);
-                backtrack(result, tempList, nums);
-                tempList.removeLast(); // Backtrack
+            for (int num : nums) {
+                if (state.contains(num))
+                    continue;
+                state.add(num);
+                backtrack(result, state, nums);
+                state.removeLast();
             }
         }
     }
