@@ -15,6 +15,18 @@ class Solution {
         return res;
     }
 
+    private void dfs(int[] nums, List<List<Integer>> res, List<Integer> state, int start) {
+        res.add(new ArrayList<>(state));
+        for (int i = start; i < nums.length; i++) {
+            if (i > start && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            state.add(nums[i]);
+            dfs(nums, res, state, i + 1);
+            state.removeLast();
+        }
+    }
+
     private void quickSort(int[] nums, int start, int end) {
         if (start >= end) {
             return;
@@ -45,18 +57,6 @@ class Solution {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
-    }
-
-    private void dfs(int[] nums, List<List<Integer>> res, List<Integer> state, int start) {
-        res.add(new ArrayList<>(state));
-        for (int i = start; i < nums.length; i++) {
-            if (i > start && nums[i] == nums[i - 1]) {
-                continue;
-            }
-            state.add(nums[i]);
-            dfs(nums, res, state, i + 1);
-            state.removeLast();
-        }
     }
 
     public static void main(String[] args) {

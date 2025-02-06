@@ -10,22 +10,21 @@ import com.catxu.leetcode.question.ListNode;
  * Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.
  * <p>
  * Return the head of the merged linked list.
- * <p>
- * Example 1:Input: list1 = [1,2,4], list2 = [1,3,4]
- * <p>
+ * <pre>
+ * Example 1:
+ * Input: list1 = [1,2,4], list2 = [1,3,4]
  * Output: [1,1,2,3,4,4]
- * <p>
+ * </pre>
+ * <pre>
  * Example 2:
- * <p>
  * Input: list1 = [], list2 = []
- * <p>
  * Output: []
- * <p>
+ * </pre>
+ * <pre>
  * Example 3:
- * <p>
  * Input: list1 = [], list2 = [0]
- * <p>
  * Output: [0]
+ * </pre>
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
