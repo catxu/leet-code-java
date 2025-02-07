@@ -10,41 +10,39 @@ import com.catxu.leetcode.question.ListNode;
  * You may assume the two numbers do not contain any leading zero, except the number 0 itself.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: l1 = [2,4,3], l2 = [5,6,4]
- * <p>
  * Output: [7,0,8]
- * <p>
  * Explanation: 342 + 465 = 807.
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: l1 = [0], l2 = [0]
- * <p>
  * Output: [0]
- * <p>
+ * </pre>
  * Example 3:
- * <p>
+ * <pre>
  * Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
- * <p>
  * Output: [8,9,9,9,0,0,0,1]
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * The number of nodes in each linked list is in the range [1, 100].
- * <p>
  * 0 <= Node.val <= 9
- * <p>
  * It is guaranteed that the list represents a number that does not have leading zeros.
- * <p>
- * * Definition for singly-linked list.
- * * public class ListNode {
- * *     int val;
- * *     ListNode next;
- * *     ListNode() {}
- * *     ListNode(int val) { this.val = val; }
- * *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * * }
+ * </pre>
+ * Definition for singly-linked list.
+ * <pre>
+ * {@code
+ *  public class ListNode {
+ *      int val;
+ *      ListNode next;
+ *      ListNode() {}
+ *      ListNode(int val) { this.val = val; }
+ *      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ *  }
+ * }
+ * </pre>
  */
 class Solution {
 
@@ -68,7 +66,7 @@ class Solution {
                     l1.next.val = l1.next.val + 1;
                 }
             }
-            val = val - 10;
+            val -= 10;
         }
         ListNode result = new ListNode(val);
 

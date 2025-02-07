@@ -8,36 +8,29 @@ package com.catxu.leetcode.question4;
  * The overall run time complexity should be O(log (m+n)).
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: nums1 = [1,3], nums2 = [2]
- * <p>
  * Output: 2.00000
- * <p>
  * Explanation: merged array = [1,2,3] and median is 2.
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: nums1 = [1,2], nums2 = [3,4]
- * <p>
  * Output: 2.50000
- * <p>
  * Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * nums1.length == m
- * <p>
  * nums2.length == n
- * <p>
  * 0 <= m <= 1000
- * <p>
  * 0 <= n <= 1000
- * <p>
  * 1 <= m + n <= 2000
  * -10<sup>6</sup> <= nums1[i], nums2[i] <= 10<sup>6</sup>
+ * </pre>
  */
 class Solution {
-    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         if (nums1.length < nums2.length) {
             findMedianSortedArrays(nums2, nums1);
         }
@@ -66,7 +59,8 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        System.out.println(findMedianSortedArrays(new int[]{1}, new int[]{0,2}));
+        System.out.println(new Solution().findMedianSortedArrays(new int[]{1}, new int[]{0, 2}));
+        System.out.println(new Solution().findMedianSortedArrays(new int[]{1, 2}, new int[]{3, 4}));
     }
 
 }
