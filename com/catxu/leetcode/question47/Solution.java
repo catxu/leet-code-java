@@ -1,14 +1,15 @@
 package com.catxu.leetcode.question47;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 47. Permutations II
  */
 class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
-        quickSort(nums, 0, nums.length - 1);
         boolean[] visited = new boolean[nums.length];
         List<List<Integer>> ans = new ArrayList<>();
         dfs(nums, ans, new ArrayList<>(), visited);
@@ -20,13 +21,16 @@ class Solution {
             ans.add(new ArrayList<>(state));
             return;
         }
+        Set<Integer> duplicates = new HashSet<>();
+        // [1, 1, 2]
         for (int i = 0; i < nums.length; i++) {
-            if (visited[i]) {
+            if (visited[i] || duplicates.contains(nums[i])) {
                 continue;
             }
-            if (i > 0 && nums[i - 1] == nums[i] && visited[i - 1]) {
-                continue;
-            }
+            // duplis -> [1] -> ['1] -> [2] -> [1, 2] -> [1] -> ['1]
+            //        -> ['1]
+            // state  -> [1] -> [1, '1] -> [1, '1, 2] -> [1, 2, '1] -> [] -> [2, 1, '1]
+            duplicates.add(nums[i]);
             visited[i] = true;
             state.add(nums[i]);
             dfs(nums, ans, state, visited);
@@ -80,7 +84,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().permuteUnique(new int[]{1, 2, 1,2,1}));
+        System.out.println(new Solution().permuteUnique(new int[]{1, 2, 1}));
         System.out.println(new Solution().permuteUnique(new int[]{1}));
         System.out.println(new Solution().permuteUnique(new int[]{1, 2, 3}));
     }

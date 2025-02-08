@@ -58,7 +58,7 @@ class Solution {
             ans++;
             int x = minHeap.poll();
             int y = minHeap.poll();
-            // y 为下一个最小，如果 x > ((k-y+1) / 2)，就没必要在 enqueue 了
+            // y 为下一个最小，如果 x > ((k-y+1) / 2)，就没必要 enqueue 了
             if (x < (k - y + 1) / 2) {
                 minHeap.offer(x * 2 + y);
             }
