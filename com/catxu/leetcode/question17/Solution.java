@@ -10,33 +10,30 @@ import java.util.*;
  * A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: digits = "23"
- * <p>
  * Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: digits = ""
- * <p>
  * Output: []
- * <p>
+ * </pre>
  * Example 3:
- * <p>
+ * <pre>
  * Input: digits = "2"
- * <p>
  * Output: ["a","b","c"]
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * 0 <= digits.length <= 4
- * <p>
  * digits[i] is a digit in the range ["2", "9"].
+ * </pre>
  */
 class Solution {
-    final static Map<Character, List<Character>> map = new HashMap<>();
 
-    static {
+    public List<String> letterCombinations(String digits) {
+        Map<Character, List<Character>> map = new HashMap<>();
         map.put('2', Arrays.asList('a','b','c'));
         map.put('3', Arrays.asList('d','e','f'));
         map.put('4', Arrays.asList('g','h','i'));
@@ -45,45 +42,32 @@ class Solution {
         map.put('7', Arrays.asList('p','q','r','s'));
         map.put('8', Arrays.asList('t','u','v'));
         map.put('9', Arrays.asList('w','x','y','z'));
-    }
 
-/*    static {
-        map.put('2', "abc");
-        map.put('3', "def");
-        map.put('4', "ghi");
-        map.put('5', "jkl");
-        map.put('6', "mno");
-        map.put('7', "pqrs");
-        map.put('8', "tuv");
-        map.put('9', "wxyz");
-    }*/
-
-    List<String> res = new ArrayList<>();
-    String digits;
-
-    public List<String> letterCombinations(String digits) {
-        this.digits = digits;
+        List<String> ans = new ArrayList<>();
         if (!digits.isEmpty()) {
-            letterCombinations("", 0);
+            dfs(ans, new StringBuilder(), 0, map, digits);
         }
-        return res;
+        return ans;
     }
 
-    private void letterCombinations(String currentStr, int index) {
-        if (digits.length() == currentStr.length()) {
-            res.add(currentStr);
+    private void dfs(List<String> res, StringBuilder state, int index, Map<Character, List<Character>> dict, String digits) {
+        if (state.length() == digits.length()) {
+            res.add(state.toString());
             return;
         }
-        List<Character> chars = map.get(digits.charAt(index));
-        for (char ch : chars) {
-            letterCombinations(currentStr + ch, index + 1);
+        List<Character> chs = dict.get(digits.charAt(index));
+        for (char ch : chs) {
+            state.append(ch);
+            dfs(res, state, index + 1, dict, digits);
+            state.deleteCharAt(state.length() - 1);
         }
     }
+
 
     public static void main(String[] args) {
         Solution s = new Solution();
         System.out.println(s.letterCombinations("23"));
-//        System.out.println(s.letterCombinations(""));
-//        System.out.println(s.letterCombinations("4673"));
+        System.out.println(s.letterCombinations(""));
+        System.out.println(s.letterCombinations("4673"));
     }
 }
