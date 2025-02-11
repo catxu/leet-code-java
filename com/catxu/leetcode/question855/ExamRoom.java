@@ -20,17 +20,13 @@ import java.util.TreeSet;
  * void leave(int p) Indicates that the student sitting at seat p will leave the room. It is guaranteed that there will be a student sitting at seat p.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input
- * <p>
  * ["ExamRoom", "seat", "seat", "seat", "seat", "leave", "seat"]
- * <p>
  * [[10], [], [], [], [], [4], []]
- * <p>
  * Output
- * <p>
  * [null, 0, 9, 4, 2, null, 5]
- * <p>
+ * </pre>
  * Explanation
  * <pre>
  * {@code
@@ -43,14 +39,12 @@ import java.util.TreeSet;
  * examRoom.seat(); // return 5, the student sits at the last seat number 5.
  * }
  * </pre>
- * <p>
  * Constraints:
- * <p>
+ * <pre>
  * 1 <= n <= 10<sup>9</sup>
- * <p>
  * It is guaranteed that there is a student sitting at seat p.
- * <p>
  * At most 10<sup>4</sup> calls will be made to seat and leave.
+ * </pre>
  */
 class ExamRoom {
     private final TreeSet<Integer> seats;
