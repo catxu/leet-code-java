@@ -1,6 +1,7 @@
 package com.catxu.leetcode.question71;
 
-import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 71. Simplify Path
@@ -67,30 +68,34 @@ import java.util.Stack;
  */
 class Solution {
     public String simplifyPath(String path) {
-        Stack<String> stack = new Stack<>();
+        Queue<String> queue = new LinkedList<>();
         StringBuilder sb = new StringBuilder();
         String[] paths = path.split("/");
         for (String p : paths) {
             if (!p.isEmpty()) {
-                stack.push(p);
+                queue.offer(p);
             }
         }
         sb.append("/");
-        while (!stack.isEmpty()) {
-            String p = stack.pop();
+        while (!queue.isEmpty()) {
+            String p = queue.poll();
             if (p.equals(".") || p.equals("..")) {
-                if (!p.equals(".")) {
-                    sb.delete(sb.lastIndexOf("/") + 1, sb.length());
+                if (!p.equals(".") && sb.length() > 1) {
+                    sb.deleteCharAt(sb.length() - 1).delete(sb.lastIndexOf("/") + 1, sb.length());
                 }
                 continue;
             }
             sb.append(p).append("/");
         }
-        return sb.deleteCharAt(sb.length() - 1).toString();
+        return sb.length() > 1 ? sb.deleteCharAt(sb.length() - 1).toString() : sb.toString();
     }
 
     public static void main(String[] args) {
         System.out.println(new Solution().simplifyPath("/home/"));
         System.out.println(new Solution().simplifyPath("/home//foo/"));
+        System.out.println(new Solution().simplifyPath("/home/user/Documents/../Pictures"));
+        System.out.println(new Solution().simplifyPath("/../"));
+        System.out.println(new Solution().simplifyPath("/.../a/../b/c/../d/./"));
+        System.out.println(new Solution().simplifyPath("/./../..././/a/././"));
     }
 }
