@@ -10,31 +10,24 @@ import java.util.Arrays;
  * You must do it in place.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * <img src="./mat1.png" />
- * <p>
  * Input: matrix = [[1,1,1],[1,0,1],[1,1,1]]
- * <p>
  * Output: [[1,0,1],[0,0,0],[1,0,1]]
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * <img src="./mat2.png" />
- * <p>
  * Input: matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
- * <p>
  * Output: [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * m == matrix.length
- * <p>
  * n == matrix[0].length
- * <p>
  * 1 <= m, n <= 200
- * <p>
  * -2<sup>31</sup> <= matrix[i][j] <= 2<sup>31</sup> - 1
- * <p>
+ * </pre>
  * Follow up:
  * <p>
  * A straightforward solution using O(mn) space is probably a bad idea.
@@ -114,8 +107,8 @@ class Solution {
         };
         solution.setZeroes(matrix3);
 
-        System.out.println(Arrays.toString(matrix1));
-        System.out.println(Arrays.toString(matrix2));
-        System.out.println(Arrays.toString(matrix3));
+        System.out.println(Arrays.deepToString(matrix1));
+        System.out.println(Arrays.deepToString(matrix2));
+        System.out.println(Arrays.deepToString(matrix3));
     }
 }
