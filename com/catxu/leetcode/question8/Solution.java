@@ -1,6 +1,5 @@
 package com.catxu.leetcode.question8;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,7 +17,7 @@ import java.util.Map;
  * <p>
  * Convert these digits into an integer (i.e. "123" -> 123, "0032" -> 32). If no digits were read, then the integer is 0. Change the sign as necessary (from step 2).
  * <p>
- * If the integer is out of the 32-bit signed integer range [-2^31, 2^31 - 1], then clamp the integer so that it remains in the range. Specifically, integers less than -2^31 should be clamped to -2^31, and integers greater than 2^31 - 1 should be clamped to 2^31 - 1.
+ * If the integer is out of the 32-bit signed integer range [-2<sup>31</sup>, 2<sup>31</sup> - 1], then clamp the integer so that it remains in the range. Specifically, integers less than -2<sup>31</sup> should be clamped to -2<sup>31</sup>, and integers greater than 2<sup>31</sup> - 1 should be clamped to 2<sup>31</sup> - 1.
  * <p>
  * Return the integer as the final result.
  * <p>
@@ -29,81 +28,43 @@ import java.util.Map;
  * Do not ignore any characters other than the leading whitespace or the rest of the string after the digits.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: s = "42"
- * <p>
  * Output: 42
- * <p>
  * Explanation: The underlined characters are what is read in, the caret is the current reader position.
- * <p>
  * Step 1: "42" (no characters read because there is no leading whitespace)
- * <p>
- * ^
- * <p>
  * Step 2: "42" (no characters read because there is neither a '-' nor '+')
- * <p>
- * ^
- * <p>
  * Step 3: "42" ("42" is read in)
- * <p>
- * ^
- * <p>
  * The parsed integer is 42.
- * <p>
  * Since 42 is in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1], the final result is 42.
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: s = "   -42"
- * <p>
  * Output: -42
- * <p>
  * Explanation:
- * <p>
  * Step 1: "   -42" (leading whitespace is read and ignored)
- * <p>
- * ^
- * <p>
  * Step 2: "   -42" ('-' is read, so the result should be negative)
- * <p>
- * ^
- * <p>
  * Step 3: "   -42" ("42" is read in)
- * <p>
- * ^
- * <p>
  * The parsed integer is -42.
- * <p>
  * Since -42 is in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1], the final result is -42.
- * <p>
+ * </pre>
  * Example 3:
- * <p>
+ * <pre>
  * Input: s = "4193 with words"
- * <p>
  * Output: 4193
- * <p>
  * Explanation:
- * <p>
  * Step 1: "4193 with words" (no characters read because there is no leading whitespace)
- * <p>
- * ^
- * <p>
  * Step 2: "4193 with words" (no characters read because there is neither a '-' nor '+')
- * <p>
- * ^
- * <p>
  * Step 3: "4193 with words" ("4193" is read in; reading stops because the next character is a non-digit)
- * <p>
- * ^
- * <p>
  * The parsed integer is 4193.
- * <p>
  * Since 4193 is in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1], the final result is 4193.
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * 0 <= s.length <= 200
  * s consists of English letters (lower-case and upper-case), digits (0-9), ' ', '+', '-', and '.'.
+ * </pre>
  */
 class Solution {
     public int myAtoi(String str) {
@@ -114,18 +75,24 @@ class Solution {
         }
         return (int) (automaton.sign * automaton.ans);
     }
+
+    public static void main(String[] args) {
+        System.out.println(new Solution().myAtoi("42"));
+        System.out.println(new Solution().myAtoi("   -42"));
+        System.out.println(new Solution().myAtoi("4193 with words"));
+    }
 }
 
 class Automaton {
     public int sign = 1;
     public long ans = 0;
     private String state = "start";
-    private Map<String, String[]> table = new HashMap<String, String[]>() {{
-        put("start", new String[]{"start", "signed", "in_number", "end"});
-        put("signed", new String[]{"end", "end", "in_number", "end"});
-        put("in_number", new String[]{"end", "end", "in_number", "end"});
-        put("end", new String[]{"end", "end", "end", "end"});
-    }};
+    private final Map<String, String[]> table = Map.of(
+            "start", new String[]{"start", "signed", "in_number", "end"},
+            "signed", new String[]{"end", "end", "in_number", "end"},
+            "in_number", new String[]{"end", "end", "in_number", "end"},
+            "end", new String[]{"end", "end", "end", "end"}
+    );
 
     public void get(char c) {
         state = table.get(state)[get_col(c)];

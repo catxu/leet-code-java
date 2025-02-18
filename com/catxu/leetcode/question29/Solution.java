@@ -12,26 +12,22 @@ package com.catxu.leetcode.question29;
  * Note: Assume we are dealing with an environment that could only store integers within the 32-bit signed integer range: [−2<sup>31</sup>, 2<sup>31</sup> − 1]. For this problem, if the quotient is strictly greater than 2<sup>31</sup> - 1, then return 2<sup>31</sup> - 1, and if the quotient is strictly less than -2<sup>31</sup>, then return -2<sup>31</sup>.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: dividend = 10, divisor = 3
- * <p>
  * Output: 3
- * <p>
  * Explanation: 10/3 = 3.33333.... which is truncated to 3.
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: dividend = 7, divisor = -3
- * <p>
  * Output: -2
- * <p>
  * Explanation: 7/-3 = -2.33333.... which is truncated to -2.
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * -2<sup>31</sup> <= dividend, divisor <= 2<sup>31</sup> - 1
- * <p>
  * divisor != 0
+ * </pre>
  */
 class Solution {
     public int divide(int dividend, int divisor) {

@@ -8,29 +8,23 @@ import com.catxu.leetcode.question.ListNode;
  * Given the head of a linked list, rotate the list to the right by k places.
  * <p>
  * Example 1:
- * <p>
- *
+ * <pre>
  * <img src="./rotate1.png" alt="rotate list" />
- * <p>
  * Input: head = [1,2,3,4,5], k = 2
- * <p>
  * Output: [4,5,1,2,3]
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * <img src="./rotate2.png" alt="rotate list" />
- * <p>
  * Input: head = [0,1,2], k = 4
- * <p>
  * Output: [2,0,1]
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * The number of nodes in the list is in the range [0, 500].
- * <p>
  * -100 <= Node.val <= 100
- * <p>
  * 0 <= k <= 2 * 10<sup>9</sup>
+ * </pre>
  */
 class Solution {
     public ListNode rotateRight(ListNode head, int k) {
