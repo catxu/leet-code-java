@@ -62,7 +62,7 @@ class Solution {
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        System.out.println(s.rotateRight(ListNode.build(new int[]{1,2,3,4,5}), 2));
-        System.out.println(s.rotateRight(ListNode.build(new int[]{0,1,2}), 4));
+        System.out.println(s.rotateRight(ListNode.build(new int[]{1, 2, 3, 4, 5}), 2));
+        System.out.println(s.rotateRight(ListNode.build(new int[]{0, 1, 2}), 4));
     }
 }
