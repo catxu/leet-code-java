@@ -2,81 +2,58 @@ package com.catxu.leetcode.question82;
 
 import com.catxu.leetcode.question.ListNode;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
- * 83. Remove Duplicates from Sorted List
+ * 82. Remove Duplicates from Sorted List II
  * <p>
- * Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+ * Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.
  * <p>
  * Example 1:
- * <p>
- * Input: head = [1,1,2]
- * <p>
- * Output: [1,2]
- * <p>
+ * <pre>
+ * Input: head = [1,2,3,3,4,4,5]
+ * Output: [1,2,5]
+ * </pre>
  * Example 2:
- * <p>
- * Input: head = [1,1,2,3,3]
- * <p>
- * Output: [1,2,3]
+ * <pre>
+ * Input: head = [1,1,1,2,3]
+ * Output: [2,3]
+ * </pre>
  * <p>
  * Constraints:
- * <p>
+ * <pre>
  * The number of nodes in the list is in the range [0, 300].
- * <p>
  * -100 <= Node.val <= 100
- * <p>
  * The list is guaranteed to be sorted in ascending order.
+ * </pre>
  */
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        if (head == null) {
-            return null;
+        if (head == null || head.next == null) {
+            return head;
         }
+        ListNode cur = head;
+        ListNode prev = null;
         ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode cur = dummy.next;
-        Queue<ListNode> queue = new LinkedList<>();
-        queue.offer(cur);
-        cur = cur.next;
+        ListNode pointer = dummy;
         while (cur != null) {
-            ListNode prev = queue.poll();
-            if (prev.val == cur.val) {
-                prev.next = cur.next;
-                queue.offer(prev);
-            } else {
-                queue.offer(cur);
+            if (prev != null && prev.val != cur.val) {
+                pointer.next = new ListNode(prev.val);
+                pointer = pointer.next;
             }
+            while (prev != null && cur != null && prev.val == cur.val) {
+                cur = cur.next;
+            }
+            if (cur == null) {
+                return dummy.next;
+            }
+            prev = cur;
             cur = cur.next;
         }
+        pointer.next = prev;
         return dummy.next;
     }
 
     public static void main(String[] args) {
-        Solution s = new Solution();
-        System.out.println(s.deleteDuplicates(ListNode.build(new int[]{1, 1, 2})));
-        System.out.println(s.deleteDuplicates(ListNode.build(new int[]{1, 1, 2, 3, 3})));
-        System.out.println(s.deleteDuplicates(ListNode.build(new int[]{1, 1, 1})));
+        System.out.println(new Solution().deleteDuplicates(ListNode.build(new int[]{1, 2, 3, 3, 4, 4, 5})));
+        System.out.println(new Solution().deleteDuplicates(ListNode.build(new int[]{1, 1, 1, 2, 3})));
     }
-
-    /* 更优解
-     *
-     * public ListNode deleteDuplicates(ListNode head) {
-     *     if(head == null){
-     *         return head;
-     *     }
-     *     ListNode cur =head;
-     *     while (cur.next != null){
-     *         if(cur.val == cur.next.val){
-     *             cur.next =cur.next.next;
-     *         }else{
-     *             cur = cur.next;
-     *         }
-     *     }
-     *     return head;
-     * }
-     */
 }
-
