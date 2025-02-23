@@ -9,10 +9,7 @@ class Solution {
         String[] v2 = version2.split("\\.");
         int m = v1.length, n = v2.length;
         int i = 0;
-        for (; i < m; i++) {
-            if (i >= n) {
-                return -1;
-            }
+        for (; i < Math.min(m, n); i++) {
             int a = Integer.parseInt(v1[i]);
             int b = Integer.parseInt(v2[i]);
             if (a > b) {
@@ -21,13 +18,30 @@ class Solution {
                 return -1;
             }
         }
-        if (i < n) {
-
+        if (m != n) {
+            if (m > n) {
+                while (i < m) {
+                    if (Integer.parseInt(v1[i]) > 0) {
+                        return 1;
+                    }
+                    i++;
+                }
+            } else {
+                while (i < n) {
+                    if (Integer.parseInt(v2[i]) > 0) {
+                        return -1;
+                    }
+                    i++;
+                }
+            }
         }
+        return 0;
     }
 
     public static void main(String[] args) {
+        System.out.println(new Solution().compareVersion("1.2", "1.10"));
         System.out.println(new Solution().compareVersion("1.01", "1.001"));
         System.out.println(new Solution().compareVersion("1.0", "1.0.0.0"));
+        System.out.println(new Solution().compareVersion("1", "1.1"));
     }
 }
