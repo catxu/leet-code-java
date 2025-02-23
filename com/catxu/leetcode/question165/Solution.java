@@ -7,33 +7,12 @@ class Solution {
     public int compareVersion(String version1, String version2) {
         String[] v1 = version1.split("\\.");
         String[] v2 = version2.split("\\.");
-        int m = v1.length, n = v2.length;
-        int i = 0;
-        for (; i < Math.min(m, n); i++) {
-            int a = Integer.parseInt(v1[i]);
-            int b = Integer.parseInt(v2[i]);
-            if (a > b) {
-                return 1;
-            } else if (a < b) {
-                return -1;
-            }
-        }
-        if (m != n) {
-            if (m > n) {
-                while (i < m) {
-                    if (Integer.parseInt(v1[i]) > 0) {
-                        return 1;
-                    }
-                    i++;
-                }
-            } else {
-                while (i < n) {
-                    if (Integer.parseInt(v2[i]) > 0) {
-                        return -1;
-                    }
-                    i++;
-                }
-            }
+
+        for (int n = 0; n < Math.max(v1.length, v2.length); n++) {
+            int i = (n < v1.length ? Integer.parseInt(v1[n]) : 0);
+            int j = (n < v2.length ? Integer.parseInt(v2[n]) : 0);
+            if (i < j) return -1;
+            else if (i > j) return 1;
         }
         return 0;
     }
