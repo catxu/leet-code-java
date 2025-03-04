@@ -1,7 +1,7 @@
 package com.catxu.leetcode.question117;
 
 /**
- *117. Populating Next Right Pointers in Each Node II
+ * 117. Populating Next Right Pointers in Each Node II
  */
 class Solution {
 
