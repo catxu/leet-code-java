@@ -30,46 +30,34 @@ import java.util.Map;
  * <p>
  * · 0 <= Node.val <= 10<sup>5</sup>
  * <p>
- * Note: This question is the same as 783: https://leetcode.com/problems/minimum-distance-between-bst-nodes/
+ * Note: This question is the same as 783: <a href="https://leetcode.com/problems/minimum-distance-between-bst-nodes/">783</a>
  */
 class Solution {
+    private int minDiff = Integer.MAX_VALUE;
+    private int prev = -10_0000;
+
     public int getMinimumDifference(TreeNode root) {
-        List<Integer> nodes = new ArrayList<>();
-        inOrderTraversal(root, nodes);
-        int miniDiff = 10_000000;
-        int prevNodeVal = nodes.get(0);
-        for (int i = 1; i < nodes.size(); i++) {
-            Integer val = nodes.get(i);
-            miniDiff = Math.min(miniDiff, Math.abs(val - prevNodeVal));
-            prevNodeVal = val;
-        }
-        return miniDiff;
+        inOrderTraversal(root);
+        return minDiff;
     }
 
     // 待优化 一次遍历 并计算 miniDiff
-    private void inOrderTraversal(TreeNode root, List<Integer> nodes) {
-        if (root == null) {
+    private void inOrderTraversal(TreeNode node) {
+        if (node == null) {
             return;
         }
-        inOrderTraversal(root.left, nodes);
-        nodes.add(root.val);
-        inOrderTraversal(root.right, nodes);
+        inOrderTraversal(node.left);
+        minDiff = Math.min(minDiff, node.val - prev);
+        prev = node.val;
+        inOrderTraversal(node.right);
     }
 
     public static void main(String[] args) {
-        Integer[] levelorder1 = {4, 2, 6, 1, 3};  // 层序遍历数组
-        TreeNode root1 = TreeNode.levelOrderBuildTree(levelorder1);
-        // 打印树结构
-        TreeNode.printTree(root1);
+        TreeNode root1 = TreeNode.levelOrderBuildTree(new Integer[]{4, 2, 6, 1, 3});
+        TreeNode root2 = TreeNode.levelOrderBuildTree(new Integer[]{1, 0, 48, null, null, 12, 49});
 
-        Solution s = new Solution();
-        System.out.println(s.getMinimumDifference(root1));
-
-        Integer[] levelorder2 = {1, 0, 48, null, null, 12, 49};
-        TreeNode root2 = TreeNode.levelOrderBuildTree(levelorder2);
-        // 打印树结构
-        TreeNode.printTree(root2);
-        System.out.println(s.getMinimumDifference(root2));
+        System.out.println(new Solution().getMinimumDifference(root1));
+        System.out.println(new Solution().getMinimumDifference(root2));
 
     }
 }
