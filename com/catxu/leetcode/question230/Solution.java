@@ -17,7 +17,7 @@ class Solution {
     }
 
     private void inOrder(TreeNode root) {
-        if (root == null) {
+        if (root == null || count <= 0) {
             return;
         }
         inOrder(root.left);
@@ -30,6 +30,6 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Solution().kthSmallest(TreeNode.levelOrderBuildTree(new Integer[]{3, 1, 4, null, 2}), 1));
+        System.out.println(new Solution().kthSmallest(TreeNode.levelOrderBuildTree(new Integer[]{3, 1, 4, null, 2, null, 0}), 1));
     }
 }
