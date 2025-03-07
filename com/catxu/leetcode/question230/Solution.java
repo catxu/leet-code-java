@@ -2,6 +2,9 @@ package com.catxu.leetcode.question230;
 
 import com.catxu.leetcode.question.TreeNode;
 
+/**
+ * 230. Kth Smallest Element in a BST
+ */
 class Solution {
 
     private int count;
