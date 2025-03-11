@@ -20,9 +20,11 @@ class WordDictionary {
 
     static class TrieNode {
         private Map<Character, TrieNode> children;
+        private boolean isEndOfWord;
 
         public TrieNode() {
             this.children = new HashMap<>();
+            this.isEndOfWord = false;
         }
     }
 
@@ -39,6 +41,7 @@ class WordDictionary {
             cur.children.computeIfAbsent(ch, k -> new TrieNode());
             cur = cur.children.get(ch);
         }
+        cur.isEndOfWord = true;
     }
 
     public boolean search(String word) {
@@ -46,8 +49,8 @@ class WordDictionary {
     }
 
     public boolean search(String word, TrieNode node) {
-        if (word == null || word.isEmpty()) {
-            return true;
+        if ((word == null || word.isEmpty())) {
+            return node.isEndOfWord;
         }
         TrieNode cur = node;
         char[] chs = word.toCharArray();
@@ -69,7 +72,7 @@ class WordDictionary {
                 return false;
             }
         }
-        return true;
+        return cur.isEndOfWord;
     }
 
     // 假设问题中的通配符是类似“.”这样的单字符通配符，比如用户想搜索的模式中包含某个位置可以是任意字符。
@@ -83,7 +86,7 @@ class WordDictionary {
         obj.addWord("mad");
         System.out.println(obj.search("d.."));
         System.out.println(obj.search(".p.."));
-        System.out.println(obj.search("badd"));
+        System.out.println(obj.search("ba"));
     }
 }
 

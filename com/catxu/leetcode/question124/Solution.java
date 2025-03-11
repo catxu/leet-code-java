@@ -6,11 +6,11 @@ import com.catxu.leetcode.question.TreeNode;
  * 124. Binary Tree Maximum Path Sum
  */
 class Solution {
-    private int maxPathSumWithSplit = Integer.MIN_VALUE;
+    private int ans = Integer.MIN_VALUE;
 
     public int maxPathSum(TreeNode root) {
         dfs(root);
-        return maxPathSumWithSplit;
+        return ans;
     }
 
     private int dfs(TreeNode node) {
@@ -21,7 +21,7 @@ class Solution {
         int right = dfs(node.right);
         left = Math.max(left, 0);
         right = Math.max(right, 0);
-        maxPathSumWithSplit = Math.max(maxPathSumWithSplit, node.val + left + right);
+        ans = Math.max(ans, node.val + left + right); // 不遗漏不重复
         return node.val + Math.max(left, right);
     }
 
