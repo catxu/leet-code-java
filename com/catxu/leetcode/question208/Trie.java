@@ -43,14 +43,12 @@ import com.catxu.leetcode.question.TrieNode;
  *     }
  *
  * </pre>
- * <p>
  * Constraints:
- * <p>
+ * <pre>
  * 1 <= word.length, prefix.length <= 2000
- * <p>
  * word and prefix consist only of lowercase English letters.
- * <p>
  * At most 3 * 10<sup>4</sup> calls in total will be made to insert, search, and startsWith.
+ * </pre>
  */
 class Trie {
     private final TrieNode root;
