@@ -53,10 +53,10 @@ import com.catxu.leetcode.question.ListNode;
  */
 class Solution {
     public boolean hasCycle(ListNode head) {
-        ListNode slow = head;
-        if (slow == null) {
+        if (head == null || head.next == null) {
             return false;
         }
+        ListNode slow = head;
         ListNode fast = head.next;
         while (fast != null && fast != slow) {
             ListNode next = fast.next;
