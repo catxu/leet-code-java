@@ -21,6 +21,6 @@ class Solution {
         System.out.println(new Solution().compareVersion("1.2", "1.10"));
         System.out.println(new Solution().compareVersion("1.01", "1.001"));
         System.out.println(new Solution().compareVersion("1.0", "1.0.0.0"));
-        System.out.println(new Solution().compareVersion("1", "1.1"));
+        System.out.println(new Solution().compareVersion("1.2", "1.1"));
     }
 }
