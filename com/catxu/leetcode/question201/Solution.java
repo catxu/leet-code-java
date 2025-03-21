@@ -20,7 +20,9 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        // 101 -> 110 -> 111 -> 100
+        //  5     6     7
+        // 101 & 110 & 111
+        // 100
         System.out.println(new Solution().rangeBitwiseAnd(5, 7));
         System.out.println(new Solution().rangeBitwiseAnd(0, 0));
         System.out.println(new Solution().rangeBitwiseAnd(1, Integer.MAX_VALUE));
