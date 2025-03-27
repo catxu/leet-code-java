@@ -17,7 +17,7 @@ class Solution {
     public int networkDelayTime(int[][] times, int n, int k) {
         final int INF = Integer.MAX_VALUE / 2;
         List<int[]>[] graph = new List[n];
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; i++) {
             graph[i] = new ArrayList<>();
         }
         for (int[] route : times) {
@@ -41,7 +41,7 @@ class Solution {
                 continue;
             }
             for (int[] neighbor : graph[v1]) {
-                int v2 = neighbor[0], w2 = distance[v1] + neighbor[1];
+                int v2 = neighbor[0], w2 = w1 + neighbor[1];
                 if (w2 < distance[v2]) {
                     distance[v2] = w2;
                     minHeap.offer(new int[]{w2, v2});
