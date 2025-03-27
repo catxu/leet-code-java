@@ -46,10 +46,17 @@ class Solution {
         if (combinations.size() == k) {
             // 这里要新建 List 放入 res 中，否则引用会被清空
             res.add(new ArrayList<>(combinations));
+            return;
         }
 
         for (int i = start; i <= n; i++) {
+            // 不会造成重复选择，因为 start -> n 有序且不重复，且下一次选择从 i + 1 开始，所以无需以下剪枝
+            // if (combinations.contains(i)
+            //         || (!combinations.isEmpty() && i < combinations.get(combinations.size() - 1))) {
+            //     continue;
+            // }
             combinations.add(i);
+            // 进行下一轮选择，因为不可以重复选择，所以从 i + 1 开始
             dfs(res, n, k, i + 1, combinations);
             combinations.removeLast();
         }

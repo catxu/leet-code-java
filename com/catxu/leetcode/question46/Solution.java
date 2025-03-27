@@ -41,14 +41,14 @@ class Solution {
     private void backtrack(List<List<Integer>> result, List<Integer> state, int[] nums) {
         if (state.size() == nums.length) {
             result.add(new ArrayList<>(state));
-        } else {
-            for (int num : nums) {
-                if (state.contains(num))
-                    continue;
-                state.add(num);
-                backtrack(result, state, nums);
-                state.removeLast();
-            }
+            return;
+        }
+        for (int num : nums) {
+            if (state.contains(num))
+                continue;
+            state.add(num);
+            backtrack(result, state, nums);
+            state.removeLast();
         }
     }
 

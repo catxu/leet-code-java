@@ -26,27 +26,32 @@ import java.util.List;
  */
 class Solution {
     List<String> ans = new ArrayList<>();
+    StringBuilder path = new StringBuilder();
 
     public List<String> generateParenthesis(int n) {
-        backtrack(n, 0, 0, "");
+        backtrack(n, 0, 0);
         return ans;
     }
 
-    private void backtrack(int n, int open, int close, String s) {
-        if (s.length() == n * 2) {
-            ans.add(s);
+    private void backtrack(int n, int open, int close) {
+        if (open > n || close > n || open < close) {
             return;
         }
-        if (open < n) {
-            backtrack(n, open + 1, close, s + "(");
+        if (path.length() == n * 2) {
+            ans.add(path.toString());
+            return;
         }
-        if (close < open) {
-            backtrack(n, open, close + 1, s + ")");
-        }
+        path.append("(");
+        backtrack(n, open + 1, close);
+        path.deleteCharAt(path.length() - 1);
+
+        path.append(")");
+        backtrack(n, open, close + 1);
+        path.deleteCharAt(path.length() - 1);
     }
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        System.out.println(s.generateParenthesis(8).size());
+        System.out.println(s.generateParenthesis(3));
     }
 }

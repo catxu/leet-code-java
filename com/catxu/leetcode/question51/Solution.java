@@ -38,7 +38,9 @@ class Solution {
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> res = new ArrayList<>();
         boolean[] cols = new boolean[n];
+        // "\"
         boolean[] mainDiag = new boolean[2 * n - 1];
+        // "/"
         boolean[] subDiag = new boolean[2 * n - 1];
         List<List<String>> state = new ArrayList<>();
         for (int i = 0; i < n; i++) {
@@ -52,6 +54,19 @@ class Solution {
         return res;
     }
 
+    /*  0 1 2 3
+     0  . . . .
+     1  . . . Q'
+     2 'Q . . .
+     3  . Q . .
+
+     Q - mainDiagIdx = 3 - 1 + 4 - 1 = 5
+    'Q - mainDiagIdx = 2 - 0 + 4 - 1 = 5
+    Q' - mainDiagIdx = 1 - 0 + 4 - 1 = 4
+     Q - subDiagIdx  = 3 + 1 = 4
+    Q' - subDiagIdx  = 3 + 1 = 4
+    'Q - subDiagIdx  = 2 + 0 = 2
+     */
     private void backtracking(List<List<String>> res, List<List<String>> state, int row, int n, boolean[] cols, boolean[] mainDiag, boolean[] subDiag) {
         if (row == n) {
             // 将state 里面每一行（List<String>）即 [".","Q",".","."] 转成 [".Q..", "...Q", ...] 的格式，以满足题目返回要求

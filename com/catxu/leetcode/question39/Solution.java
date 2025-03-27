@@ -61,11 +61,11 @@ class Solution {
         Arrays.sort(candidates);
         // 状态（子集）
         List<Integer> state = new ArrayList<>();
-        // 子集和
-        int total = 0;
         // 结果列表（子集列表）
         List<List<Integer>> res = new ArrayList<>();
-        backtrack(state, target, total, candidates, 0, res);
+
+        backtrack(state, target, 0, candidates, 0, res);
+
         return res;
     }
 
@@ -83,10 +83,10 @@ class Solution {
             }
             // 尝试：做出选择，更新元素和 total
             state.add(choices[i]);
-            // 进行下一轮选择
+            // 进行下一轮选择，因为可以重复选择，还是从 i 开始
             backtrack(state, target, total + choices[i], choices, i, res);
             // 回退：撤销选择，恢复到之前的状态
-            state.remove(state.size() - 1);
+            state.removeLast();
         }
     }
 

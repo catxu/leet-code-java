@@ -3,41 +3,32 @@ package com.catxu.leetcode.question79;
 /**
  * 79. Word Search
  */
-class Solution {
-    private boolean result = false;
+public class Solution {
 
     public boolean exist(char[][] board, String word) {
-        boolean[][] visited = new boolean[board.length][board[0].length];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                dfs(board, i, j, word, new StringBuilder(), visited);
-                if (result) {
-                    return true;
-                }
+        int m = board.length;
+        int n = board[0].length;
+        boolean[][] visited = new boolean[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (dfs(board, word, i, j, 0, visited)) return true;
             }
         }
-        return result;
+        return false;
     }
 
-    private void dfs(char[][] board, int row, int col, String word, StringBuilder state, boolean[][] visited) {
-        if (!state.isEmpty() && !word.startsWith(state.toString())) {
-            return;
-        }
-        if (state.length() == word.length() && state.toString().equals(word)) {
-            result = true;
-            return;
-        }
-        if (row < 0 || col < 0 || row >= board.length || col >= board[0].length || visited[row][col]) {
-            return;
-        }
-        visited[row][col] = true;
-        state.append(board[row][col]);
-        dfs(board, row - 1, col, word, state, visited);
-        dfs(board, row, col - 1, word, state, visited);
-        dfs(board, row + 1, col, word, state, visited);
-        dfs(board, row, col + 1, word, state, visited);
-        state.deleteCharAt(state.length() - 1);
-        visited[row][col] = false;
+    public boolean dfs(char[][] board, String word, int i, int j, int cur, boolean[][] visited) {
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] != word.charAt(cur) || visited[i][j])
+            return false;
+        if (cur == word.length() - 1 && board[i][j] == word.charAt(cur)) return true;
+
+        visited[i][j] = true;
+        boolean res = dfs(board, word, i + 1, j, cur + 1, visited) ||
+                dfs(board, word, i, j + 1, cur + 1, visited) ||
+                dfs(board, word, i - 1, j, cur + 1, visited) ||
+                dfs(board, word, i, j - 1, cur + 1, visited);
+        visited[i][j] = false;
+        return res;
     }
 
     public static void main(String[] args) {
