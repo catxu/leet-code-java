@@ -17,7 +17,9 @@ class Solution {
     public int networkDelayTime(int[][] times, int n, int k) {
         final int INF = Integer.MAX_VALUE / 2;
         List<int[]>[] graph = new List[n];
-        Arrays.fill(graph, new ArrayList<>());
+        for (int i = 0; i < n; ++i) {
+            graph[i] = new ArrayList<>();
+        }
         for (int[] route : times) {
             // 0: source / 1: target / 2: weight
             int v = route[0] - 1, neighbor = route[1] - 1;
