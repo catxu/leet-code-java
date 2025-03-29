@@ -49,16 +49,18 @@ class Solution {
         if (k == 0) {
             return;
         }
-        // lifo
-        Stack<Integer> stack = new Stack<>();
-        for (int i = nums.length - k; i < nums.length; i++) {
-            stack.push(nums[i]);
-        }
-        for (int i = nums.length - k - 1; i >= 0; i--) {
-            nums[i + k] = nums[i];
-        }
-        for (int i = k - 1; i >= 0; i--) {
-            nums[i] = stack.pop();
+        reverse(nums, 0, nums.length - k - 1);
+        reverse(nums, nums.length - k, nums.length - 1);
+        reverse(nums, 0, nums.length - 1);
+    }
+
+    private void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int t = nums[start];
+            nums[start] = nums[end];
+            nums[end] = t;
+            start++;
+            end--;
         }
     }
 
