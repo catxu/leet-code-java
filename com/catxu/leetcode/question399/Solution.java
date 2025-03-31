@@ -7,6 +7,34 @@ import java.util.Map;
 
 /**
  * 399. Evaluate Division
+ * <p>
+ * // a --[3.0]--> b
+ * // d --[4.0]--> c
+ * // a --[6.0]--> d
+ * //
+ * // a ----> b
+ * // |
+ * // |
+ * // v
+ * // d ----> c
+ * //
+ * //    a,   b,   d,   c
+ * // round 1: a --[3.0]--> b
+ * // i [0,   1,   2,   3]
+ * // p [1,   1,   2,   3]
+ * // w [3.0, 1.0, 1.0, 1.0]
+ * //
+ * // round 2: d --[4.0]--> c
+ * // i [0,   1,   2,   3]
+ * // p [1,   1,   3,   3]
+ * // w [3.0, 1.0, 4.0, 1.0]
+ * //
+ * // round 3: a --[6.0]--> d
+ * // round 3: a = 0, d = 2
+ * // i [0,   1,   2,   3]
+ * // p [1,   3,   3,   3]
+ * // w [3.0, 8.0, 4.0, 1.0]
+ * // weight[1] = weight[2] * value / weight[0];
  */
 class Solution {
     // 时间复杂度：O((N+Q)logA)
@@ -96,10 +124,11 @@ class Solution {
         public double isConnected(int x, int y) {
             int rootX = find(x);
             int rootY = find(y);
-            if (rootX != rootY) {
+            if (rootX == rootY) {
+                return weight[x] / weight[y];
+            } else {
                 return -1.0d;
             }
-            return weight[x] / weight[y];
         }
     }
 
