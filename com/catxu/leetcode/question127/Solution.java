@@ -16,9 +16,10 @@ class Solution {
         //          -----> lot --> log --> cog
 
         // 如何建图？相邻字符间最多差一个字符
-        // 图结构：Map<String, List<Cell>> Cell: index, String
+        // 图结构：Map<String, List<Cell>> Cell: Vertex, Weight -> 权重后续用于距离计算
         // 如何识别 neighbors？判断a-z每个字符
         // 如何做路径查找：Dijkstra
+
         int n = wordList.size();
         Map<String, Integer> dict = new HashMap<>();
         for (int i = 0; i < n; i++) {
@@ -26,14 +27,10 @@ class Solution {
         }
         dict.putIfAbsent(beginWord, -1);
 
-        String start = null;
+        // 建图
         Map<String, List<Cell>> graph = new HashMap<>();
-        for (int k = -1; k < n; k++) {
-            if (start != null) {
-                start = wordList.get(k);
-            } else {
-                start = beginWord;
-            }
+        for (Map.Entry<String, Integer> entry : dict.entrySet()) {
+            String start = entry.getKey();
             char[] chs = start.toCharArray();
             for (int i = 0; i < chs.length; i++) {
                 char c = chs[i];
@@ -43,18 +40,24 @@ class Solution {
                     }
                     chs[i] = j;
                     String neighbor = new String(chs);
+                    // 裁剪掉出发点
+                    if (beginWord.equals(neighbor)) {
+                        continue;
+                    }
                     Integer idx = dict.get(neighbor);
-                    // 当前字符串之后的 neighbor
-                    if (idx != null && idx > k) {
+                    if (idx != null) {
                         graph.computeIfAbsent(start, key -> new ArrayList<>()).add(new Cell(neighbor, 1));
                     }
-                    chs[i] = c;
                 }
+                // 字符还原
+                chs[i] = c;
             }
         }
+        // Dijkstra 优先队列，按权重排序
         PriorityQueue<Cell> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a.weight));
         minHeap.offer(new Cell(beginWord, 0));
         int ans = Integer.MAX_VALUE;
+        // source 出发到当前 node 的距离
         int[] distance = new int[n + 1];
         Arrays.fill(distance, n + 2);
         distance[0] = 0;
@@ -74,9 +77,9 @@ class Solution {
             }
             for (Cell neighbor : neighbors) {
                 int neighborIdx = dict.get(neighbor.vertex) + 1;
-                neighbor.weight += cell.weight;
-                if (neighbor.weight < distance[neighborIdx]) {
-                    distance[neighborIdx] = neighbor.weight;
+                int newWeight = neighbor.weight + cell.weight;
+                if (newWeight < distance[neighborIdx]) {
+                    distance[neighborIdx] = neighbor.weight = newWeight;
                     minHeap.offer(neighbor);
                 }
             }
@@ -95,8 +98,8 @@ class Solution {
     }
 
     public static void main(String[] args) {
-//        System.out.println(new Solution().ladderLength("hit", "cog", List.of("hot", "dot", "dog", "lot", "log", "cog")));
-//        System.out.println(new Solution().ladderLength("hit", "cog", List.of("hot", "dot", "dog", "lot", "log")));
+        System.out.println(new Solution().ladderLength("hit", "cog", List.of("hot", "dot", "dog", "lot", "log", "cog")));
+        System.out.println(new Solution().ladderLength("hit", "cog", List.of("hot", "dot", "dog", "lot", "log")));
         System.out.println(new Solution().ladderLength("hot", "dog", List.of("hot", "dog", "dot")));
     }
 }
