@@ -24,6 +24,7 @@ class Solution {
         visited.add(startGene);
         int step = 0;
 
+        // blind bfs
         while (!queue.isEmpty()) {
             step++;
             int size = queue.size();
