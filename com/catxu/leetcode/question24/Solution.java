@@ -33,28 +33,13 @@ import com.catxu.leetcode.question.ListNode;
  */
 class Solution {
     public ListNode swapPairs(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode dummy = new ListNode(0, head);
-        ListNode prev = dummy;
-        ListNode cur = head;
-
-        while (cur != null && cur.next != null) {
-            // save ptrs
-            ListNode second = cur.next;
-            ListNode nxtPair = second.next;
-
-            // reverse this pair
-            second.next = cur;
-            cur.next = nxtPair;
-            prev.next = second;
-
-            // update ptrs
-            prev = cur;
-            cur = nxtPair;
-        }
-        return dummy.next;
+        if (head == null || head.next == null) return head;
+        ListNode first = head;
+        ListNode second = head.next;
+        ListNode suffix = swapPairs(second.next);
+        first.next = suffix;
+        second.next = first;
+        return second;
     }
 
     public static void main(String[] args) {
