@@ -4,58 +4,41 @@ package com.catxu.leetcode.question97;
  * 97. Interleaving String
  */
 class Solution {
-    private int[][][] dp;
+
+    private Boolean[][] memo;
+    private int m, n, l;
 
     public boolean isInterleave(String s1, String s2, String s3) {
         if (s1.length() + s2.length() != s3.length()) {
             return false;
         }
-        if (s1.isEmpty()) {
-            return s2.equals(s3);
-        } else if (s2.isEmpty()) {
-            return s1.equals(s3);
-        }
-        dp = new int[s1.length() + 1][s2.length() + 1][3];
-        return dfs(s1, 0, s2, -1, s3, 1) || dfs(s1, -1, s2, 0, s3, 2);
+        m = s1.length();
+        n = s2.length();
+        l = s3.length();
+        memo = new Boolean[m + 1][n + 1];
+        return dfs(s1, 0, s2, 0, s3);
     }
 
-    private boolean dfs(String s1, int i, String s2, int j, String s3, int curBeginWithS) {
-        if ((curBeginWithS == 1 && i > s1.length() - 1)
-                || (curBeginWithS == 2 && j > s2.length() - 1)) {
-            return false;
+    private boolean dfs(String s1, int i, String s2, int j, String s3) {
+        if (i + j == l) {
+            return true;
         }
-        if (dp[i + 1][j + 1][curBeginWithS] != 0) {
-            return dp[i + 1][j + 1][curBeginWithS] == 1;
+        if (memo[i][j] != null) {
+            return memo[i][j];
         }
-        char c1, c2, c3;
-        c3 = s3.charAt(i + j + 1);
-        if (curBeginWithS == 1) {
-            c1 = s1.charAt(i);
-            if (c1 != c3) {
-                dp[i + 1][j + 1][curBeginWithS] = -1;
-                return false;
-            } else if (i + j + 2 == s3.length()) {
-                dp[i + 1][j + 1][curBeginWithS] = 1;
-                return true;
-            } else {
-                boolean res = dfs(s1, i + 1, s2, j, s3, curBeginWithS) || dfs(s1, i, s2, j + 1, s3, curBeginWithS + 1);
-                dp[i + 1][j + 1][curBeginWithS] = res ? 1 : -1;
-                return res;
-            }
-        } else {
-            c2 = s2.charAt(j);
-            if (c2 != c3) {
-                dp[i + 1][j + 1][curBeginWithS] = -1;
-                return false;
-            } else if (i + j + 2 == s3.length()) {
-                dp[i + 1][j + 1][curBeginWithS] = 1;
-                return true;
-            } else {
-                boolean res = dfs(s1, i, s2, j + 1, s3, curBeginWithS) || dfs(s1, i + 1, s2, j, s3, curBeginWithS - 1);
-                dp[i + 1][j + 1][curBeginWithS] = res ? 1 : -1;
-                return res;
-            }
+
+        boolean res = false;
+        char cur = s3.charAt(i + j);
+        // i 达到 m 后会继续匹配后续的 j （如果还有的话）
+        if (i < m && s1.charAt(i) == cur) {
+            res |= dfs(s1, i + 1, s2, j, s3);
         }
+        // j 达到 n 后会继续匹配后续的 i （如果还有的话）
+        if (j < n && s2.charAt(j) == cur) {
+            res |= dfs(s1, i, s2, j + 1, s3);
+        }
+        memo[i][j] = res;
+        return res;
     }
 
     public static void main(String[] args) {
