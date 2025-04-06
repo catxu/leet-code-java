@@ -49,8 +49,12 @@ class Solution {
         if (k == 0) {
             return;
         }
+        // 1,2,3,4  k = 2  length - 1 = 3
+        // 2,1,3,4  k = 2  length - 1 = 3
         reverse(nums, 0, nums.length - k - 1);
+        // 2,1,4,3  k = 2  length - k = 2
         reverse(nums, nums.length - k, nums.length - 1);
+        // 3,4,1,2  k = 2  length - k = 2
         reverse(nums, 0, nums.length - 1);
     }
 

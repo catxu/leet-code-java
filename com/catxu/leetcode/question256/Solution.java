@@ -37,6 +37,7 @@ class Solution {
         int n = cost.length;
         int m = 3;
         // 第 i 栋房子 paint 成 x 色的最小花费
+        // dp[i][j] 前 i 栋房子染色后的最小花费
         int[][] dp = new int[n][m];
         for (int i = 0; i < n; i++) {
             Arrays.fill(dp[i], Integer.MAX_VALUE);

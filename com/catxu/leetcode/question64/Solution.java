@@ -35,19 +35,42 @@ package com.catxu.leetcode.question64;
  */
 class Solution {
     public int minPathSum(int[][] grid) {
-        int[][] dp = new int[grid.length][grid[0].length];
-        dp[0][0] = grid[0][0];
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (i - 1 < 0 && j - 1 < 0) {
+//        int n = grid.length, m = grid[0].length;
+//        int[][] dp = new int[n][m];
+//        for (int i = 0; i < n; i++) {
+//            for (int j = 0; j < m; j++) {
+//                if (i == 0 && j == 0) {
+//                    dp[i][j] = grid[i][j];
+//                    continue;
+//                }
+//                // dp[i][j]最优解 = min(dp[i-1][j] 向右移, dp[i][j-1] 向下移) + grid[i][j]
+//                dp[i][j] = Math.min(i - 1 < 0 ? Integer.MAX_VALUE : dp[i - 1][j],
+//                        j - 1 < 0 ? Integer.MAX_VALUE : dp[i][j - 1]) + grid[i][j];
+//            }
+//        }
+//        return dp[n - 1][m - 1];
+        int n = grid.length, m = grid[0].length;
+        // 滚动数组空间优化
+        int[][] dp = new int[2][m];
+        // two pointers:
+        // now is where row i stored
+        // old is where row i - 1 stored: old = 1 - now
+        int old, now = 0;
+        for (int i = 0; i < n; i++) {
+            // swap old and now
+            old = now;
+            now = 1 - now;
+            for (int j = 0; j < m; j++) {
+                if (i == 0 && j == 0) {
+                    dp[now][j] = grid[i][j];
                     continue;
                 }
                 // dp[i][j]最优解 = min(dp[i-1][j] 向右移, dp[i][j-1] 向下移) + grid[i][j]
-                dp[i][j] = Math.min(i - 1 < 0 ? Integer.MAX_VALUE : dp[i - 1][j],
-                        j - 1 < 0 ? Integer.MAX_VALUE : dp[i][j - 1]) + grid[i][j];
+                dp[now][j] = Math.min(i - 1 < 0 ? Integer.MAX_VALUE : dp[old][j],
+                        j - 1 < 0 ? Integer.MAX_VALUE : dp[now][j - 1]) + grid[i][j];
             }
         }
-        return dp[grid.length - 1][grid[0].length - 1];
+        return dp[now][m - 1];
     }
 
 //    public int minPathSum(int[][] grid) {
