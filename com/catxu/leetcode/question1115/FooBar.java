@@ -5,9 +5,7 @@ package com.catxu.leetcode.question1115;
  */
 class FooBar {
     private final int n;
-
-    final Object lock = new Object();
-    int cnt = 0;
+    private volatile boolean permit = true;
 
     public FooBar(int n) {
         this.n = n;
@@ -15,29 +13,21 @@ class FooBar {
 
     public void foo(Runnable printFoo) throws InterruptedException {
         for (int i = 0; i < n; i++) {
-            synchronized (lock) {
-                while (cnt != 0) {
-                    lock.wait();
-                }
-                // printFoo.run() outputs "foo". Do not change or remove this line.
-                printFoo.run();
-                cnt++;
-                lock.notifyAll();
+            while (!permit) {
+                Thread.yield();
             }
+            printFoo.run();
+            permit = false;
         }
     }
 
     public void bar(Runnable printBar) throws InterruptedException {
-        for (int i = 0; i < n; i++) {
-            synchronized (lock) {
-                while (cnt != 1) {
-                    lock.wait();
-                }
-                // printFoo.run() outputs "foo". Do not change or remove this line.
-                printBar.run();
-                cnt--;
-                lock.notifyAll();
+        for (int i = 0; i < n; i++ ) {
+            while (permit) {
+                Thread.yield();
             }
+            printBar.run();
+            permit = true;
         }
     }
 
