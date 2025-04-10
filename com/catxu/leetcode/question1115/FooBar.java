@@ -1,11 +1,17 @@
 package com.catxu.leetcode.question1115;
 
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * 1115. Print FooBar Alternately
  */
 class FooBar {
     private final int n;
-    private volatile boolean permit = true;
+
+    ReentrantLock lock = new ReentrantLock(true);
+    Condition condition = lock.newCondition();
+    boolean enableFoo = true;
 
     public FooBar(int n) {
         this.n = n;
@@ -13,21 +19,33 @@ class FooBar {
 
     public void foo(Runnable printFoo) throws InterruptedException {
         for (int i = 0; i < n; i++) {
-            while (!permit) {
-                Thread.yield();
+            lock.lock();
+            try {
+                while (!enableFoo) {
+                    condition.await();
+                }
+                printFoo.run();
+                enableFoo = !enableFoo;
+                condition.signalAll();
+            } finally {
+                lock.unlock();
             }
-            printFoo.run();
-            permit = false;
         }
     }
 
     public void bar(Runnable printBar) throws InterruptedException {
-        for (int i = 0; i < n; i++ ) {
-            while (permit) {
-                Thread.yield();
+        for (int i = 0; i < n; i++) {
+            lock.lock();
+            try {
+                while (enableFoo) {
+                    condition.await();
+                }
+                printBar.run();
+                enableFoo = !enableFoo;
+                condition.signalAll();
+            } finally {
+                lock.unlock();
             }
-            printBar.run();
-            permit = true;
         }
     }
 
