@@ -52,7 +52,7 @@ class Solution {
 
         boolean canWinFlag = false; // 假设当前玩家不能赢
 
-        // 2. 遍历所有可选数字 i (1 to maxInt)
+        // 2. 遍历所有可选数字 i
         for (int i = 1; i <= n; i++) {
             int currentBit = (1 << (i - 1)); // 数字 i 对应的位
             // 3. 检查数字 i 是否可用
