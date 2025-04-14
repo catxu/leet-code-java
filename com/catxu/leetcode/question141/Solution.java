@@ -53,21 +53,15 @@ import com.catxu.leetcode.question.ListNode;
  */
 class Solution {
     public boolean hasCycle(ListNode head) {
-        if (head == null || head.next == null) {
-            return false;
-        }
-        ListNode slow = head;
-        ListNode fast = head.next;
-        while (fast != null && fast != slow) {
-            ListNode next = fast.next;
-            if (next != null) {
-                fast = next.next;
-            } else {
-                return false;
-            }
+        ListNode slow = head, fast = head; // 标准Floyd算法，slow和fast都从head出发
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
             slow = slow.next;
+            if (slow == fast) { // 移动后再做相遇检测
+                return true;
+            }
         }
-        return fast == slow;
+        return false;
     }
 
     public static void main(String[] args) {
