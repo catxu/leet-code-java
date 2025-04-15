@@ -10,24 +10,22 @@ package com.catxu.leetcode.question33;
  * Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
  * <p>
  * You must write an algorithm with O(log n) runtime complexity.
- * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: nums = [4,5,6,7,0,1,2], target = 0
- * <p>
  * Output: 4
+ * </pre>
  * <p>
  * Example 2:
- * <p>
+ * <pre>
  * Input: nums = [4,5,6,7,0,1,2], target = 3
- * <p>
  * Output: -1
- * <p>
+ * </pre>
  * Example 3:
- * <p>
+ * <pre>
  * Input: nums = [1], target = 0
- * <p>
  * Output: -1
+ * </pre>
  */
 class Solution {
     public int search(int[] nums, int target) {
