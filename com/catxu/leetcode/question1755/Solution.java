@@ -1,4 +1,4 @@
-package com.catxu.leetcode.question1775;
+package com.catxu.leetcode.question1755;
 
 import java.util.*;
 
