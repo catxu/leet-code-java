@@ -10,38 +10,48 @@ import com.catxu.leetcode.question.TreeNode;
  * A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
  * <p>
  * Example 1:
+ * <pre>
  * <img src="./tmp-tree.png" alt="tree image" />
- * <p>
  * Input: root = [3,9,20,null,null,15,7]
- * <p>
  * Output: 3
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: root = [1,null,2]
- * <p>
  * Output: 2
+ * </pre>
  * <p>
  * Constraints:
- * <p>
+ * <pre>
  * The number of nodes in the tree is in the range [0, 10<sup>4</sup>].
- * <p>
  * -100 <= Node.val <= 100
+ * </pre>
  */
 class Solution {
     public int maxDepth(TreeNode root) {
-        return backtracking(root, 0);
+        // return dfs(root, 0);
+        return dfs(root);
     }
 
-    private int backtracking(TreeNode root, int depth) {
-        if (root == null) {
-            return depth;
+    private int dfs(TreeNode node) {
+        if (node == null) {
+            return 0;
         }
-        depth++;
-        int leftDepth = backtracking(root.left, depth);
-        int rightDepth = backtracking(root.right, depth);
-        return Math.max(leftDepth, rightDepth);
+        int left = dfs(node.left) + 1;
+        int right = dfs(node.right) + 1;
+        return Math.max(left, right);
     }
+
+
+    // private int dfs(TreeNode root, int depth) {
+    //     if (root == null) {
+    //         return depth;
+    //     }
+    //     depth++;
+    //     int leftDepth = dfs(root.left, depth);
+    //     int rightDepth = dfs(root.right, depth);
+    //     return Math.max(leftDepth, rightDepth);
+    // }
 
     public static void main(String[] args) {
         TreeNode root1 = TreeNode.levelOrderBuildTree(new Integer[]{3, 9, 20, null, null, 15, 7});
