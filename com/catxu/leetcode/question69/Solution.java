@@ -51,6 +51,17 @@ class Solution {
         return r;
     }
 
+    // 二分查找还可以用于小数区间搜索
+    public double sqrt(int x) {
+        double l = 1, r = 2;
+        while (l < (r - 0.0000000001)) {
+            double mid = (l + r) / 2;
+            if (mid * mid < 2) l = mid;
+            else r = mid;
+        }
+        return l;
+    }
+
     // 当退出循环时，l 必然 大于 r。可能有两种情况，r 减少或者 l 增加导致循环退出。
     // 当 r 减少，必然是因为 product 大于 x，所以 r 即为正确答案
     // 当 l 增加，必然是因为 product 小于 x，
@@ -59,6 +70,7 @@ class Solution {
         System.out.println(s.mySqrt(0));
         System.out.println(s.mySqrt(1));
         System.out.println(s.mySqrt(2));
+        System.out.println(s.sqrt(2));
         System.out.println(s.mySqrt(4));
         System.out.println(s.mySqrt(8));
         System.out.println(s.mySqrt(Integer.MAX_VALUE));
