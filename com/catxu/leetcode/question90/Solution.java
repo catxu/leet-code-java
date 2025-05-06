@@ -35,6 +35,10 @@ class Solution {
         quickSort(nums, start, pivot - 1);
         quickSort(nums, pivot + 1, end);
     }
+    // 3, 2, 1, 0
+    // 0, 2, 1, 3
+    // 0, 2, 1, 3
+    // 0, 1, 2, 3
 
     private int partition(int[] nums, int start, int end) {
         int i = start - 1;
