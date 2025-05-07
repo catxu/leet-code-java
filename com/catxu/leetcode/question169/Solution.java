@@ -1,8 +1,5 @@
 package com.catxu.leetcode.question169;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 169. Majority Element
  * <p>
@@ -11,38 +8,32 @@ import java.util.Map;
  * The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: nums = [3,2,3]
- * <p>
  * Output: 3
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: nums = [2,2,1,1,1,2,2]
- * <p>
  * Output: 2
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * n == nums.length
- * <p>
  * 1 <= n <= 5 * 10<sup>4</sup>
- * <p>
  * -10<sup>9</sup> <= nums[i] <= 10<sup>9</sup>
+ * </pre>
  */
 class Solution {
 
     public int majorityElement(int[] nums) {
-        int threshold = nums.length / 2;
-        Map<Integer, Integer> elements = new HashMap<>(nums.length);
+        // 摩尔投票
+        int majority = 0, votes = 0;
         for (int num : nums) {
-            int times = elements.getOrDefault(num, 0);
-            if (++times > threshold) {
-                return num;
-            }
-            elements.put(num, times);
+            if (votes == 0) majority = num;
+            votes += (majority == num ? 1 : -1);
         }
-        return -1;
+        return majority;
     }
 
     public static void main(String[] args) {
