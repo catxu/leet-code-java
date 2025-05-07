@@ -10,45 +10,37 @@ package com.catxu.leetcode.question69;
  * For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: x = 4
- * <p>
  * Output: 2
- * <p>
  * Explanation: The square root of 4 is 2, so we return 2.
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: x = 8
- * <p>
  * Output: 2
- * <p>
  * Explanation: The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * 0 <= x <= 2<sup>31</sup> - 1
+ * </pre>
  */
 class Solution {
     public int mySqrt(int x) {
         if (x <= 1) {
             return x;
         }
-        int l = 0;
-        int r = x;
-        int mid = (l + r) / 2;
-        while (l <= r) {
-            long product = (long) mid * mid;
-            if (product > x) {
-                r = mid - 1;
-            } else if (product < x) {
-                l = mid + 1;
+        int l = 0, r = x;
+        while (l + 1 != r) {
+            long mid = l + r >> 1;
+            if (mid * mid <= x) {
+                l = (int) mid;
             } else {
-                return mid;
+                r = (int) mid;
             }
-            mid = (l + r) / 2;
         }
-        return r;
+        return l;
     }
 
     // 二分查找还可以用于小数区间搜索
@@ -56,8 +48,11 @@ class Solution {
         double l = 1, r = 2;
         while (l < (r - 0.0000000001)) {
             double mid = (l + r) / 2;
-            if (mid * mid < 2) l = mid;
-            else r = mid;
+            if (mid * mid < 2) {
+                l = mid;
+            } else {
+                r = mid;
+            }
         }
         return l;
     }
