@@ -69,7 +69,7 @@ class Solution {
     public static void main(String[] args) {
         System.out.println(new Solution().wordPattern("abba", "cat dog dog cat"));
         System.out.println(new Solution().wordPattern("abba", "cat dog dog fish"));
-        System.out.println(new Solution().wordPattern("aaaa", "cat dog dog cat"));
+        System.out.println(new Solution().wordPattern("ab", "cat cat"));
         System.out.println(new Solution().wordPattern("a", "cat"));
         System.out.println(new Solution().wordPattern("a", "Cat"));
         System.out.println(new Solution().wordPattern("a", "a"));

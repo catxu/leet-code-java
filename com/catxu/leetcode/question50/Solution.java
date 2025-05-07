@@ -6,36 +6,29 @@ package com.catxu.leetcode.question50;
  * Implement pow(x, n), which calculates x raised to the power n (i.e., x<sup>n</sup>).
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: x = 2.00000, n = 10
- * <p>
  * Output: 1024.00000
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: x = 2.10000, n = 3
- * <p>
  * Output: 9.26100
- * <p>
+ * </pre>
  * Example 3:
- * <p>
+ * <pre>
  * Input: x = 2.00000, n = -2
- * <p>
  * Output: 0.25000
- * <p>
  * Explanation: 2<sup>-2</sup> = 1/2<sup>2</sup> = 1/4 = 0.25
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * -100.0 < x < 100.0
- * <p>
  * -2<sup>31</sup> <= n <= 2<sup>31</sup>-1
- * <p>
  * n is an integer.
- * <p>
  * Either x is not zero or n > 0.
- * <p>
  * -10<sup>4</sup> <= x<sup>n</sup> <= 10<sup>4</sup>
+ * </pre>
  */
 class Solution {
 
