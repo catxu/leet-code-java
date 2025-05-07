@@ -61,7 +61,7 @@ class Solution {
             return false;
         }
         boolean match = i < s.length && (p[j] == '.' || p[j] == s[i]);
-        if (j + 1 < p.length && p[j + 1] == '*') { // 优先校验 [j+1] 是否为 '*'
+        if (j + 1 < p.length && p[j + 1] == '*') { // 【贪心】优先校验 [j+1] 是否为 '*'
             if (!match) {
                 /* '*' 匹配 0 次 */
                 match = dfs(i, j + 2);
