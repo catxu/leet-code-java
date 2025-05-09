@@ -12,44 +12,31 @@ import java.util.PriorityQueue;
  * Given two integer arrays days and apples of length n, return the maximum number of apples you can eat.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: apples = [1,2,3,5,2], days = [3,2,1,4,2]
- * <p>
  * Output: 7
- * <p>
  * Explanation: You can eat 7 apples:
- * <p>
  * - On the first day, you eat an apple that grew on the first day.
- * <p>
  * - On the second day, you eat an apple that grew on the second day.
- * <p>
  * - On the third day, you eat an apple that grew on the second day. After this day, the apples that grew on the third day rot.
- * <p>
  * - On the fourth to the seventh days, you eat apples that grew on the fourth day.
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: apples = [3,0,0,0,0,2], days = [3,0,0,0,0,2]
- * <p>
  * Output: 5
- * <p>
  * Explanation: You can eat 5 apples:
- * <p>
  * - On the first to the third day you eat apples that grew on the first day.
- * <p>
  * - Do nothing on the fourth and fifth days.
- * <p>
  * - On the sixth and seventh days you eat apples that grew on the sixth day.
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * n == apples.length == days.length
- * <p>
  * 1 <= n <= 2 * 10<sup>4</sup>
- * <p>
- * 0 <= apples[i], days[i] <= 2 * 104
- * <p>
+ * 0 <= apples[i], days[i] <= 2 * 10<sup>4</sup>
  * days[i] = 0 if and only if apples[i] = 0.
+ * </pre>
  */
 class Solution {
     public int eatenApples(int[] apples, int[] days) {
