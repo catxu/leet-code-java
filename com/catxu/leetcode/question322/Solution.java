@@ -12,32 +12,27 @@ import java.util.Arrays;
  * You may assume that you have an infinite number of each kind of coin.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: coins = [1,2,5], amount = 11
- * <p>
  * Output: 3
- * <p>
  * Explanation: 11 = 5 + 5 + 1
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: coins = [2], amount = 3
- * <p>
  * Output: -1
- * <p>
+ * </pre>
  * Example 3:
- * <p>
+ * <pre>
  * Input: coins = [1], amount = 0
- * <p>
  * Output: 0
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * 1 <= coins.length <= 12
- * <p>
  * 1 <= coins[i] <= 2<sup>31</sup> - 1
- * <p>
  * 0 <= amount <= 10<sup>4</sup>
+ * </pre>
  */
 class Solution {
     public int coinChange(int[] coins, int amount) {
@@ -46,7 +41,7 @@ class Solution {
         Arrays.fill(dp, unreachableAmt);
         dp[0] = 0;
         for (int i = 1; i <= amount; i++) {
-            for (int coin : coins) {
+            for (int coin : coins) { // 完全背包 每种物品可以取任意次
                 if (i >= coin) {
                     dp[i] = Math.min(dp[i], dp[i - coin] + 1);
                 }

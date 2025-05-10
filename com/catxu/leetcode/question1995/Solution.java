@@ -6,13 +6,13 @@ package com.catxu.leetcode.question1995;
 class Solution {
     public int countQuadruplets(int[] nums) {
         int n = nums.length, ans = 0;
-        int[] cnt = new int[10010];
-        for (int c = n - 2; c >= 2; c--) {
-            cnt[nums[c + 1]]++;
-            for (int a = 0; a < n; a++) {
-                for (int b = a + 1; b < c; b++) {
-                    ans += cnt[nums[a] + nums[b] + nums[c]];
-                }
+        int[] cnt = new int[300]; // a + b + c 最大 300
+        for (int b = n - 3; b >= 1; b--) {
+            for (int d = b + 2; d < n; d++) {
+                cnt[nums[d] - nums[b + 1] + 99]++; // d c 最大差为 -99
+            }
+            for (int a = 0; a < b; a++) {
+                ans += cnt[nums[a] + nums[b] + 99];
             }
         }
         return ans;

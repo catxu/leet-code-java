@@ -47,8 +47,8 @@ class Solution {
         for (int i = 0; i < n; i++) {
             dp[i][0] = 1;
         }
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j <= w; j++) {
+        for (int i = 0; i < n; i++) { // 遍历物品
+            for (int j = 0; j <= w; j++) { // 遍历背包 也可以先遍历背包，然后遍历物品，参考 @322 Coin Change
                 if (i == 0) {
                     dp[0][j] += (j - nums[i] == 0 ? 1 : 0);
                     continue;
