@@ -1,33 +1,31 @@
 package com.catxu.leetcode.question42;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * 42. Trapping Rain Water
  * <p>
  * Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * <img src="./rainwatertrap.png" />
- * <p>
  * Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
- * <p>
  * Output: 6
- * <p>
  * Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: height = [4,2,0,3,2,5]
- * <p>
  * Output: 9
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * n == height.length
- * <p>
  * 1 <= n <= 2 * 10<sup>4</sup>
- * <p>
  * 0 <= height[i] <= 10<sup>5</sup>
+ * </pre>
  */
 class Solution {
     public int trap(int[] height) {
@@ -50,6 +48,21 @@ class Solution {
             }
         }
         return res;
+    }
+
+    public int trapII(int[] height) {
+        int n = height.length, ans = 0;
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && height[i] >= height[stack.peek()]) {
+                int bottomHeight = height[stack.pop()];
+                int left = stack.peek();
+                int h = Math.min(height[i], height[left]) - bottomHeight;
+                ans += h * (i - left - 1);
+            }
+            stack.push(i);
+        }
+        return ans;
     }
 
     public static void main(String[] args) {
