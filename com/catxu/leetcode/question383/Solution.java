@@ -11,28 +11,25 @@ import java.util.Map;
  * Each letter in magazine can only be used once in ransomNote.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: ransomNote = "a", magazine = "b"
- * <p>
  * Output: false
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: ransomNote = "aa", magazine = "ab"
- * <p>
  * Output: false
- * <p>
+ * </pre>
  * Example 3:
- * <p>
+ * <pre>
  * Input: ransomNote = "aa", magazine = "aab"
- * <p>
  * Output: true
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * 1 <= ransomNote.length, magazine.length <= 10<sup>5</sup>
- * <p>
  * ransomNote and magazine consist of lowercase English letters.
+ * </pre>
  */
 class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
