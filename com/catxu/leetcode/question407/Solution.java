@@ -45,4 +45,19 @@ class Solution {
         }
         return ans;
     }
+
+    public static void main(String[] args) {
+        System.out.println(new Solution().trapRainWater(new int[][]{
+                {1, 1, 2}, // 储水量取决于上下左右四个方向最短板（木桶理论）
+                {4, 0, 2},
+                {4, 3, 3}
+        }));
+        System.out.println(new Solution().trapRainWater(new int[][]{
+                {3, 3, 3, 3, 3},
+                {3, 2, 2, 2, 3},
+                {3, 2, 1, 2, 3},
+                {3, 2, 2, 2, 3},
+                {3, 3, 3, 3, 3},
+        }));
+    }
 }
