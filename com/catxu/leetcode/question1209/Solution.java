@@ -12,9 +12,7 @@ class Solution {
         if (n < k) return s;
         Deque<Pair> stack = new ArrayDeque<>();
         char[] w = s.toCharArray();
-        Pair pair = new Pair(w[0], 1);
-        stack.push(pair);
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             if (stack.isEmpty()) {
                 stack.push(new Pair(w[i], 1));
                 continue;
