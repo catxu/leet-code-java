@@ -7,6 +7,7 @@ import java.util.Queue;
  * 909. Snakes and Ladders
  */
 class Solution {
+    // 本质是 BFS 找环
     public int snakesAndLadders(int[][] board) {
         int n = board.length;
         boolean[] visited = new boolean[n * n + 1];
@@ -50,5 +51,18 @@ class Solution {
             c = n - 1 - c;
         }
         return new int[]{n - 1 - r, c};
+    }
+
+    private int[] id2rcII(int id, int n) {
+        int row = n - 1 - (id - 1) / n; // 从下往上填
+        int offset = (id - 1) % n;
+        int col;
+
+        if ((n - 1 - row) % 2 == 0) {
+            col = offset; // （0-based 从下往上数）偶数层：从左到右
+        } else {
+            col = n - 1 - offset; // 奇数层：从右到左
+        }
+        return new int[]{row, col};
     }
 }
