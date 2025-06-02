@@ -46,30 +46,35 @@ class Solution {
         return count == numCourses;
     }
 
-    /*public boolean canFinish(int numCourses, int[][] prerequisites) {
-        List<List<Integer>> adjacency = new ArrayList<>();
-        for (int i = 0; i < numCourses; i++)
-            adjacency.add(new ArrayList<>());
-        int[] flags = new int[numCourses];
-        for (int[] cp : prerequisites)
-            adjacency.get(cp[1]).add(cp[0]);
-        for (int i = 0; i < numCourses; i++)
-            if (!dfs(adjacency, flags, i)) return false;
-        return true;
-    }*/
 
-    private boolean dfs(List<List<Integer>> adjacency, int[] flags, int i) {
-        if (flags[i] == 1) return false;
-        if (flags[i] == -1) return true;
-        flags[i] = 1;
-        for (Integer j : adjacency.get(i))
-            if (!dfs(adjacency, flags, j)) return false;
-        flags[i] = -1;
-        return true;
+    List<List<Integer>> adjacency;
+    boolean valid = true;
+    int[] visited;
+
+    public boolean canFinishII(int N, int[][] prerequisites) {
+        adjacency = new ArrayList<>();
+        for (int i = 0; i < N; i++)
+            adjacency.add(new ArrayList<>());
+        for (int[] edge : prerequisites)
+            adjacency.get(edge[1]).add(edge[0]);
+        visited = new int[N]; // 0: unvisited, 1: inProgress, 2: visited 三色法 白色、灰色、黑色
+        for (int i = 0; i < N; i++)
+            if (valid && visited[i] == 0) dfs(i); // 如果当前点为unvisited白色，则对其进行dfs
+        return valid;
+    }
+
+    private void dfs(int u) {
+        visited[u] = 1; // 当前点标记为灰色
+        for (int v : adjacency.get(u)) { // 遍历 neighbor:
+            if (visited[v] == 0) dfs(v); // 遇到 0 继续dfs
+            else if (visited[v] == 1) valid = false; // 灰色表示有环
+        }
+        visited[u] = 2; // 当前点标记为黑色
     }
 
     public static void main(String[] args) {
         System.out.println(new Solution().canFinish(2, new int[][]{{1, 0}}));
         System.out.println(new Solution().canFinish(2, new int[][]{{1, 0}, {0, 1}}));
+        System.out.println(new Solution().canFinishII(2, new int[][]{{1, 0}, {0, 1}}));
     }
 }
