@@ -20,7 +20,6 @@ import com.catxu.leetcode.question.TreeNode;
  * Input: root = [1,null,2]
  * Output: 2
  * </pre>
- * <p>
  * Constraints:
  * <pre>
  * The number of nodes in the tree is in the range [0, 10<sup>4</sup>].

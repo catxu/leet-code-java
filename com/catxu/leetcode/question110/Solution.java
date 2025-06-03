@@ -56,7 +56,7 @@ class Solution {
             return true;
         }
         int l = getHeight(root.left);
-        int r = Integer.MAX_VALUE / 2;
+        int r = 0;
         if (isBalanced) r = getHeight(root.right);
         return isBalanced && Math.abs(l - r) <= 1;
     }
