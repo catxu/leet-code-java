@@ -11,32 +11,26 @@ import java.util.Map;
  * Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.
  * <p>
  * Example 1:
+ * <pre>
  * <img src="./tree.png" alt="tree image" />
- * <p>
  * Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
- * <p>
  * Output: [3,9,20,null,null,15,7]
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: preorder = [-1], inorder = [-1]
  * Output: [-1]
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * · 1 <= preorder.length <= 3000
- * <p>
  * · inorder.length == preorder.length
- * <p>
  * · -3000 <= preorder[i], inorder[i] <= 3000
- * <p>
  * · preorder and inorder consist of unique values.
- * <p>
  * · Each value of inorder also appears in preorder.
- * <p>
  * · preorder is guaranteed to be the preorder traversal of the tree.
- * <p>
  * · inorder is guaranteed to be the inorder traversal of the tree.
+ * </pre>
  */
 class Solution {
     private Map<Integer, Integer> inorderIndexMap;

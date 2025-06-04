@@ -10,7 +10,7 @@ import java.util.List;
  * 145. Binary Tree Postorder Traversal
  */
 class Solution {
-    class Node {
+    static class Node {
         TreeNode node;
         int color;
 
