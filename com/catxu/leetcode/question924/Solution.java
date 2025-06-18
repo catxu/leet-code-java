@@ -11,15 +11,15 @@ class Solution {
         int n = graph.length;
         boolean[] vis = new boolean[n];
         boolean[] isInitial = new boolean[n];
-        int minInitial = initial[0];
-        for (int x : initial) {
-            isInitial[x] = true;
-            minInitial = Math.min(minInitial, x);
+        int minInitial = initial[0]; // 可能答案之一 最小initial 节点 id
+        for (int i : initial) {
+            isInitial[i] = true;
+            minInitial = Math.min(minInitial, i);
         }
         int max = 0, ans = -1;
         for (int i : initial) {
             if (vis[i]) continue;
-            nodeId = -1;
+            nodeId = -1; // nodeId 状态机：初始值：-1 -> 一个initial节点：initial节点id -> 多个initial节点：-2
             size = 0;
             dfs(i, graph, vis, isInitial);
             if (nodeId >= 0 && (size > max || size == max && nodeId < ans)) {
