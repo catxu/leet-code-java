@@ -1,54 +1,58 @@
 package com.catxu.leetcode.question46;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 46. Permutations
  * <p>
- * Given an array nums of distinct integers, return all the possible
- * permutations
- * . You can return the answer in any order.
+ * Given an array nums of distinct integers, return all the possible permutations.
+ * <p>
+ * You can return the answer in any order.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: nums = [1,2,3]
  * Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: nums = [0,1]
  * Output: [[0,1],[1,0]]
+ * </pre>
  * Example 3:
- * <p>
+ * <pre>
  * Input: nums = [1]
  * Output: [[1]]
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * 1 <= nums.length <= 6
  * -10 <= nums[i] <= 10
  * All the integers of nums are unique.
+ * </pre>
  */
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        backtrack(result, new ArrayList<>(), nums);
+        Set<Integer> vis = new HashSet<>();
+        backtrack(result, new ArrayList<>(), vis, nums);
         return result;
     }
 
-    // 49 -> 50 -> 25 -> 37 -> 43 -> 46 -> 48 -> 49
-
-    private void backtrack(List<List<Integer>> result, List<Integer> state, int[] nums) {
+    private void backtrack(List<List<Integer>> result, List<Integer> state, Set<Integer> vis, int[] nums) {
         if (state.size() == nums.length) {
             result.add(new ArrayList<>(state));
             return;
         }
         for (int num : nums) {
-            if (state.contains(num))
-                continue;
-            state.add(num);
-            backtrack(result, state, nums);
-            state.removeLast();
+            if (vis.add(num)) {
+                state.add(num);
+                backtrack(result, state, vis, nums);
+                state.removeLast();
+            }
         }
     }
 
