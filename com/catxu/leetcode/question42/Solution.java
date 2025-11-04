@@ -28,15 +28,13 @@ import java.util.Deque;
  * </pre>
  */
 class Solution {
+
     public int trap(int[] height) {
-        // trap water = min(left, right) - h[i]
-        int left = 0;
-        int right = height.length - 1;
-        int maxL = height[left];
-        int maxR = height[right];
-        int res = 0;
+        int left = 0, right = height.length - 1;
+        int maxL = height[left], maxR = height[right];
+        int res = 0; // trap water = min(maxL, maxR) - h[i]
         while (left < right) {
-            if (maxL <= maxR) {
+            if (maxL <= maxR) { // 水的高度取决于两边中较低的挡板
                 left++;
                 res += Math.max(0, maxL - height[left]);
                 // 先更新 res，再 update 左边的最大值
@@ -55,8 +53,9 @@ class Solution {
         Deque<Integer> stack = new ArrayDeque<>();
         for (int i = 0; i < n; i++) {
             while (!stack.isEmpty() && height[i] >= height[stack.peek()]) {
-                int bottomHeight = height[stack.pop()];
-                int left = stack.peek();
+                int bottomHeight = height[stack.pop()]; // 把 i 之前的短板出栈
+                if (stack.isEmpty() || bottomHeight == height[i]) break; // 无法蓄水
+                int left = stack.peek(); // 找到左边界
                 int h = Math.min(height[i], height[left]) - bottomHeight;
                 ans += h * (i - left - 1);
             }
@@ -68,6 +67,7 @@ class Solution {
     public static void main(String[] args) {
         Solution s = new Solution();
         System.out.println(s.trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        System.out.println(s.trapII(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
         System.out.println(s.trap(new int[]{4, 2, 0, 3, 2, 5}));
     }
 }
