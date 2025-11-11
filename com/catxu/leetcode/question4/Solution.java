@@ -31,30 +31,30 @@ package com.catxu.leetcode.question4;
  */
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        if (nums1.length < nums2.length) {
-            findMedianSortedArrays(nums2, nums1);
-        }
-        int total = nums1.length + nums2.length;
-        int half = total / 2;
-        int left = 0;
-        int right = nums2.length - 1;
-        while (true) {
-            int i = Math.floorDiv(left + right, 2); // Math.floorDiv(-1, 2) = -1
-            int j = half - i - 2;
-            int shorterLeftVal = i < 0 ? Integer.MIN_VALUE : nums2[i];
-            int shorterRightVal = i + 1 >= nums2.length ? Integer.MAX_VALUE : nums2[i + 1];
-            int longerLeftVal = j < 0 ? Integer.MIN_VALUE : nums1[j];
-            int longerRightVal = j + 1 >= nums1.length ? Integer.MAX_VALUE : nums1[j + 1];
-            if (Math.max(shorterLeftVal, longerLeftVal) <= Math.min(shorterRightVal, longerRightVal)) {
-                if (total % 2 != 0) {
-                    return Math.min(shorterRightVal, longerRightVal);
-                }
-                return (Math.max(shorterLeftVal, longerLeftVal) + Math.min(shorterRightVal, longerRightVal)) / 2.0;
-            } else if (shorterLeftVal > longerRightVal) {
+        if (nums1.length > nums2.length) return findMedianSortedArrays(nums2, nums1);
+        int m = nums1.length, n = nums2.length;
+        int totalLeft = (m + n + 1) / 2; // 整体中点长度
+        int left = 0, right = m;
+        // 在较短数组上执行二分查找，找到一个划分点 i 使得 i + j = totalLeft 并且
+        // 这个划分点 左半部分的最大值 ≤ 右半部分的最小值，即 nums1[i-1] <= nums2[j] && nums2[j-1] <= nums1[i]
+        while (left < right) {
+            int i = (left + right + 1) / 2;
+            int j = totalLeft - i;
+            if (nums1[i - 1] > nums2[j]) { // 为什么这里只判断 nums1[i-1] <= nums2[j]，如何保证 nums2[j-1] <= nums1[i]
                 right = i - 1;
             } else {
-                left = i + 1;
+                left = i;
             }
+        }
+
+        int i = left, j = totalLeft - i; // i, j 分别为 nums1, nums2 上的划分点
+        int nums1LeftMax = (i == 0) ? Integer.MIN_VALUE : nums1[i - 1], nums1RightMin = (i == m) ? Integer.MAX_VALUE : nums1[i];
+        int nums2LeftMax = (j == 0) ? Integer.MIN_VALUE : nums2[j - 1], nums2RightMin = (j == n) ? Integer.MAX_VALUE : nums2[j];
+
+        if ((m + n) % 2 == 1) {
+            return Math.max(nums1LeftMax, nums2LeftMax);
+        } else {
+            return (Math.max(nums1LeftMax, nums2LeftMax) + Math.min(nums1RightMin, nums2RightMin)) / 2.0;
         }
     }
 

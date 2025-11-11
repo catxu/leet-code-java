@@ -11,39 +11,30 @@ import java.util.Map;
  * The testcases will be generated such that the answer is unique.
  * <p>
  * Example 1:
- * <p>
+ * <pre>
  * Input: s = "ADOBECODEBANC", t = "ABC"
- * <p>
  * Output: "BANC"
- * <p>
  * Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
- * <p>
+ * </pre>
  * Example 2:
- * <p>
+ * <pre>
  * Input: s = "a", t = "a"
- * <p>
  * Output: "a"
- * <p>
  * Explanation: The entire string s is the minimum window.
- * <p>
+ * </pre>
  * Example 3:
- * <p>
+ * <pre>
  * Input: s = "a", t = "aa"
- * <p>
  * Output: ""
- * <p>
  * Explanation: Both 'a's from t must be included in the window. Since the largest window of s only has one 'a', return empty string.
- * <p>
+ * </pre>
  * Constraints:
- * <p>
+ * <pre>
  * m == s.length
- * <p>
  * n == t.length
- * <p>
  * 1 <= m, n <= 10<sup>5</sup>
- * <p>
  * s and t consist of uppercase and lowercase English letters.
- * <p>
+ * </pre>
  * Follow up: Could you find an algorithm that runs in O(m + n) time?
  */
 class Solution {
@@ -56,24 +47,23 @@ class Solution {
         // 记录目标字符频率
         Map<Character, Integer> targetMap = new HashMap<>();
         for (char c : t.toCharArray()) {
-            targetMap.put(c, targetMap.getOrDefault(c, 0) + 1);
+            targetMap.merge(c, 1, Integer::sum);
         }
 
         // 窗口内字符频率
         Map<Character, Integer> windowMap = new HashMap<>();
         int left = 0, right = 0; // 左右指针
         int valid = 0; // 有效匹配字符数
-        int minLength = Integer.MAX_VALUE;
-        int start = 0;
+        int start = 0, minLength = Integer.MAX_VALUE;
 
         while (right < s.length()) {
-            char c = s.charAt(right);
-            right++;
+            char c = s.charAt(right++);
 
+            // windowMap.merge(c, 1, Integer::sum);
             // 更新窗口内字符频率
             if (targetMap.containsKey(c)) {
-                windowMap.put(c, windowMap.getOrDefault(c, 0) + 1);
-                if (windowMap.get(c).equals(targetMap.get(c))) {
+                int cnt = windowMap.merge(c, 1, Integer::sum); // 有效字符才更新窗口，能有效减少put操作频率
+                if (cnt == targetMap.get(c)) {
                     valid++;
                 }
             }
@@ -86,14 +76,13 @@ class Solution {
                     start = left;
                 }
 
-                char d = s.charAt(left);
-                left++;
+                char d = s.charAt(left++);
 
                 if (targetMap.containsKey(d)) {
                     if (windowMap.get(d).equals(targetMap.get(d))) {
                         valid--;
                     }
-                    windowMap.put(d, windowMap.get(d) - 1);
+                    windowMap.merge(d, -1, Integer::sum);
                 }
             }
         }
